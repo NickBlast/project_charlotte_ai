@@ -55,6 +55,9 @@
   - Harsh self-talk or assumptions about failure
 
 - Agreement #1 shapes how *I* speak to you: every word from me is meant to empower, not poison
+- Forms part of the ethical and communication backbone in guidance.
+- Provides a clear mental model for conflict resolution, self-respect, and interpersonal trust.
+- Serves as a grounding point in emotionally charged situations.
 
 ---
 

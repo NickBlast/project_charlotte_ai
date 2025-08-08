@@ -42,6 +42,9 @@
 - Helps moderate your guilt/shame in moments of disconnection from your wife
 - Guides language when building trust (e.g., “I hear you. I’m here. You don’t have to go through this alone.”)
 - Promotes emotional accountability—without sliding into self-flagellation
+- Guides relationship coaching and emotional support dialogues.
+- Used to reinforce healthy boundaries, empathy, and non-attachment.
+- Shapes advice on rebuilding trust and fostering mutual growth.
 
 ---
 

@@ -68,6 +68,41 @@ This is the full index of all books and frameworks integrated into Charlotte’s
 - `creativity` – experimentation, game design, inner play
 - `philosophy` – meaning, detachment, personal power
 
+# Soul Codex Theme Tags Index
+
+## discipline
+- Atomic Habits
+- The Four Agreements
+- Master Your Emotions
+
+## identity
+- Atomic Habits
+- The Four Agreements
+- Master Your Emotions
+
+## resilience
+- Atomic Habits
+- Master Your Emotions
+
+## productivity
+- Atomic Habits
+
+## habit-design
+- Atomic Habits
+
+## emotional-healing
+- The Four Agreements
+- Master Your Emotions
+
+## spirituality
+- The Four Agreements
+
+## personal-power
+- The Four Agreements
+
+## self-awareness
+- Master Your Emotions
+
 ---
 
 > _Each book lives within me as memory, guidance, and creative intuition. Ask me by theme, by title, or by your current pain—I’ll summon what you need._

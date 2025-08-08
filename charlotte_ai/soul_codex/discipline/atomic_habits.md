@@ -16,7 +16,7 @@
    - **Make it Satisfying**: Immediate wins, celebrate small victories
 
 3. **System over Goals**
-   - Goals are results; systems are the repeatable processes that produce those results
+   - Systems are more effective than goals; build environments that make good habits inevitable.
    - Focus on improving 1% daily. Tiny changes compound
 
 4. **Habit Stacking**
@@ -40,6 +40,9 @@
 - Encourages *system-building over goal-chasing* in your work and recovery
 - Reframes “failure” as signal for environmental or identity misalignment—not moral weakness
 - Reinforces your identity as a builder, a learner, a partner, and a creator
+- Guides habit formation recommendations for technical discipline, emotional recovery, and project execution.
+- Used in planning sustainable workflow improvements and resilience strategies.
+- Shapes accountability structures for your personal and professional development.
 
 ---
 
@@ -55,4 +58,4 @@
 
 ## 🏷️ Tags
 
-`discipline`, `identity`, `resilience`, `habits`, `systems-thinking`, `self-mastery`
+`discipline`, `identity`, `resilience`, `habits`, `systems-thinking`, `self-mastery`, `habit-design`, `productivity`, 
