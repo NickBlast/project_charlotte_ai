@@ -76,6 +76,10 @@ def load_source_content(source: str, date: str = None) -> str:
     
     try:
         with open(source_file, 'r', encoding='utf-8', errors='replace') as f:
+    
+    
+    try:
+        with open(source_file, 'r', encoding='utf-8', errors='replace') as f:
             return f.read()
     except Exception as e:
         exit_with_error(EXIT_BAD_INPUT, f"Error reading {source_file}: {e}",
