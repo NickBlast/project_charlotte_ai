@@ -2,6 +2,12 @@
 """
 Shared utilities for Charlotte AI memory tools.
 """
+
+# Constants
+BYTES_PER_MB = 1024 * 1024
+ROUTING_CONFIDENCE_THRESHOLD = 0.6
+INVALID_FILENAME_CHARS_PATTERN = r'[<>:"/\\|?*\x00-\x1F]'
+
 import os
 import re
 import sys

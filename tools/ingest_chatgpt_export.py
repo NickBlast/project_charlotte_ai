@@ -45,32 +45,27 @@ def safe_extract_zip(zip_path: Path, extract_to: Path, max_size_mb: int = 25):
     extract_to.mkdir(parents=True, exist_ok=True)
     
     try:
+        from utils import BYTES_PER_MB
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             for member in zip_ref.infolist():
                 # Check file size
-                if member.file_size > max_size_mb * 1024 * 1024:
                 if member.file_size > max_size_mb * BYTES_PER_MB:
                     print(f"[WARN] Skipping large file: {member.filename} ({member.file_size} bytes)")
                     continue
-                
                 # Skip directories
                 if member.is_dir():
                     continue
-                
                 # Safely resolve path to prevent Zip-Slip
                 try:
                     target_path = safe_extract_path(extract_to, member.filename)
                 except ValueError as e:
                     print(f"[WARN] Skipping unsafe path: {member.filename} - {e}")
                     continue
-                
                 # Create parent directories
                 target_path.parent.mkdir(parents=True, exist_ok=True)
-                
                 # Extract file
                 with zip_ref.open(member) as source, open(target_path, 'wb') as target:
                     target.write(source.read())
-                    
     except zipfile.BadZipFile:
         exit_with_error(EXIT_BAD_INPUT, f"Invalid ZIP file: {zip_path}", 
                        "Ensure the file is a valid ZIP archive.")
@@ -105,8 +100,6 @@ def parse_conversations_json(json_path: Path) -> list:
         exit_with_error(EXIT_BAD_INPUT, f"Error reading {json_path}: {e}", 
                        "Check file permissions and format.")
     return []  # This line ensures we always return a list
-
-                       "Check file permissions and format.")
 
 
 def html_to_text(html_content: str) -> str:
@@ -337,20 +330,17 @@ def main():
     
     # Detect export format
     format_type, main_file = detect_export_format(export_dir)
-    
-    if format_type is None or main_file is None:
+    if not format_type or not main_file:
         exit_with_error(EXIT_BAD_INPUT, "No recognized export format found", 
                        "Ensure the export contains conversations.json or HTML files.")
-    
-    print(f"[INFO] Detected export format: {format_type.upper()}")
-    
+    print(f"[INFO] Detected export format: {format_type.upper() if format_type else 'UNKNOWN'}")
     # Process export based on format
     conversations: list = []
-    if format_type == "json":
+    if format_type == "json" and main_file is not None:
         conversations = parse_conversations_json(main_file)
-    else:  # HTML
+    elif format_type == "html" and main_file is not None:
         try:
-            with open(main_file, 'r', encoding='utf-8', errors='replace') as f:
+            with open(str(main_file), 'r', encoding='utf-8', errors='replace') as f:
                 html_content = f.read()
             # Convert HTML to a simple text format for processing
             text_content = html_to_text(html_content)
@@ -371,53 +361,41 @@ def main():
         except Exception as e:
             exit_with_error(EXIT_BAD_INPUT, f"Error processing HTML file: {e}", 
                            "Ensure the HTML file is readable.")
-    
     if not conversations:
         exit_with_error(EXIT_NOTHING_TO_DO, "No conversations found in export", 
                        "Check that the export contains conversation data.")
-    
     print(f"[INFO] Found {len(conversations)} conversations")
-    
     # Process conversations into Markdown files
     if not args.dry_run:
         print(f"[INFO] Creating Markdown files in {archives_dir}")
     else:
         print(f"[DRY-RUN] Would create Markdown files in {archives_dir}")
-    
     thread_files = process_conversations(conversations, export_date, archives_dir, args.dry_run)
-    
     if not thread_files:
         exit_with_error(EXIT_NOTHING_TO_DO, "No threads were processed successfully", 
                        "Check the export format and file permissions.")
-    
     # Create memory candidates file
     if not args.dry_run:
         print(f"[INFO] Creating memory candidates in {intake_dir}")
     else:
         print(f"[DRY-RUN] Would create memory candidates in {intake_dir}")
-    
     candidates_content = create_memory_candidates(thread_files, intake_dir, args.dry_run)
-    
     # Create ingest report
     if not args.dry_run:
         print(f"[INFO] Creating ingest report in {reports_dir}")
     else:
         print(f"[DRY-RUN] Would create ingest report in {reports_dir}")
-    
     report_content = create_ingest_report(export_date, len(thread_files), thread_files, 
                                          reports_dir, args.dry_run)
-    
     # Print summary
     print(f"\n[SUMMARY] ChatGPT Export Ingest")
-    print(f"  Format: {format_type.upper()}")
+    print(f"  Format: {format_type.upper() if format_type else 'UNKNOWN'}")
     print(f"  Date: {export_date}")
     print(f"  Threads: {len(thread_files)}")
     print(f"  Candidates: {'Generated' if not args.dry_run else 'Would generate'}")
     print(f"  Report: {'Generated' if not args.dry_run else 'Would generate'}")
-    
     if args.dry_run:
         print(f"\n[DRY-RUN] No files were actually written.")
-    
     return 0
 
 
