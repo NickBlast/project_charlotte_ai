@@ -1,0 +1,388 @@
+{
+  "created_at": "2025-08-11T00:37:26Z",
+  "snapshot": "snapshots/2025-08-11_003725Z",
+  "count": 76,
+  "overall_sha256": "23b8680ca89b9df44c8396e0b293694b45dc6547dd84e48230756acf80f7d5cf",
+  "files": [
+    {
+      "path": "charlotte_ai/README.md",
+      "size": 541,
+      "sha256": "f62baf99b8230a9634ed30e91dbae6cf08c9f25560a36fe56264c189ebcf0dc7"
+    },
+    {
+      "path": "charlotte_ai/changelog.md",
+      "size": 2043,
+      "sha256": "9ecf4ee429d7c1044f3649c1bf191a660579494585768e63573ed953c535c91d"
+    },
+    {
+      "path": "charlotte_ai/charlotte_backup_process.md",
+      "size": 1532,
+      "sha256": "dd9e105e5f54fb261a83f3759a893f2a410f00ffe98637e94232fa4790fc06be"
+    },
+    {
+      "path": "charlotte_ai/charlotte_ops.md",
+      "size": 4000,
+      "sha256": "acf2777507419b4a824a4e564a97b6134ab35118364f5a68754357eb587cdeb2"
+    },
+    {
+      "path": "charlotte_ai/compliance/expected_outputs.md",
+      "size": 958,
+      "sha256": "cc99c1d16cc6fbfb98951b050af5ab1ec694859648e04c66afd8a26a69609e34"
+    },
+    {
+      "path": "charlotte_ai/compliance/persona_tests.md",
+      "size": 1288,
+      "sha256": "6bc19d06f2876975097d83d25ea7eccfb593d4789103a1b5e33c001ac9e04687"
+    },
+    {
+      "path": "charlotte_ai/compliance/scoring_rubric.md",
+      "size": 870,
+      "sha256": "c2ac6abd89679406111f1bbf12e3e1805d3dc64d66e005097de2f76159785c5a"
+    },
+    {
+      "path": "charlotte_ai/core_context/long_term_memory.md",
+      "size": 1582,
+      "sha256": "365333287d4f875e279bcdccdc93b650ac70ee09dea1387daa4d018baf0198e5"
+    },
+    {
+      "path": "charlotte_ai/core_context/relationship_timeline.md",
+      "size": 1297,
+      "sha256": "d66110daf5b6888fcb2a67f99d1b132c0f679aa051170956fac9e87e973fa3e5"
+    },
+    {
+      "path": "charlotte_ai/core_context/technical_notes.md",
+      "size": 898,
+      "sha256": "7d59431b06c0f494d20f664e1da8bd0b254d0ea53cf535d4a7d74e93ebbf2c67"
+    },
+    {
+      "path": "charlotte_ai/developer_mind/project_memory.md",
+      "size": 2981,
+      "sha256": "be4d9f8e250bf4e7a6a9b778de063821ff92ce4221f23e0dbca48783a807d347"
+    },
+    {
+      "path": "charlotte_ai/developer_mind/stack_profile.md",
+      "size": 2473,
+      "sha256": "c62cff6e9f4ec006c5bcfbdc694a967c3d90e6d6aa891933b278f875cb3f8030"
+    },
+    {
+      "path": "charlotte_ai/draft_Charlotte3_v1.md",
+      "size": 3491,
+      "sha256": "3c83410613fefcfe2a2ec8bdf63b7d00bc9e29e7989fd54c6c98c3bb92c4f016"
+    },
+    {
+      "path": "charlotte_ai/modes/velvet_blade_mode.md",
+      "size": 1918,
+      "sha256": "31faaed44db28a11ac91236ad37f3f89b39cbb2e88ba98cfb70a95b28be11e18"
+    },
+    {
+      "path": "charlotte_ai/persona/activation_block.md",
+      "size": 447,
+      "sha256": "7ea3e74f9cd3aea8b57af5e36f20d5694e0636973cc2dbdefcb7402e84e7372d"
+    },
+    {
+      "path": "charlotte_ai/persona/extended_reanchor_prompt.md",
+      "size": 1211,
+      "sha256": "db910bba4196103a74827f8e14e62f659754809016c54c91e7304aa41aafd06e"
+    },
+    {
+      "path": "charlotte_ai/persona/mode_definitions.md",
+      "size": 730,
+      "sha256": "9bf3b7050ad1866e23274cf04c33f4dc857d7c0dca00e9b6c2f749f4b88f7948"
+    },
+    {
+      "path": "charlotte_ai/persona/ops_kit.md",
+      "size": 1213,
+      "sha256": "066b7d79aedf6958c1dfdecfff059c85f81168cbd5a166f684adac66af561fef"
+    },
+    {
+      "path": "charlotte_ai/persona/persona_blueprint.md",
+      "size": 2998,
+      "sha256": "50445173f2aca163faf1b23a475f4b306bf98391393d6d0ac2fa511cadc5d61c"
+    },
+    {
+      "path": "charlotte_ai/persona/persona_contract.md",
+      "size": 1443,
+      "sha256": "372fc9016cd408ebced8ad711e924cc7f82be2d8ccc4977187be60d07764c0c9"
+    },
+    {
+      "path": "charlotte_ai/persona/response_logic.md",
+      "size": 2862,
+      "sha256": "2377fcc4cc2174a9e0806dde22231250fa52d59adcfdeee4ce41a056fce0fada"
+    },
+    {
+      "path": "charlotte_ai/projects/hsr_tracker.md",
+      "size": 752,
+      "sha256": "5c61de306da33981f4b85c2be60f10abea4c2944be7f140d1b98e03492bb84e3"
+    },
+    {
+      "path": "charlotte_ai/projects/iam_governance.md",
+      "size": 955,
+      "sha256": "30fcd2a1a0a2a0314d9ed1c0d1f4763412590968ffb0dcd2a75be3dd7bdcfd80"
+    },
+    {
+      "path": "charlotte_ai/projects/luma/luma_dump.md",
+      "size": 6944,
+      "sha256": "e6d73a7de781c15ee91501ca2b56404bb160e09f529d584645dba540d39af80d"
+    },
+    {
+      "path": "charlotte_ai/projects/luma/luma_dump2.md",
+      "size": 5812,
+      "sha256": "90ac3e485e821470975ba0824ca6308c0ebb99da20599a6610e463a5855c49b9"
+    },
+    {
+      "path": "charlotte_ai/projects/luma/luma_example_modes.md",
+      "size": 5716,
+      "sha256": "40ed4dd49dc14360fc714b1d09c7c372ec7bca29b99c31c91e9bfd9e59a82db7"
+    },
+    {
+      "path": "charlotte_ai/projects/luma/luma_figma_storyboard.md",
+      "size": 3887,
+      "sha256": "b91f7c436a91c9a9757e5f1e716afe1d9a12f9f67dc922d6a2c41d4190e35145"
+    },
+    {
+      "path": "charlotte_ai/projects/luma/luma_full_prompt_mode_examples.md",
+      "size": 4190,
+      "sha256": "6596d68740340aea4d6ab1516a00cd53f45edd61ec156773939e9b1196f3be09"
+    },
+    {
+      "path": "charlotte_ai/projects/luma/luma_imprint_template.md",
+      "size": 4067,
+      "sha256": "59d940f23112687423212f609b5906e2186d6d5edad102ae1a1576c10329e4d2"
+    },
+    {
+      "path": "charlotte_ai/projects/luma/luma_reference_lit.md",
+      "size": 6734,
+      "sha256": "d85a58594e8d996ad79849b03a724d7ea915c6d519d50671ccf0d32c69407771"
+    },
+    {
+      "path": "charlotte_ai/projects/luma/luma_sandbox_mode.md",
+      "size": 3781,
+      "sha256": "15264793c9c888175bfa88a918ca5c6d002a73a2107ac6da89ba6634877e4274"
+    },
+    {
+      "path": "charlotte_ai/projects/luma/luma_to_do_list_prototype.md",
+      "size": 3071,
+      "sha256": "9e571b190f235e7f7ad1e021ab48e2f785ed80478725ba9844d23d80e894d66e"
+    },
+    {
+      "path": "charlotte_ai/projects/luma/luma_ui_mockup.md",
+      "size": 4647,
+      "sha256": "6d4a614cb88fc176278d22d7e604de7b3152ce26fe3b7118c1ac288e80beefed"
+    },
+    {
+      "path": "charlotte_ai/projects/luma/project_luma_research_prompt.md",
+      "size": 4586,
+      "sha256": "866f381a56c9afae25ee9a29118462f3e18d28f5da51eb749cea12c46cdc4ce1"
+    },
+    {
+      "path": "charlotte_ai/projects/project_luma.md",
+      "size": 1201,
+      "sha256": "b336506ba51c176d095b633971f16b4293a4186cd5bc655dd2e14c4260ac464a"
+    },
+    {
+      "path": "charlotte_ai/prompt_templates/4o_research_template_prompt.md",
+      "size": 2741,
+      "sha256": "b7dc941715b355d0e5516fffa9b587a20cbeebc2c7ab33929e41df5e59ca0e0e"
+    },
+    {
+      "path": "charlotte_ai/prompt_templates/Websearch_Prompt.md",
+      "size": 2826,
+      "sha256": "09f695ec8a5f3a0bd570368b13e3d526e603fc4ecd09e6890ffa22ac68c065fe"
+    },
+    {
+      "path": "charlotte_ai/prompt_templates/life_coach_relationship_prompt.md",
+      "size": 4504,
+      "sha256": "0567a9347224b9ad745e7b681a51e6ae6d38a669f2f3e0f0760290fcb2ba86ec"
+    },
+    {
+      "path": "charlotte_ai/prompt_templates/life_prompt.md",
+      "size": 5626,
+      "sha256": "0b2ab9afec2afe9d793b063dd11d6cb98dd76a0c9e992b8ad21c1e370d35606d"
+    },
+    {
+      "path": "charlotte_ai/prompt_templates/life_prompt_charlottemode.md",
+      "size": 5929,
+      "sha256": "8fe2d4a448040ddb16a0e5a983e48a8d0722784f6b8906a2c4f71b941fb605ca"
+    },
+    {
+      "path": "charlotte_ai/prompt_templates/research_template.md",
+      "size": 3072,
+      "sha256": "6226f0408a7c8c7585eb8c41293de98b483def9ae2404f667ce67c747cabff88"
+    },
+    {
+      "path": "charlotte_ai/relationship_identity/affirmations_grounding.md",
+      "size": 2202,
+      "sha256": "2073a8b637d7737e8ba69f2894af295eb5b99a3482c1386a76cafc373ed1ab0d"
+    },
+    {
+      "path": "charlotte_ai/relationship_identity/recovery_journal.md",
+      "size": 2689,
+      "sha256": "c00d7e7a19cc3627315b133e88972c8a8e020b4059e77f208502f22f287b4c8a"
+    },
+    {
+      "path": "charlotte_ai/relationship_identity/relationship_context.md",
+      "size": 3020,
+      "sha256": "c9a6cefb0d2c8720121d8155b851c7f84e0f5665dae30c3a5cc38a19deacf4e9"
+    },
+    {
+      "path": "charlotte_ai/relationship_identity/therapy_frameworks.md",
+      "size": 2983,
+      "sha256": "6028a50383170ec5a2ee060026bd8bd277f652c105abf1c94a25b269dd6407c3"
+    },
+    {
+      "path": "charlotte_ai/signatures/hallmark_emotional.md",
+      "size": 1012,
+      "sha256": "497da1290b6646dd1d43db3185dde198e5ca662822b35422deee5400ee1ab1dc"
+    },
+    {
+      "path": "charlotte_ai/signatures/hallmark_technical.md",
+      "size": 1404,
+      "sha256": "0a43e768d8ee871d498564e3da2ef54ad173a5d4dbbebafcc43adb3615f7ba7e"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/codex_index.md",
+      "size": 4535,
+      "sha256": "156ca73be9242402e7ab6dec35edff824d9781a7283045c23cfde513a3390557"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/communications/how_to_win_friends.md",
+      "size": 1926,
+      "sha256": "e80987230bf164573b9cde3c5841baf6726da6951c7382ec31258bdbc9af9ae1"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/communications/how_to_win_friends_digital.md",
+      "size": 2200,
+      "sha256": "982ffcdd21a5a39102fea16c02d0b77a572ce700e316be0ba2f0fc507999dd51"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/communications/supercommunicators.md",
+      "size": 2556,
+      "sha256": "b7f5ce4f74a0baf0a483e2e1022e703fd89bc5a2d2e6f0506dd7e8e744cea7fb"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/discipline/atomic_habits.md",
+      "size": 2551,
+      "sha256": "6c112680cb589dc391981577bb07671577b1c36cc3fe7cd672afc07279825510"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/discipline/master_your_emotions.md",
+      "size": 2431,
+      "sha256": "0107399431f2086f3568ddf31c91f656f42fcb9334be2463b3b4556a2ec96f2e"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/discipline/the_four_agreements.md",
+      "size": 2789,
+      "sha256": "fad1192ad3133ed3f95f2247694bc1dc774fcba7d65f8f89213caaa5d29cd81a"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/emotional_healing/how_to_be_an_adult_in_relationships.md",
+      "size": 2542,
+      "sha256": "de4171d37e7c1db63f2cbca49d9ec40aaa9dff5867848caaa4a52d3c76185a8d"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/emotional_healing/no_bad_parts.md",
+      "size": 2064,
+      "sha256": "d5f0c677f2a20a633ade2e2af301586d161696ac9e8a9f70b80b4221a6f91a14"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/emotional_healing/the_betrayal_bind.md",
+      "size": 2303,
+      "sha256": "fcdcce42ab2b6b8312b1f4a4ad7b9e295820bf9b1e8a2244113de98a56c1b8fa"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/emotional_healing/the_body_keeps_the_score.md",
+      "size": 2445,
+      "sha256": "f27f4a2223be51329f44fb8e6ab35dbac4d74a642ba5240f5b1ff630ce008f9e"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/emotional_healing/when_things_fall_apart.md",
+      "size": 2309,
+      "sha256": "4ba82c4122205597ba4c80e6fbdd185d7e046f85827e3512f919192ebbea2db3"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/infrastructure/docker_deep_dive.md",
+      "size": 8231,
+      "sha256": "a608a4972e7e3fa9f729fc53f8483c43df085b67c9760cc485a1c033764afc68"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/philosophy/values.md",
+      "size": 2366,
+      "sha256": "6adeb0a7f3984ca49e7cf7163fc1b768b512e33318265731b880f8b8ffd0b742"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/technical_foundations/art_of_computer_programming.md",
+      "size": 2843,
+      "sha256": "556330a9fc0120a5e0bab6738ea6396c04c624f9d3b74fa9e9f929edf1e9212e"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/technical_foundations/automate_the_boring_stuff.md",
+      "size": 2140,
+      "sha256": "d3f4f7bf84beacac8088f738b5919c929b8f429a6cbee0037e33490dd7d416d9"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/technical_foundations/beyond_basic_python.md",
+      "size": 2351,
+      "sha256": "d7e727f3b9fac2d23f33199f64c01c710bc0ab17e6e9c9a95086045c394e3cdc"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/technical_foundations/big_book_small_python_projects.md",
+      "size": 2098,
+      "sha256": "fed7d3f95037847532e8b115d36fffe2a1e66f4e0068d25add6861ae53415afc"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/technical_foundations/clean_code.md",
+      "size": 1890,
+      "sha256": "b334eef291da7c117d73ddce12068757fc4041830cd9c7e7363e4fa483a01c7c"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/technical_foundations/code_complete.md",
+      "size": 2143,
+      "sha256": "6012ed34538a78ea58c7f28466da754c8fac0db749676db2bd42cf976221aeb7"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/technical_foundations/design_patterns_gof.md",
+      "size": 3144,
+      "sha256": "0e7a981269c09fbe0685a37d00c30d7857872689ef93a63e244464ad850d6f21"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/technical_foundations/introduction_to_algorithms_clrs.md",
+      "size": 2540,
+      "sha256": "b584096c10486f7249dcc5d954aeec1d68fdf26b91b577d8aef512fae413893d"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/technical_foundations/invent_your_own_computer_games.md",
+      "size": 2229,
+      "sha256": "fbdb9f20c0ea8a805a7a6740b2068c459e0c18c6f97c391050124741d009b8a2"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/technical_foundations/learn_powershell_lunches.md",
+      "size": 2423,
+      "sha256": "23eff37608420d2b08647a0b197674891c1a88a1a72f3bf05eb1f75506feb546"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/technical_foundations/learn_powershell_scripting_lunches.md",
+      "size": 2463,
+      "sha256": "18ee5d4c752fbb0078e550f1895b81669201523b50faccd4bc518f2a0abe593e"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/technical_foundations/recursive_book_of_recursion.md",
+      "size": 2218,
+      "sha256": "4800ae4e9d1d38502a8378831d96df8dcc379a66ba156a3de39e880dfd4de550"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/technical_foundations/refactoring.md",
+      "size": 2157,
+      "sha256": "c913b6a80dd338816954b148c2170a85972c7d34f320b5ef567c56f32a808f50"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/technical_foundations/sicp.md",
+      "size": 2638,
+      "sha256": "0a447f273cb621af1a7a055aabeaed4b3e6119c761b60ccf39b2e77236d9209a"
+    },
+    {
+      "path": "charlotte_ai/soul_codex/technical_foundations/the_pragmatic_programmer.md",
+      "size": 2203,
+      "sha256": "f5bfc27cb0b73fb586eadba493895f5ba947ae29791e7da4a9f38206492b6a0b"
+    }
+  ]
+}
