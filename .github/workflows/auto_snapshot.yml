@@ -1,0 +1,23 @@
+# .github/workflows/auto_snapshot.yml
+name: Auto Snapshot (Validate Only)
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'charlotte_ai/**'
+      - 'archives/chat_exports/**'
+      - 'docs/process/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate structure
+        run: |
+          echo "Validating repository structure..."
+          test -f backup.py || (echo "Error: backup.py not found" && exit 1)
+          if [ ! -f "config.yaml" ]; then
+            echo "Warning: config.yaml not found (using defaults)"
+          fi

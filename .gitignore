@@ -1,2 +1,9 @@
 # Archive Files
 .archive/
+GEMINI.md
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
