@@ -49,6 +49,7 @@ def safe_extract_zip(zip_path: Path, extract_to: Path, max_size_mb: int = 25):
             for member in zip_ref.infolist():
                 # Check file size
                 if member.file_size > max_size_mb * 1024 * 1024:
+                if member.file_size > max_size_mb * BYTES_PER_MB:
                     print(f"[WARN] Skipping large file: {member.filename} ({member.file_size} bytes)")
                     continue
                 
