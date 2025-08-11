@@ -1,0 +1,28 @@
+name: Release Snapshot
+on:
+  push:
+    tags:
+      - 'backup-*'
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Derive snapshot path
+        id: derive
+        run: |
+          TS="${GITHUB_REF_NAME#backup-}"     # e.g., 2025-08-11-013015Z
+          TS="${TS//-/_}"                     # 2025_08_11_013015Z
+          SNAP="snapshots/${TS}"
+          echo "snapshot_path=$SNAP" >> $GITHUB_OUTPUT
+          echo "Snapshot path: $SNAP"
+      - name: Create zip
+        run: |
+          mkdir -p dist
+          zip -r "dist/${GITHUB_REF_NAME}.zip" "${{ steps.derive.outputs.snapshot_path }}"
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/*.zip
