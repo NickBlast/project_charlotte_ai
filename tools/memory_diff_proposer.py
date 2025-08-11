@@ -45,6 +45,9 @@ def load_source_content(source: str, date: str = None) -> str:
 def load_source_content(source: str, date: str = None) -> str:
     """Load content from the specified source."""
     source_file: Optional[Path] = None
+def load_source_content(source: str, date: str = None) -> str:
+    """Load content from the specified source."""
+    source_file: Optional[Path] = None
     if source == "candidates":
         source_file = Path("charlotte_ai") / "_intake" / "memory_candidates.md"
         if not source_file.exists():
