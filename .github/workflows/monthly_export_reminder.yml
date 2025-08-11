@@ -1,0 +1,22 @@
+name: Monthly Export Reminder
+on:
+  schedule:
+    - cron: '0 15 1 * *'  # 1st of every month at 15:00 UTC
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get current month and year
+        id: date
+        run: |
+          echo "month_year=$(date +'%B %Y')" >> $GITHUB_OUTPUT
+          echo "issue_title=Request ChatGPT Data Export — $(date +'%B %Y')" >> $GITHUB_OUTPUT
+      
+      - name: Create or update issue
+        uses: peter-evans/create-issue-from-file@v4
+        with:
+          title: ${{ steps.date.outputs.issue_title }}
+          content-filepath: .github/ISSUE_TEMPLATE/chatgpt-export-request.md
+          labels: reminder, data-export

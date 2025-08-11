@@ -1,0 +1,55 @@
+name: Auto Snapshot
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'charlotte_ai/**'
+      - 'archives/chat_exports/**'
+      - 'docs/process/**'
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.head_commit.message, '[skip-snapshot]') }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0  # Fetch all history for tag creation
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+      
+      - name: Validate structure
+        run: |
+          echo "Validating repository structure..."
+          if [ ! -f "backup.py" ]; then
+            echo "Error: backup.py not found"
+            exit 1
+          fi
+          if [ ! -f "config.yaml" ]; then
+            echo "Warning: config.yaml not found, using default config"
+            cp config.example.yaml config.yaml
+          fi
+      
+      - name: Create snapshot
+        run: |
+          echo "Creating snapshot..."
+          python backup.py snapshot
+      
+      - name: Push changes
+        run: |
+          echo "Pushing changes..."
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: auto-snapshot [skip-snapshot]" || echo "No changes to commit"
+          git push origin main
