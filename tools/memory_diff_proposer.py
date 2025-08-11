@@ -42,6 +42,10 @@ def load_source_content(source: str, date: str = None) -> str:
     """Load content from the specified source."""
     source_file: Path = None  # type: ignore
     if source == "candidates":
+def load_source_content(source: str, date: str = None) -> str:
+    """Load content from the specified source."""
+    source_file: Optional[Path] = None
+    if source == "candidates":
         source_file = Path("charlotte_ai") / "_intake" / "memory_candidates.md"
         if not source_file.exists():
             exit_with_error(EXIT_BAD_INPUT, f"Memory candidates file not found: {source_file}",
