@@ -40,6 +40,9 @@ def sanitize_filename(name: str) -> str:
     # Limit length to prevent filesystem issues
     return sanitized[:FILENAME_LENGTH_LIMIT] if len(sanitized) > FILENAME_LENGTH_LIMIT else sanitized
 
+    # Limit length to prevent filesystem issues
+    return sanitized[:FILENAME_LENGTH_LIMIT] if len(sanitized) > FILENAME_LENGTH_LIMIT else sanitized
+
 
 def redact_sensitive_content(text: str) -> str:
     """Redact sensitive information from text.
