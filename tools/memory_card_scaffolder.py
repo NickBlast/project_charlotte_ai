@@ -72,14 +72,6 @@ def get_module_path(category: str, project: str = None, mode: str = None) -> Pat
     else:
         exit_with_error(EXIT_BAD_INPUT, f"Unknown category: {category}",
                        "Use one of: persona, protocol, project, relationship, special")
-    
-    # This should never be reached
-    return base_path  # type: ignore
-
-    
-    # This should never be reached
-
-    
 
 
 def generate_intent_id() -> str:
