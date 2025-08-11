@@ -101,7 +101,7 @@ def parse_conversations_json(json_path: Path) -> list:
                        "Check file permissions and format.")
     return []  # This line ensures we always return a list
 
-
+    return []  # This line ensures we always return a list
 def html_to_text(html_content: str) -> str:
     """Convert HTML content to plain text with conservative parsing."""
     # Remove script and style elements
