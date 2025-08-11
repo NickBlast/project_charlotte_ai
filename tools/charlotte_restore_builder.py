@@ -47,6 +47,9 @@ def get_files_by_pattern(pattern: str, only_active: bool = False) -> list:
                     content = f.read()
                     # Check if status is active in YAML header
                     if "status: active" in content.split('---')[1] if '---' in content else False:
+                    # Check if status is active in YAML header
+                    parts = content.split('---')
+                    if len(parts) > 1 and "status: active" in parts[1]:
                         active_files.append(file)
             except Exception:
                 # If we can't read the file, skip it
