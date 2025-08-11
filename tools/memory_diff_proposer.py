@@ -156,6 +156,9 @@ def route_content_line(line: str) -> tuple:
     # If confidence is too low, return None to park in unclassified
     if best_score < 0.6:
         return None, 0.0
+    # If confidence is too low, return None to park in unclassified
+    if best_score < ROUTING_CONFIDENCE_THRESHOLD:
+        return None, 0.0
     
     # Map targets to actual directories
     target_map = {
