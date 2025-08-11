@@ -29,6 +29,24 @@ from utils import (
 )
 
 
+
+# Add the tools directory to the path so we can import utils
+sys.path.append(str(Path(__file__).parent))
+
+from utils import (
+    utc_ts, 
+    as_posix_sorted, 
+    sanitize_filename, 
+    redact_sensitive_content,
+    safe_extract_path,
+    exit_with_error,
+    EXIT_BAD_INPUT,
+    EXIT_NOTHING_TO_DO,
+    EXIT_WRITE_ERROR,
+    BYTES_PER_MB
+)
+
+
 def parse_args():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser(description="Ingest OpenAI ChatGPT export")
