@@ -1,0 +1,25 @@
+# Copy to config.yaml and adjust as needed
+repo_root: "."
+source_dirs:
+  - "charlotte_ai"   # live Charlotte tree
+include_exts: [".md", ".markdown", ".yml", ".yaml", ".json", ".txt"]
+exclude_globs:
+  - ".git/**"
+  - ".github/**"
+  - "**/.DS_Store"
+  - "**/Thumbs.db"
+  - "**/*.tmp"
+  - "**/~$*"
+  - "**/*.key"
+  - "**/*.pem"
+  - "**/.env*"
+  - "**/*.env"
+  - "**/secrets/**"
+  - "charlotte_ai/research_results/**"   # large/ephemeral
+follow_symlinks: false
+git:
+  enable: true
+  push: true
+  tag: true
+  tag_prefix: "backup-"
+  commit_message: "chore: Charlotte snapshot"
