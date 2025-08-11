@@ -11,6 +11,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 import re
 
+BYTES_PER_MB = 1024 * 1024  # 1 MB in bytes
+
 # Add the tools directory to the path so we can import utils
 sys.path.append(str(Path(__file__).parent))
 
@@ -106,7 +108,6 @@ def html_to_text(html_content: str) -> str:
     """Convert HTML content to plain text with conservative parsing."""
     # Remove script and style elements
     html_content = re.sub(r'<script[^>]*>.*?</script>', '', html_content, flags=re.DOTALL)
-    html_content = re.sub(r'<style[^>]*>.*?</style>', '', html_content, flags=re.DOTALL)
     
     # Replace common HTML elements with text equivalents
     html_content = re.sub(r'<br\s*/?>', '\n', html_content)

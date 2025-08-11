@@ -11,6 +11,7 @@ import re
 import subprocess
 import tempfile
 import shutil
+from typing import Optional
 
 # Add the tools directory to the path so we can import utils
 sys.path.append(str(Path(__file__).parent))
@@ -86,6 +87,9 @@ def load_source_content(source: str, date: str = None) -> str:
 
 
 
+
+# Confidence threshold for routing lines to targets
+ROUTING_CONFIDENCE_THRESHOLD = 0.6
 
 def score_routing_confidence(line: str, target_dir: str) -> float:
     """Score confidence (0-1) for routing a line to a target directory."""
