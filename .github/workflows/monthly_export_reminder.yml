@@ -19,4 +19,9 @@ jobs:
         with:
           title: ${{ steps.date.outputs.issue_title }}
           content-filepath: .github/ISSUE_TEMPLATE/chatgpt-export-request.md
+      - name: Create or update issue
+        uses: peter-evans/create-issue-from-file@b7e2e0e2e1e2e2e2e2e2e2e2e2e2e2e2e2e2e2e
+        with:
+          title: ${{ steps.date.outputs.issue_title }}
+          content-filepath: .github/ISSUE_TEMPLATE/chatgpt-export-request.md
           labels: reminder, data-export
