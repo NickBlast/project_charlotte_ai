@@ -7,13 +7,14 @@ Shared utilities for Charlotte AI memory tools.
 BYTES_PER_MB = 1024 * 1024
 ROUTING_CONFIDENCE_THRESHOLD = 0.6
 INVALID_FILENAME_CHARS_PATTERN = r'[<>:"/\\|?*\x00-\x1F]'
+FILENAME_LENGTH_LIMIT = 200
 
 import os
 import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import List, Union
+from typing import List, Union, Optional
 
 
 def utc_ts() -> str:
@@ -29,17 +30,7 @@ def as_posix_sorted(paths: List[Union[str, Path]]) -> List[str]:
 def sanitize_filename(name: str) -> str:
     """Sanitize filename by replacing invalid characters."""
     # Replace invalid characters with underscores
-    sanitized = re.sub(r'[<>:"/\\|?*\x00-\x1F]', '_', name)
-    # Replace invalid characters with underscores
     sanitized = re.sub(INVALID_FILENAME_CHARS_PATTERN, '_', name)
-    # Limit length to prevent filesystem issues
-    sanitized = re.sub(r'[<>:"/\\|?*\x00-\x1F]', '_', name)
-    # Limit length to prevent filesystem issues
-    return sanitized[:200] if len(sanitized) > 200 else sanitized
-
-    # Limit length to prevent filesystem issues
-    return sanitized[:FILENAME_LENGTH_LIMIT] if len(sanitized) > FILENAME_LENGTH_LIMIT else sanitized
-
     # Limit length to prevent filesystem issues
     return sanitized[:FILENAME_LENGTH_LIMIT] if len(sanitized) > FILENAME_LENGTH_LIMIT else sanitized
 

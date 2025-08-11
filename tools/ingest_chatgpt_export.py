@@ -47,7 +47,6 @@ def safe_extract_zip(zip_path: Path, extract_to: Path, max_size_mb: int = 25):
     extract_to.mkdir(parents=True, exist_ok=True)
     
     try:
-        from utils import BYTES_PER_MB
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             for member in zip_ref.infolist():
                 # Check file size
@@ -103,7 +102,7 @@ def parse_conversations_json(json_path: Path) -> list:
                        "Check file permissions and format.")
     return []  # This line ensures we always return a list
 
-    return []  # This line ensures we always return a list
+
 def html_to_text(html_content: str) -> str:
     """Convert HTML content to plain text with conservative parsing."""
     # Remove script and style elements

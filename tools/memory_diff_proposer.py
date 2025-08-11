@@ -20,6 +20,7 @@ from utils import (
     utc_ts, 
     as_posix_sorted, 
     exit_with_error,
+    ROUTING_CONFIDENCE_THRESHOLD,
     EXIT_BAD_INPUT,
     EXIT_NOTHING_TO_DO,
     EXIT_WRITE_ERROR
@@ -39,13 +40,6 @@ def parse_args():
     return parser.parse_args()
 
 
-def load_source_content(source: str, date: str = None) -> str:
-    """Load content from the specified source."""
-    source_file: Path = None  # type: ignore
-    if source == "candidates":
-def load_source_content(source: str, date: str = None) -> str:
-    """Load content from the specified source."""
-    source_file: Optional[Path] = None
 def load_source_content(source: str, date: str = None) -> str:
     """Load content from the specified source."""
     source_file: Optional[Path] = None
@@ -88,11 +82,6 @@ def load_source_content(source: str, date: str = None) -> str:
                        "Check file permissions and format.")
     return ""  # This line ensures we always return a string
 
-
-
-
-# Confidence threshold for routing lines to targets
-ROUTING_CONFIDENCE_THRESHOLD = 0.6
 
 def score_routing_confidence(line: str, target_dir: str) -> float:
     """Score confidence (0-1) for routing a line to a target directory."""
@@ -160,9 +149,6 @@ def route_content_line(line: str) -> tuple:
     best_target = max(scores.keys(), key=lambda x: scores[x])
     best_score = scores[best_target]
     
-    # If confidence is too low, return None to park in unclassified
-    if best_score < 0.6:
-        return None, 0.0
     # If confidence is too low, return None to park in unclassified
     if best_score < ROUTING_CONFIDENCE_THRESHOLD:
         return None, 0.0

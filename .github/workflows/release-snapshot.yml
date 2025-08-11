@@ -1,3 +1,4 @@
+name: Release Snapshot
 on:
   push:
     tags:
