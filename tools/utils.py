@@ -24,6 +24,8 @@ def sanitize_filename(name: str) -> str:
     """Sanitize filename by replacing invalid characters."""
     # Replace invalid characters with underscores
     sanitized = re.sub(r'[<>:"/\\|?*\x00-\x1F]', '_', name)
+    # Replace invalid characters with underscores
+    sanitized = re.sub(INVALID_FILENAME_CHARS_PATTERN, '_', name)
     # Limit length to prevent filesystem issues
     return sanitized[:200] if len(sanitized) > 200 else sanitized
 
