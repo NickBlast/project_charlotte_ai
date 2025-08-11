@@ -42,6 +42,10 @@ def load_source_content(source: str, date: str = None) -> str:
     """Load content from the specified source."""
     source_file: Path = None  # type: ignore
     if source == "candidates":
+def load_source_content(source: str, date: str = None) -> str:
+    """Load content from the specified source."""
+    source_file: Optional[Path] = None
+    if source == "candidates":
         source_file = Path("charlotte_ai") / "_intake" / "memory_candidates.md"
         if not source_file.exists():
             exit_with_error(EXIT_BAD_INPUT, f"Memory candidates file not found: {source_file}",
@@ -79,6 +83,8 @@ def load_source_content(source: str, date: str = None) -> str:
         exit_with_error(EXIT_BAD_INPUT, f"Error reading {source_file}: {e}",
                        "Check file permissions and format.")
     return ""  # This line ensures we always return a string
+
+
 
 
 def score_routing_confidence(line: str, target_dir: str) -> float:
@@ -149,6 +155,9 @@ def route_content_line(line: str) -> tuple:
     
     # If confidence is too low, return None to park in unclassified
     if best_score < 0.6:
+        return None, 0.0
+    # If confidence is too low, return None to park in unclassified
+    if best_score < ROUTING_CONFIDENCE_THRESHOLD:
         return None, 0.0
     
     # Map targets to actual directories

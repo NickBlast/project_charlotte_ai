@@ -76,6 +76,9 @@ def get_module_path(category: str, project: str = None, mode: str = None) -> Pat
     # This should never be reached
     return base_path  # type: ignore
 
+    
+    # This should never be reached
+
 
 def generate_intent_id() -> str:
     """Generate a unique intent ID in the format YYYY-MM-DD-NN."""

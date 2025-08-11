@@ -49,6 +49,7 @@ def safe_extract_zip(zip_path: Path, extract_to: Path, max_size_mb: int = 25):
             for member in zip_ref.infolist():
                 # Check file size
                 if member.file_size > max_size_mb * 1024 * 1024:
+                if member.file_size > max_size_mb * BYTES_PER_MB:
                     print(f"[WARN] Skipping large file: {member.filename} ({member.file_size} bytes)")
                     continue
                 
@@ -104,6 +105,8 @@ def parse_conversations_json(json_path: Path) -> list:
         exit_with_error(EXIT_BAD_INPUT, f"Error reading {json_path}: {e}", 
                        "Check file permissions and format.")
     return []  # This line ensures we always return a list
+
+                       "Check file permissions and format.")
 
 
 def html_to_text(html_content: str) -> str:
