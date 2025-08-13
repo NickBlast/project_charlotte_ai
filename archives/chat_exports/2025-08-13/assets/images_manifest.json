@@ -1,0 +1,14 @@
+{
+  "copied_at": "2025-08-13_045341Z",
+  "counts": {
+    "user_folders": 1,
+    "loose_images": 0
+  },
+  "images": [
+    {
+      "dest": "assets/user_folders/user-test/image.png",
+      "sha256": "f2ca1bb6c7e907d06dafe4687e579fce76b37e4e93b7605022da52e6ccc26fd2",
+      "bytes": 5
+    }
+  ]
+}

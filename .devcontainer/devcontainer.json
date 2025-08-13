@@ -1,0 +1,30 @@
+{
+  "name": "ai_persona_constructs",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "python.defaultInterpreterPath": "/usr/local/bin/python3"
+  },
+  "features": {},
+  "postCreateCommand": "python3 -m pip install --upgrade pip && if [ -f tools/requirements.txt ]; then pip install -r tools/requirements.txt; else python3 -m pip install pyyaml; fi",
+  "remoteUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "timonwong.shellcheck"
+      ]
+    }
+  },
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspaces/ai_persona_constructs,type=bind,consistency=cached"
+  ],
+  "workspaceFolder": "/workspaces/ai_persona_constructs",
+  "containerEnv": {
+    "PYTHONUNBUFFERED": "1"
+  }
+}
