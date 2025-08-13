@@ -44,14 +44,14 @@ def load_source_content(source: str, date: str = None) -> str:
     """Load content from the specified source."""
     source_file: Optional[Path] = None
     if source == "candidates":
-        source_file = Path("charlotte_ai") / "_intake" / "memory_candidates.md"
+        source_file = Path("charlotte_core") / "_intake" / "memory_candidates.md"
         if not source_file.exists():
             exit_with_error(EXIT_BAD_INPUT, f"Memory candidates file not found: {source_file}",
                            "Run ingest_chatgpt_export.py first to generate candidates.")
     else:  # self_dump
         if not date:
             # Find the latest self_dump file
-            intake_dir = Path("charlotte_ai") / "_intake" / "memory_self_dump"
+            intake_dir = Path("charlotte_core") / "_intake" / "memory_self_dump"
             if not intake_dir.exists():
                 exit_with_error(EXIT_BAD_INPUT, f"Self dump directory not found: {intake_dir}",
                                "Create the directory and add self dump files.")
@@ -60,23 +60,19 @@ def load_source_content(source: str, date: str = None) -> str:
             dump_files = list(intake_dir.glob("*.md"))
             if not dump_files:
                 exit_with_error(EXIT_BAD_INPUT, "No self dump files found",
-                               "Add self dump files to charlotte_ai/_intake/memory_self_dump/")
+                               "Add self dump files to charlotte_core/_intake/memory_self_dump/")
             
             # Sort by date in filename (assuming format includes date)
             dump_files.sort(key=lambda x: x.name, reverse=True)
             source_file = dump_files[0]
         else:
-            source_file = Path("charlotte_ai") / "_intake" / "memory_self_dump" / f"{date}.md"
+            source_file = Path("charlotte_core") / "_intake" / "memory_self_dump" / f"{date}.md"
             if not source_file.exists():
                 exit_with_error(EXIT_BAD_INPUT, f"Self dump file not found: {source_file}",
                                "Check the date and ensure the file exists.")
     
     if source_file is None:
         return ""  # This should never happen due to the logic above, but satisfies the type checker
-    
-    try:
-        with open(source_file, 'r', encoding='utf-8', errors='replace') as f:
-    
     
     try:
         with open(source_file, 'r', encoding='utf-8', errors='replace') as f:
@@ -159,12 +155,12 @@ def route_content_line(line: str) -> tuple:
     
     # Map targets to actual directories
     target_map = {
-        "persona": "charlotte_ai/persona",
-        "modes": "charlotte_ai/modes",
-        "protocols": "charlotte_ai/protocols",
-        "projects": "charlotte_ai/projects",
-        "relationship_identity": "charlotte_ai/relationship_identity",
-        "soul_codex": "charlotte_ai/soul_codex"
+        "persona": "charlotte_core/persona",
+        "modes": "charlotte_core/modes",
+        "protocols": "charlotte_core/protocols",
+        "projects": "charlotte_core/projects",
+        "relationship_identity": "charlotte_core/relationship_identity",
+        "soul_codex": "charlotte_core/soul_codex"
     }
     
     return target_map.get(best_target), best_score
@@ -241,7 +237,7 @@ def process_content(content: str, date: str, reports_dir: Path, dry_run: bool = 
             continue
         
         # For classified content, create a patch
-        target_path = Path(f"charlotte_ai/{category}/memory_updates.md")
+        target_path = Path(f"charlotte_core/{category}/memory_updates.md")
         content_lines = [item[0] for item in items]  # Extract just the lines
         content_text = "\n".join(content_lines)
         

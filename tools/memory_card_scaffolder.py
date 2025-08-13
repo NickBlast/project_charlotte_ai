@@ -52,9 +52,9 @@ def validate_args(args):
                        "Remove --mode or choose a different category")
 
 
-def get_module_path(category: str, project: str = None, mode: str = None) -> Path:
+def get_module_path(category: str, project: str | None = None, mode: str | None = None) -> Path:
     """Get the module path for the given category."""
-    base_path = Path("charlotte_ai")
+    base_path = Path("charlotte_core")
     
     if category == "persona":
         return base_path / "persona"
@@ -64,7 +64,7 @@ def get_module_path(category: str, project: str = None, mode: str = None) -> Pat
         if not project:
             exit_with_error(EXIT_BAD_INPUT, "Project name required for project category",
                            "Provide project name with --project <name>")
-        return base_path / "projects" / sanitize_filename(project)
+        return base_path / "projects" / sanitize_filename(project or "")
     elif category == "relationship":
         return base_path / "relationship_identity"
     elif category == "special":
@@ -96,7 +96,7 @@ def ensure_unique_slug(base_slug: str, module_path: Path) -> str:
 
 
 def create_memory_card_content(title: str, intent_id: str, category: str, scope: str, 
-                              project: str = None, mode: str = None) -> str:
+                              project: str | None = None, mode: str | None = None) -> str:
     """Create the content for a memory card."""
     # Generate tags based on category
     tags = [category]

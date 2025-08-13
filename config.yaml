@@ -1,7 +1,7 @@
 # Copy to config.yaml and adjust as needed
 repo_root: "."
 source_dirs:
-  - "charlotte_ai"   # live Charlotte tree
+  - "charlotte_core"   # live Charlotte tree
 include_exts: [".md", ".markdown", ".yml", ".yaml", ".json", ".txt"]
 exclude_globs:
   - ".git/**"
@@ -15,7 +15,7 @@ exclude_globs:
   - "**/.env*"
   - "**/*.env"
   - "**/secrets/**"
-  - "charlotte_ai/research_results/**"   # large/ephemeral
+  - "charlotte_core/research_results/**"   # large/ephemeral
 follow_symlinks: false
 git:
   enable: true
