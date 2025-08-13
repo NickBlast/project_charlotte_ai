@@ -10,25 +10,7 @@ import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 import re
-
-BYTES_PER_MB = 1024 * 1024  # 1 MB in bytes
-
-# Add the tools directory to the path so we can import utils
-sys.path.append(str(Path(__file__).parent))
-
-from utils import (
-    utc_ts, 
-    as_posix_sorted, 
-    sanitize_filename, 
-    redact_sensitive_content,
-    safe_extract_path,
-    exit_with_error,
-    EXIT_BAD_INPUT,
-    EXIT_NOTHING_TO_DO,
-    EXIT_WRITE_ERROR
-)
-
-
+import hashlib
 
 # Add the tools directory to the path so we can import utils
 sys.path.append(str(Path(__file__).parent))
@@ -43,7 +25,9 @@ from utils import (
     EXIT_BAD_INPUT,
     EXIT_NOTHING_TO_DO,
     EXIT_WRITE_ERROR,
-    BYTES_PER_MB
+    BYTES_PER_MB,
+    MAX_TEXT_MB_DEFAULT,
+    MAX_CONVERSATIONS_JSON_MB
 )
 
 
@@ -277,12 +261,135 @@ def create_memory_candidates(thread_files: list, intake_dir: Path, dry_run: bool
     return candidates_content
 
 
+def sha256_file(path: Path) -> str:
+    """Compute SHA-256 hash of file contents."""
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(8192), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def copy_export_artifacts(raw_dir: Path, archives_dir: Path, export_date: str, dry_run: bool = False) -> dict:
+    """Copy images and metadata files from raw export to organized archive structure."""
+    assets_dir = archives_dir / "assets"
+    meta_dir = archives_dir / "meta"
+    user_folders_dir = assets_dir / "user_folders"
+    loose_images_dir = assets_dir / "loose"
+    
+    if not dry_run:
+        for directory in [assets_dir, meta_dir, user_folders_dir, loose_images_dir]:
+            directory.mkdir(parents=True, exist_ok=True)
+    
+    # Track copied files for manifest
+    copied_images = []
+    user_folder_count = 0
+    loose_image_count = 0
+    
+    # Find and copy user* folders containing images
+    for item in raw_dir.rglob("*"):
+        if item.is_dir() and item.name.startswith("user") and item.name != "user":
+            # This is a user* folder - copy all contents preserving structure
+            if not dry_run:
+                dest_dir = user_folders_dir / item.relative_to(raw_dir)
+                dest_dir.mkdir(parents=True, exist_ok=True)
+                for file in item.iterdir():
+                    if file.is_file() and file.suffix.lower() in {'.png', '.jpg', '.jpeg', '.gif', '.webp', '.bmp', '.svg'}:
+                        dest_file = dest_dir / file.name
+                        dest_file.write_bytes(file.read_bytes())
+                        copied_images.append({
+                            "dest": str(dest_file.relative_to(archives_dir)),
+                            "sha256": sha256_file(dest_file),
+                            "bytes": dest_file.stat().st_size
+                        })
+            else:
+                # Dry-run: just count what would be copied
+                image_files = list(item.rglob("*.[pP][nN][gG]")) + list(item.rglob("*.[jJ][pP][gG]")) + \
+                             list(item.rglob("*.[jJ][pP][eE][gG]")) + list(item.rglob("*.[gG][iI][fF]")) + \
+                             list(item.rglob("*.[wW][eE][bB][pP]")) + list(item.rglob("*.[bB][mM][pP]")) + \
+                             list(item.rglob("*.[sS][vV][gG]"))
+                if image_files:
+                    print(f"[DRY-RUN] Would copy user folder: {item.relative_to(raw_dir)} ({len(image_files)} images)")
+                    user_folder_count += 1
+                    loose_image_count += len(image_files)
+            user_folder_count += 1
+    
+    # Find and copy loose file* images
+    image_patterns = ["file*.[pP][nN][gG]", "file*.[jJ][pP][gG]", "file*.[jJ][pP][eE][gG]", 
+                     "file*.[gG][iI][fF]", "file*.[wW][eE][bB][pP]", "file*.[bB][mM][pP]", "file*.[sS][vV][gG]"]
+    for pattern in image_patterns:
+        for file in raw_dir.rglob(pattern):
+            if file.is_file():
+                if not dry_run:
+                    dest_file = loose_images_dir / file.name
+                    dest_file.write_bytes(file.read_bytes())
+                    copied_images.append({
+                        "dest": str(dest_file.relative_to(archives_dir)),
+                        "sha256": sha256_file(dest_file),
+                        "bytes": dest_file.stat().st_size
+                    })
+                else:
+                    print(f"[DRY-RUN] Would copy loose image: {file.relative_to(raw_dir)}")
+                loose_image_count += 1
+    
+    # Copy metadata files
+    meta_files = ["message_feedback.json", "user.json"]
+    for meta_file in meta_files:
+        source_file = raw_dir / meta_file
+        if source_file.exists() and source_file.is_file():
+            if not dry_run:
+                dest_file = meta_dir / meta_file
+                dest_file.write_bytes(source_file.read_bytes())
+                print(f"[INFO] Copied metadata: {meta_file}")
+            else:
+                print(f"[DRY-RUN] Would copy metadata: {meta_file}")
+        elif not dry_run:
+            print(f"[INFO] Metadata file not found: {meta_file}")
+    
+    # Create images manifest
+    if not dry_run and copied_images:
+        manifest_data = {
+            "copied_at": utc_ts(),
+            "counts": {
+                "user_folders": user_folder_count,
+                "loose_images": loose_image_count
+            },
+            "images": copied_images
+        }
+        manifest_file = assets_dir / "images_manifest.json"
+        with open(manifest_file, 'w', encoding='utf-8') as f:
+            json.dump(manifest_data, f, indent=2, ensure_ascii=False)
+        print(f"[INFO] Created images manifest with {len(copied_images)} images")
+    
+    return {
+        "user_folders": user_folder_count,
+        "loose_images": loose_image_count,
+        "images_copied": len(copied_images) if not dry_run else 0
+    }
+
+
 def create_ingest_report(export_date: str, thread_count: int, thread_files: list, 
-                        reports_dir: Path, dry_run: bool = False):
-    """Create ingestion report."""
+                        reports_dir: Path, format_type: str, artifacts_info: dict, dry_run: bool = False):
+    """Create ingestion report with artifact information."""
     report_content = f"# ChatGPT Export Ingest Report\n\n"
     report_content += f"Date: {export_date}\n"
-    report_content += f"Threads Processed: {thread_count}\n\n"
+    report_content += f"Format: {format_type.upper()}\n"
+    report_content += f"Threads Processed: {thread_count}\n"
+    report_content += f"User Folders: {artifacts_info.get('user_folders', 0)}\n"
+    report_content += f"Loose Images: {artifacts_info.get('loose_images', 0)}\n\n"
+    
+    # Check for metadata files
+    meta_files_present = []
+    if not dry_run:
+        archives_base = Path("archives") / "chat_exports" / export_date
+        meta_dir = archives_base / "meta"
+        if (meta_dir / "message_feedback.json").exists():
+            meta_files_present.append("message_feedback.json")
+        if (meta_dir / "user.json").exists():
+            meta_files_present.append("user.json")
+    
+    if meta_files_present:
+        report_content += f"Metadata Files: {', '.join(meta_files_present)}\n\n"
     
     report_content += "## Processed Threads\n\n"
     for thread_file in thread_files:
@@ -290,6 +397,7 @@ def create_ingest_report(export_date: str, thread_count: int, thread_files: list
     
     report_content += "\n## Summary\n\n"
     report_content += f"Successfully processed {thread_count} conversation threads.\n"
+    report_content += f"Preserved {artifacts_info.get('user_folders', 0)} user folders and {artifacts_info.get('loose_images', 0)} loose images.\n"
     
     # Write report (or preview in dry-run mode)
     report_file = reports_dir / f"export_ingest_{export_date}.md"
@@ -331,27 +439,32 @@ def main():
         for directory in [imports_dir, archives_dir, intake_dir, reports_dir]:
             directory.mkdir(parents=True, exist_ok=True)
     
-    # Handle ZIP extraction
+    # Handle ZIP extraction with raw preservation
+    raw_dir = None
     if args.zip:
         zip_path = Path(args.zip).resolve()
+        raw_dir = imports_dir / "raw"
         if not args.dry_run:
-            print(f"[INFO] Extracting {zip_path} to {imports_dir}")
-            safe_extract_zip(zip_path, imports_dir)
+            print(f"[INFO] Extracting {zip_path} to {raw_dir}")
+            safe_extract_zip(zip_path, raw_dir)
         else:
-            print(f"[DRY-RUN] Would extract {zip_path} to {imports_dir}")
-        export_dir = imports_dir
+            print(f"[DRY-RUN] Would extract {zip_path} to {raw_dir}")
+        export_dir = raw_dir
     else:
         export_dir = Path(args.dir).resolve()
         if not export_dir.exists():
             exit_with_error(EXIT_BAD_INPUT, f"Directory not found: {export_dir}", 
                            "Check the directory path and ensure it exists.")
+        raw_dir = export_dir
     
     # Detect export format
-    format_type, main_file = detect_export_format(export_dir)
-    if not format_type or not main_file:
+    format_result = detect_export_format(export_dir)
+    if not format_result or not format_result[0] or not format_result[1]:
         exit_with_error(EXIT_BAD_INPUT, "No recognized export format found", 
                        "Ensure the export contains conversations.json or HTML files.")
-    print(f"[INFO] Detected export format: {format_type.upper() if format_type else 'UNKNOWN'}")
+    
+    format_type, main_file = format_result
+    print(f"[INFO] Detected export format: {format_type.upper()}")
     # Process export based on format
     conversations: list = []
     if format_type == "json" and main_file is not None:
@@ -398,18 +511,28 @@ def main():
     else:
         print(f"[DRY-RUN] Would create memory candidates in {intake_dir}")
     candidates_content = create_memory_candidates(thread_files, intake_dir, args.dry_run)
+    
+    # Copy export artifacts (images and metadata)
+    if not args.dry_run:
+        print(f"[INFO] Copying export artifacts to {archives_dir}")
+    else:
+        print(f"[DRY-RUN] Would copy export artifacts to {archives_dir}")
+    artifacts_info = copy_export_artifacts(raw_dir, archives_dir, export_date, args.dry_run)
+    
     # Create ingest report
     if not args.dry_run:
         print(f"[INFO] Creating ingest report in {reports_dir}")
     else:
         print(f"[DRY-RUN] Would create ingest report in {reports_dir}")
     report_content = create_ingest_report(export_date, len(thread_files), thread_files, 
-                                         reports_dir, args.dry_run)
+                                         reports_dir, format_type, artifacts_info, args.dry_run)
     # Print summary
     print(f"\n[SUMMARY] ChatGPT Export Ingest")
-    print(f"  Format: {format_type.upper() if format_type else 'UNKNOWN'}")
+    print(f"  Format: {format_type.upper()}")
     print(f"  Date: {export_date}")
     print(f"  Threads: {len(thread_files)}")
+    print(f"  User Folders: {artifacts_info.get('user_folders', 0)}")
+    print(f"  Loose Images: {artifacts_info.get('loose_images', 0)}")
     print(f"  Candidates: {'Generated' if not args.dry_run else 'Would generate'}")
     print(f"  Report: {'Generated' if not args.dry_run else 'Would generate'}")
     if args.dry_run:

@@ -1,0 +1,7 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "Ingest fixture (smoke)", "type": "shell", "command": "bash tests/ingest_export_smoke.sh" },
+    { "label": "Run pytest", "type": "shell", "command": "pytest -q tests/test_ingest_report.py", "problemMatcher": [] }
+  ]
+}
