@@ -567,7 +567,7 @@ def do_plan(cfg):
         Exits with code 1 if no files are selected for backup.
     """
     repo_root = cfg["repo_root"]
-    include_exts = set([e.lower() for e in cfg.get("include_exts", [".md", ".markdown", ".yml", ".yaml", ".json", ".txt"])]])
+    include_exts = set([e.lower() for e in cfg.get("include_exts", [".md", ".markdown", ".yml", ".yaml", ".json", ".txt"])])
     exclude_globs = cfg.get("exclude_globs", [])
     source_dirs = [os.path.join(repo_root, p) for p in cfg.get("source_dirs", ["charlotte_core"])]
     follow_symlinks = cfg.get("follow_symlinks", False)
@@ -622,7 +622,7 @@ def do_snapshot(cfg):
         Handles various edge cases like detached HEAD, missing remotes, etc.
     """
     repo_root = cfg["repo_root"]
-    include_exts = set([e.lower() for e in cfg.get("include_exts", [".md", ".markdown", ".yml", ".yaml", ".json", ".txt"])]])
+    include_exts = set([e.lower() for e in cfg.get("include_exts", [".md", ".markdown", ".yml", ".yaml", ".json", ".txt"])])
     exclude_globs = cfg.get("exclude_globs", [])
     source_dirs = [os.path.join(repo_root, p) for p in cfg.get("source_dirs", ["charlotte_core"])]
     follow_symlinks = cfg.get("follow_symlinks", False)

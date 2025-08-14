@@ -85,6 +85,8 @@ def get_module_path(category: str, project: str | None = None, mode: str | None 
     else:
         exit_with_error(EXIT_BAD_INPUT, f"Unknown category: {category}",
                        "Use one of: persona, protocol, project, relationship, special")
+        # Return a dummy Path to satisfy type checker, though exit_with_error will terminate the program
+        return Path(".")
 
 
 def generate_intent_id() -> str:

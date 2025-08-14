@@ -53,7 +53,7 @@ def parse_args():
     return parser.parse_args()
 
 
-def load_source_content(source: str, date: str = None) -> str:
+def load_source_content(source: str, date: Optional[str] = None) -> str:
     """Load content from the specified source."""
     source_file: Optional[Path] = None
     if source == "candidates":
