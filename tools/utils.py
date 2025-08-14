@@ -1,28 +1,42 @@
 #!/usr/bin/env python3
 """
-Shared utilities for Charlotte AI memory tools.
+Shared Utilities for Charlotte AI Memory Tools
 
-This module provides common utility functions used across various Charlotte AI
-memory processing tools. It includes functions for timestamp generation,
-path handling, filename sanitization, sensitive content redaction, and
-error handling with standardized exit codes.
+Purpose:
+  This module centralizes common functions used across the Charlotte AI toolchain
+  to ensure deterministic, secure, and consistent behavior. It supports the memory
+  pipeline's core requirements for reliability and privacy as defined in the PRD
+  (FR-3, FR-6) by providing standardized methods for path handling, filename
+  sanitization, timestamping, and sensitive data redaction. Its existence
+  prevents code duplication and simplifies maintenance.
 
-Why this exists:
-To avoid code duplication and ensure consistent behavior across the toolchain for
-critical operations like timestamping, path normalization, and error handling,
-which are essential for the deterministic and reliable functioning of the memory
-pipeline as defined in the PRD.
+Inputs/Outputs:
+  - This module does not have a single entry point but provides functions that
+    take various inputs (e.g., paths, strings) and return processed outputs
+    (e.g., sanitized strings, sorted lists, timestamps). Refer to individual
+    function docstrings for details.
 
-Features:
-- UTC timestamp generation for consistent file naming (FR-6)
-- Cross-platform path handling and sorting for deterministic outputs (FR-6)
-- Filename sanitization for filesystem compatibility
-- Sensitive content redaction for security and privacy (FR-3, NFR-Security)
-- Path traversal protection (Zip-Slip prevention) for safe archive handling
-- Standardized error handling and exit codes for observability (NFR-Observability)
+Side Effects:
+  - The `exit_with_error` function terminates the calling script with a specific
+    exit code. Other functions are generally pure and do not have side effects,
+    returning new objects instead of modifying inputs in-place.
+
+Failure Modes:
+  - `safe_extract_path` will raise a `ValueError` if a path traversal attack
+    (Zip-Slip) is detected.
+  - Other functions are designed to be robust, but incorrect input types may
+    cause standard Python errors.
+
+Exit Codes:
+  - This module defines standard exit codes used by other tools:
+    - 2: Bad Input (`EXIT_BAD_INPUT`)
+    - 3: Nothing to Do (`EXIT_NOTHING_TO_DO`)
+    - 4: Write Error (`EXIT_WRITE_ERROR`)
 """
 
-# Constants for file size calculations and thresholds
+# --- Constants ---
+# Defines shared constants used across the toolchain for calculations,
+# validation thresholds, and pattern matching to ensure consistency.
 BYTES_PER_MB = 1024 * 1024
 ROUTING_CONFIDENCE_THRESHOLD = 0.6
 INVALID_FILENAME_CHARS_PATTERN = r'[<>:"/\\|?*\x00-\x1f]'
@@ -146,7 +160,7 @@ def redact_sensitive_content(text: str) -> str:
     # Redact OpenAI API keys (48-character alphanumeric after sk- prefix)
     text = re.sub(r'sk-[a-zA-Z0-9]{48}', '[REDACTED]', text)
     # Redact generic API key patterns with various assignment formats
-    text = re.sub(r'API_KEY[=\s]+[\'"]?[a-zA-Z0-9_\-]+[\'"]?', 'API_KEY=[REDACTED]', text)
+    text = re.sub(r'API_KEY[=\s]+["\']?[a-zA-Z0-9_-]+["\']?', 'API_KEY=[REDACTED]', text)
     # Redact PEM-formatted private keys with multi-line matching
     text = re.sub(r'-----BEGIN PRIVATE KEY-----.*?-----END PRIVATE KEY-----', 
                   '-----BEGIN PRIVATE KEY-----\n[REDACTED]\n-----END PRIVATE KEY-----', text, flags=re.DOTALL)
