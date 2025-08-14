@@ -1,3 +1,34 @@
+## 2025-08-13 — Repo Comment Augmentation & Link Hygiene
+### Summary
+- Enhanced internal documentation across all Python and shell scripts by adding detailed docstrings and header comments. The new comments explain the "why" behind each script, its inputs/outputs, and its connection to the project's PRD and Memory Pipeline, improving maintainability.
+
+### Changes
+- **Modified**:
+  - `backup.py`: Added detailed module docstring explaining its purpose and features.
+  - `tools/charlotte_restore_builder.py`: Added detailed module docstring.
+  - `tools/ingest_chatgpt_export.py`: Added detailed module docstring.
+  - `tools/memory_card_scaffolder.py`: Added detailed module docstring.
+  - `tools/memory_diff_proposer.py`: Added detailed module docstring.
+  - `tools/utils.py`: Expanded module docstring to explain its role and features.
+  - `scripts/backup.sh`: Added header comment explaining purpose and usage.
+  - `scripts/backup.ps1`: Added header comment explaining purpose and usage.
+- **Added**:
+  - Explanatory comments and docstrings to all key scripts.
+- **Removed**:
+  - N/A
+
+### Outputs
+- All key `.py`, `.ps1`, and `.sh` files now have improved, explanatory headers and/or docstrings.
+
+### Determinism Guarantees
+- No changes to logic; all scripts remain deterministic.
+
+### Risks & Rollback
+- **Risks**: None. Changes are limited to comments and docstrings.
+- **Rollback**: Changes can be reverted using `git restore <file>` on the affected files.
+
+---
+
 # Charlotte Changelog
 
 A chronological record of persona evolution, core context updates, and backup merges.

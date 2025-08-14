@@ -1,6 +1,19 @@
 #!/usr/bin/env python3
 """
 Scaffold a Memory Card, update the relevant index, and print a ready-made "Remember" prompt.
+
+Why this exists:
+To fulfill part of Feature 3 of the PRD and the "Ad-hoc Memory at Source" workflow.
+It provides a structured, repeatable way to create new, atomic pieces of knowledge
+("Memory Cards") with the correct format and metadata, reducing manual effort and
+ensuring consistency in Charlotte's knowledge base.
+
+Features:
+- Generates a new Memory Card markdown file from a template (FR-3).
+- Enforces the correct YAML frontmatter structure.
+- Ensures a unique, sanitized filename (slug).
+- Automatically updates the relevant `memory_index.md` to keep it current.
+- Prints a copy-pasteable "Remember this" prompt for immediate caching in the AI.
 """
 import argparse
 import sys

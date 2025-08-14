@@ -7,19 +7,25 @@ memory processing tools. It includes functions for timestamp generation,
 path handling, filename sanitization, sensitive content redaction, and
 error handling with standardized exit codes.
 
+Why this exists:
+To avoid code duplication and ensure consistent behavior across the toolchain for
+critical operations like timestamping, path normalization, and error handling,
+which are essential for the deterministic and reliable functioning of the memory
+pipeline as defined in the PRD.
+
 Features:
-- UTC timestamp generation for consistent file naming
-- Cross-platform path handling and sorting
+- UTC timestamp generation for consistent file naming (FR-6)
+- Cross-platform path handling and sorting for deterministic outputs (FR-6)
 - Filename sanitization for filesystem compatibility
-- Sensitive content redaction for security
-- Path traversal protection (Zip-Slip prevention)
-- Standardized error handling and exit codes
+- Sensitive content redaction for security and privacy (FR-3, NFR-Security)
+- Path traversal protection (Zip-Slip prevention) for safe archive handling
+- Standardized error handling and exit codes for observability (NFR-Observability)
 """
 
 # Constants for file size calculations and thresholds
 BYTES_PER_MB = 1024 * 1024
 ROUTING_CONFIDENCE_THRESHOLD = 0.6
-INVALID_FILENAME_CHARS_PATTERN = r'[<>:"/\\|?*\x00-\x1F]'
+INVALID_FILENAME_CHARS_PATTERN = r'[<>:"/\\|?*\x00-\x1f]'
 MAX_TEXT_MB_DEFAULT = 25
 MAX_CONVERSATIONS_JSON_MB = 500
 FILENAME_LENGTH_LIMIT = 200

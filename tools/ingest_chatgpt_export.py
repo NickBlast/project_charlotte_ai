@@ -1,29 +1,21 @@
 #!/usr/bin/env python3
 """
-Charlotte AI ChatGPT Export Ingestion Tool - Process OpenAI exports into structured memory
+Charlotte AI ChatGPT Export Ingestion Tool - Process OpenAI exports into structured memory.
 
-This tool processes OpenAI ChatGPT account exports and converts them into
-structured Markdown files suitable for Charlotte AI's memory system. It handles
-both ZIP archives and extracted directories, preserving conversation structure,
-timestamps, and associated artifacts like images and metadata.
+Why this exists:
+To fulfill Feature 2 of the PRD. This tool automates the first step of the
+"Monthly Official Export" workflow (Track A in the Memory Pipeline), turning a
+raw ChatGPT data export into structured, archivable, and searchable Markdown
+files and identifying potential new memories for integration.
 
 Features:
-- Support for both ZIP and extracted directory inputs
-- JSON and HTML export format detection and parsing
-- Conversation thread extraction and Markdown conversion
-- Image and metadata artifact preservation
-- Memory candidates generation with sensitive content redaction
-- Comprehensive ingestion reporting
-- Security-focused with path traversal protection
-
-Processing Pipeline:
-1. Input validation and format detection
-2. Safe ZIP extraction (if applicable) with security checks
-3. Conversation parsing and structuring
-4. Markdown file generation with proper formatting
-5. Artifact preservation (images, metadata)
-6. Memory candidates creation for Charlotte AI integration
-7. Comprehensive reporting and documentation
+- Processes official OpenAI data export ZIPs safely (FR-2).
+- Handles both `messages.json` and `conversations.html` formats (FR-1).
+- Converts conversations into clean Markdown files in `archives/` (FR-2).
+- Preserves and organizes artifacts like images and metadata (FR-2).
+- Generates a redacted `memory_candidates.md` for safe review (FR-3).
+- Creates a detailed `export_ingest_...md` report for auditability.
+- Security-focused with Zip-Slip protection and path sanitization.
 """
 
 import argparse
