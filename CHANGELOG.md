@@ -1,3 +1,22 @@
+## [2025-08-14] Comment augmentation & link hygiene
+### Summary
+- Expanded module docstrings and script headers to explain WHY and PRD alignment.
+- Fixed/validated internal links; minor refactors for clarity.
+
+### Changes
+- Added: .gemini/GEMINI.md, .gemini/settings.json, .gemini/commands/{plan,fixlinks.py}
+- Modified: tools/*.py docstrings; scripts/* headers
+- Removed: <none>
+
+### Outputs
+- Verified dry-run outputs for tools (see PR body “Acceptance evidence”)
+- Determinism unchanged (LF, UTF-8, UTC stamps)
+
+### Risks & Rollback
+- Low; comments only + link fixes. Rollback: revert <commit-sha>.
+
+PR: #6  Commit: <sha>
+
 ## 2025-08-13 — Repo Comment Augmentation & Link Hygiene
 ### Summary
 - Enhanced internal documentation across all Python and shell scripts by adding detailed docstrings and header comments. The new comments explain the "why" behind each script, its inputs/outputs, and its connection to the project's PRD and Memory Pipeline, improving maintainability.
