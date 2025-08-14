@@ -1,27 +1,20 @@
 #!/usr/bin/env python3
 """
-Charlotte Restore Package Builder - Create paste-ready restore packages for Charlotte AI
+Charlotte Restore Package Builder - Create paste-ready restore packages for Charlotte AI.
 
-This script builds comprehensive restore packages that can be pasted back into
-Charlotte AI after memory resets. It follows a specific order: Persona essence
-first, then context, ensuring proper restoration of core identity before
-additional knowledge and relationships.
+Why this exists:
+To fulfill Feature 4 of the PRD. When an AI's context is lost, this tool
+provides a fast, reliable way to "rehydrate" the persona by generating a single,
+ordered package of its core knowledge. This makes the persona portable across any
+platform (ChatGPT, Claude, Gemini, local LLMs), ensuring continuity.
 
 Features:
-- Two profile modes: minimal (core identity) and full (complete restoration)
-- Active status filtering for selective content restoration
-- Automatic chunking for large packages to fit token limits
-- YAML frontmatter parsing for content filtering
-- Persona spine validation for restore completeness
-- Comprehensive error handling and user feedback
-
-Restore Order:
-1. Persona Core (essential identity files)
-2. Protocols (operational frameworks)
-3. Modes (behavioral patterns)
-4. Projects (active work - full profile only)
-5. Relationship Archive (personal context - full profile only)
-6. Special Knowledge (domain expertise - full profile only)
+- Aggregates persona files into a single, paste-ready text package (FR-5).
+- Follows a strict, persona-first ordering to ensure logical rehydration.
+- Supports `--profile` (`minimal`, `full`) to control context depth (FR-5).
+- Chunks output into multiple files with `--max-bytes` to respect platform paste limits (FR-5).
+- `--only-active` flag to filter for currently relevant memories.
+- `--dry-run` for safe previews.
 """
 
 import argparse
@@ -478,7 +471,7 @@ def main():
     
     # Handle dry-run mode - preview without writing files
     if args.dry_run:
-        print(f"[DRY-RUN] 📋 Would build restore package:")
+        print(f"[DRY-RUN] Would build restore package:")
         print(f"  Profile: {args.profile}")
         print(f"  Only Active: {args.only_active}")
         print(f"  Max Bytes: {args.max_bytes}")

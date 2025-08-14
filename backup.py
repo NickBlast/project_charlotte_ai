@@ -1,18 +1,21 @@
 #!/usr/bin/env python3
 """
-Charlotte Core Backup System - Automated versioned backups with integrity verification
+Charlotte Core Backup System - Automated versioned backups with integrity verification.
 
-This script provides automated backup functionality for Charlotte AI's core files,
-creating timestamped snapshots with SHA-256 hashing and optional Git integration.
-It serves as the long-term memory backup system while keeping in-app memory as short-term RAM.
+Why this exists:
+To fulfill Goal 1 of the PRD: Achieve Stateful Memory. This script is the heart
+of the snapshot system (Feature 1), creating deterministic, verifiable backups of
+Charlotte's core knowledge files. It treats the Git repository as canonical,
+long-term memory, resilient to platform-specific memory limitations.
 
 Features:
-- Collects Core Modules (persona, protocols, Soul Codex, projects, relationship archive, special knowledge)
-- Creates timestamped snapshots under snapshots/YYYY-MM-DD_HHMMSS/
-- Generates MANIFEST.json with SHA-256 hashes per file + top-level integrity hash
-- Optional Git operations: commit, tag, and push to remote repository
-- Preflight checks for system integrity
-- Configurable file filtering and exclusion patterns
+- Collects Core Modules as defined in `config.yaml`.
+- Creates timestamped snapshots under `snapshots/YYYY-MM-DD_HHMMSSZ/` (FR-1).
+- Generates a `MANIFEST.json` with SHA-256 hashes for integrity (FR-1).
+- Optionally commits, tags, and pushes to a Git remote (FR-1).
+- `--plan` mode for a safe dry-run (FR-1).
+- Preflight checks to validate persona integrity before backup.
+- Adheres to deterministic principles (UTC, sorted paths) (FR-6).
 """
 
 import argparse
@@ -564,7 +567,7 @@ def do_plan(cfg):
         Exits with code 1 if no files are selected for backup.
     """
     repo_root = cfg["repo_root"]
-    include_exts = set([e.lower() for e in cfg.get("include_exts", [".md", ".markdown", ".yml", ".yaml", ".json", ".txt"])]])
+    include_exts = set([e.lower() for e in cfg.get("include_exts", [".md", ".markdown", ".yml", ".yaml", ".json", ".txt"])])
     exclude_globs = cfg.get("exclude_globs", [])
     source_dirs = [os.path.join(repo_root, p) for p in cfg.get("source_dirs", ["charlotte_core"])]
     follow_symlinks = cfg.get("follow_symlinks", False)
@@ -619,7 +622,7 @@ def do_snapshot(cfg):
         Handles various edge cases like detached HEAD, missing remotes, etc.
     """
     repo_root = cfg["repo_root"]
-    include_exts = set([e.lower() for e in cfg.get("include_exts", [".md", ".markdown", ".yml", ".yaml", ".json", ".txt"])]])
+    include_exts = set([e.lower() for e in cfg.get("include_exts", [".md", ".markdown", ".yml", ".yaml", ".json", ".txt"])])
     exclude_globs = cfg.get("exclude_globs", [])
     source_dirs = [os.path.join(repo_root, p) for p in cfg.get("source_dirs", ["charlotte_core"])]
     follow_symlinks = cfg.get("follow_symlinks", False)

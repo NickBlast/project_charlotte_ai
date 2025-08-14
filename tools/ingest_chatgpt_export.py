@@ -1,29 +1,21 @@
 #!/usr/bin/env python3
 """
-Charlotte AI ChatGPT Export Ingestion Tool - Process OpenAI exports into structured memory
+Charlotte AI ChatGPT Export Ingestion Tool - Process OpenAI exports into structured memory.
 
-This tool processes OpenAI ChatGPT account exports and converts them into
-structured Markdown files suitable for Charlotte AI's memory system. It handles
-both ZIP archives and extracted directories, preserving conversation structure,
-timestamps, and associated artifacts like images and metadata.
+Why this exists:
+To fulfill Feature 2 of the PRD. This tool automates the first step of the
+"Monthly Official Export" workflow (Track A in the Memory Pipeline), turning a
+raw ChatGPT data export into structured, archivable, and searchable Markdown
+files and identifying potential new memories for integration.
 
 Features:
-- Support for both ZIP and extracted directory inputs
-- JSON and HTML export format detection and parsing
-- Conversation thread extraction and Markdown conversion
-- Image and metadata artifact preservation
-- Memory candidates generation with sensitive content redaction
-- Comprehensive ingestion reporting
-- Security-focused with path traversal protection
-
-Processing Pipeline:
-1. Input validation and format detection
-2. Safe ZIP extraction (if applicable) with security checks
-3. Conversation parsing and structuring
-4. Markdown file generation with proper formatting
-5. Artifact preservation (images, metadata)
-6. Memory candidates creation for Charlotte AI integration
-7. Comprehensive reporting and documentation
+- Processes official OpenAI data export ZIPs safely (FR-2).
+- Handles both `messages.json` and `conversations.html` formats (FR-1).
+- Converts conversations into clean Markdown files in `archives/` (FR-2).
+- Preserves and organizes artifacts like images and metadata (FR-2).
+- Generates a redacted `memory_candidates.md` for safe review (FR-3).
+- Creates a detailed `export_ingest_...md` report for auditability.
+- Security-focused with Zip-Slip protection and path sanitization.
 """
 
 import argparse
@@ -158,14 +150,14 @@ def safe_extract_zip(zip_path: Path, extract_to: Path, max_size_mb: int = 25):
                 
                 # Check file size against safety limit
                 if member.file_size > max_size_mb * BYTES_PER_MB:
-                    print(f"[WARN] ⚠️ Skipping large file: {member.filename} ({member.file_size} bytes)")
+                    print(f"[WARN] Skipping large file: {member.filename} ({member.file_size} bytes)")
                     continue
                 
                 # Safely resolve path to prevent Zip-Slip attacks
                 try:
                     target_path = safe_extract_path(extract_to, member.filename)
                 except ValueError as e:
-                    print(f"[WARN] ⚠️ Skipping unsafe path: {member.filename} - {e}")
+                    print(f"[WARN] Skipping unsafe path: {member.filename} - {e}")
                     continue
                 
                 # Create parent directories as needed
@@ -508,7 +500,7 @@ def process_conversations(conversations, export_date: str, archives_dir: Path, d
                     f.write(content)
                     
             except Exception as e:
-                print(f"[WARN] ⚠️ Failed to write {file_path}: {e}")
+                print(f"[WARN] Failed to write {file_path}: {e}")
                 continue  # Skip this file and continue with others
         
         # Track created file and provide feedback
@@ -573,7 +565,7 @@ def create_memory_candidates(thread_files: list, intake_dir: Path, dry_run: bool
                 candidates_content += "\n\n"
                 
         except Exception as e:
-            print(f"[WARN] ⚠️ Failed to read {thread_file}: {e}")
+            print(f"[WARN] Failed to read {thread_file}: {e}")
             continue  # Skip problematic files
     
     # Write consolidated file (or preview in dry-run mode)
@@ -709,7 +701,7 @@ def copy_export_artifacts(raw_dir: Path, archives_dir: Path, export_date: str, d
                              list(item.rglob("*.[wW][eE][bB][pP]")) + list(item.rglob("*.[bB][mM][pP]")) + \
                              list(item.rglob("*.[sS][vV][gG]"))
                 if image_files:
-                    print(f"[DRY-RUN] 📁 Would copy user folder: {item.relative_to(raw_dir)} ({len(image_files)} images)")
+                    print(f"[DRY-RUN] Would copy user folder: {item.relative_to(raw_dir)} ({len(image_files)} images)")
                     user_folder_count += 1
                     loose_image_count += len(image_files)
             
@@ -734,7 +726,7 @@ def copy_export_artifacts(raw_dir: Path, archives_dir: Path, export_date: str, d
                         "bytes": dest_file.stat().st_size
                     })
                 else:
-                    print(f"[DRY-RUN] 🖼️ Would copy loose image: {file.relative_to(raw_dir)}")
+                    print(f"[DRY-RUN] Would copy loose image: {file.relative_to(raw_dir)}")
                 
                 loose_image_count += 1
     
@@ -747,11 +739,11 @@ def copy_export_artifacts(raw_dir: Path, archives_dir: Path, export_date: str, d
                 # Copy metadata file to organized directory
                 dest_file = meta_dir / meta_file
                 dest_file.write_bytes(source_file.read_bytes())
-                print(f"[INFO] 📄 Copied metadata: {meta_file}")
+                print(f"[INFO] Copied metadata: {meta_file}")
             else:
-                print(f"[DRY-RUN] 📄 Would copy metadata: {meta_file}")
+                print(f"[DRY-RUN] Would copy metadata: {meta_file}")
         elif not dry_run:
-            print(f"[INFO] ℹ️ Metadata file not found: {meta_file}")
+            print(f"[INFO] Metadata file not found: {meta_file}")
     
     # Create images manifest if files were copied
     if not dry_run and copied_images:
@@ -770,7 +762,7 @@ def copy_export_artifacts(raw_dir: Path, archives_dir: Path, export_date: str, d
         with open(manifest_file, 'w', encoding='utf-8') as f:
             json.dump(manifest_data, f, indent=2, ensure_ascii=False)
         
-        print(f"[INFO] 📋 Created images manifest with {len(copied_images)} images")
+        print(f"[INFO] Created images manifest with {len(copied_images)} images")
     
     return {
         "user_folders": user_folder_count,
@@ -842,10 +834,10 @@ def create_ingest_report(export_date: str, thread_count: int, thread_files: list
         report_content += f"- {thread_file.name}\n"
     
     report_content += "\n## Summary\n\n"
-    report_content += f"✅ **Successfully processed** {thread_count} conversation threads.\n"
-    report_content += f"📁 **Preserved** {artifacts_info.get('user_folders', 0)} user folders and {artifacts_info.get('loose_images', 0)} loose images.\n"
-    report_content += f"📄 **Memory candidates** generated for Charlotte AI integration.\n"
-    report_content += f"📋 **Ingest report** created for documentation purposes.\n\n"
+    report_content += f"**Successfully processed** {thread_count} conversation threads.\n"
+    report_content += f"**Preserved** {artifacts_info.get('user_folders', 0)} user folders and {artifacts_info.get('loose_images', 0)} loose images.\n"
+    report_content += f"**Memory candidates** generated for Charlotte AI integration.\n"
+    report_content += f"**Ingest report** created for documentation purposes.\n\n"
     
     # Add processing notes
     report_content += "## Processing Notes\n\n"
@@ -866,7 +858,7 @@ def create_ingest_report(export_date: str, thread_count: int, thread_files: list
                 f.write(report_content)
                 
         except Exception as e:
-            print(f"[WARN] ⚠️ Failed to write report {report_file}: {e}")
+            print(f"[WARN] Failed to write report {report_file}: {e}")
     
     return report_content
 
@@ -950,10 +942,10 @@ def main():
         raw_dir = imports_dir / "raw"
         
         if not args.dry_run:
-            print(f"[INFO] 📦 Extracting {zip_path} to {raw_dir}")
+            print(f"[INFO] Extracting {zip_path} to {raw_dir}")
             safe_extract_zip(zip_path, raw_dir)
         else:
-            print(f"[DRY-RUN] 📦 Would extract {zip_path} to {raw_dir}")
+            print(f"[DRY-RUN] Would extract {zip_path} to {raw_dir}")
         
         export_dir = raw_dir
     else:
@@ -979,7 +971,7 @@ def main():
     format_type, main_file = format_result
     # Ensure format_type is not None before calling .upper()
     format_type_str = format_type if format_type else "unknown"
-    print(f"[INFO] 📄 Detected export format: {format_type_str.upper()}")
+    print(f"[INFO] Detected export format: {format_type_str.upper()}")
     
     # Process export based on detected format
     conversations: list = []
@@ -1013,13 +1005,13 @@ def main():
         exit_with_error(EXIT_NOTHING_TO_DO, "No conversations found in export", 
                        "Check that the export contains conversation data.")
     
-    print(f"[INFO] 📝 Found {len(conversations)} conversations")
+    print(f"[INFO] Found {len(conversations)} conversations")
     
     # Process conversations into Markdown files
     if not args.dry_run:
-        print(f"[INFO] 📄 Creating Markdown files in {archives_dir}")
+        print(f"[INFO] Creating Markdown files in {archives_dir}")
     else:
-        print(f"[DRY-RUN] 📄 Would create Markdown files in {archives_dir}")
+        print(f"[DRY-RUN] Would create Markdown files in {archives_dir}")
     
     thread_files = process_conversations(conversations, export_date, archives_dir, args.dry_run)
     
@@ -1029,25 +1021,25 @@ def main():
     
     # Create memory candidates file
     if not args.dry_run:
-        print(f"[INFO] 🧠 Creating memory candidates in {intake_dir}")
+        print(f"[INFO] Creating memory candidates in {intake_dir}")
     else:
-        print(f"[DRY-RUN] 🧠 Would create memory candidates in {intake_dir}")
+        print(f"[DRY-RUN] Would create memory candidates in {intake_dir}")
     
     candidates_content = create_memory_candidates(thread_files, intake_dir, args.dry_run)
     
     # Copy export artifacts (images and metadata)
     if not args.dry_run:
-        print(f"[INFO] 📁 Copying export artifacts to {archives_dir}")
+        print(f"[INFO] Copying export artifacts to {archives_dir}")
     else:
-        print(f"[DRY-RUN] 📁 Would copy export artifacts to {archives_dir}")
+        print(f"[DRY-RUN] Would copy export artifacts to {archives_dir}")
     
     artifacts_info = copy_export_artifacts(raw_dir, archives_dir, export_date, args.dry_run)
     
     # Create ingest report
     if not args.dry_run:
-        print(f"[INFO] 📋 Creating ingest report in {reports_dir}")
+        print(f"[INFO] Creating ingest report in {reports_dir}")
     else:
-        print(f"[DRY-RUN] 📋 Would create ingest report in {reports_dir}")
+        print(f"[DRY-RUN] Would create ingest report in {reports_dir}")
     
     # Ensure format_type is not None before passing to create_ingest_report
     safe_format_type = format_type if format_type else "unknown"
@@ -1055,17 +1047,17 @@ def main():
                                          reports_dir, safe_format_type, artifacts_info, args.dry_run)
     
     # Print comprehensive summary
-    print(f"\n[SUMMARY] 🎯 ChatGPT Export Ingest Complete")
-    print(f"  📄 Format: {format_type_str.upper()}")
-    print(f"  📅 Date: {export_date}")
-    print(f"  💬 Threads: {len(thread_files)}")
-    print(f"  📁 User Folders: {artifacts_info.get('user_folders', 0)}")
-    print(f"  🖼️ Loose Images: {artifacts_info.get('loose_images', 0)}")
-    print(f"  🧠 Candidates: {'Generated' if not args.dry_run else 'Would generate'}")
-    print(f"  📋 Report: {'Generated' if not args.dry_run else 'Would generate'}")
+    print(f"\n[SUMMARY] ChatGPT Export Ingest Complete")
+    print(f"  Format: {format_type_str.upper()}")
+    print(f"  Date: {export_date}")
+    print(f"  Threads: {len(thread_files)}")
+    print(f"  User Folders: {artifacts_info.get('user_folders', 0)}")
+    print(f"  Loose Images: {artifacts_info.get('loose_images', 0)}")
+    print(f"  Candidates: {'Generated' if not args.dry_run else 'Would generate'}")
+    print(f"  Report: {'Generated' if not args.dry_run else 'Would generate'}")
     
     if args.dry_run:
-        print(f"\n[DRY-RUN] 📝 No files were actually written.")
+        print(f"\n[DRY-RUN] No files were actually written.")
         print(f"  This was a preview of what would be processed.")
     
     return 0

@@ -1,6 +1,8 @@
 # Archive Files
 .archive/
 GEMINI.md
+.gemini/
+
 
 # Python artifacts
 __pycache__/

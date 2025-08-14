@@ -2,6 +2,19 @@
 """
 Turn _intake/memory_candidates.md and/or latest _intake/memory_self_dump/YYYY-MM-DD.md 
 into proposed patches for the correct modules.
+
+Why this exists:
+To fulfill part of Feature 3 of the PRD and to automate the "Weekly Self-Dump Mirror"
+workflow (Track B in the Memory Pipeline). It bridges the gap between raw text
+(from conversations or self-reflection) and structured Memory Cards by suggesting
+where new information belongs, reducing the manual effort of memory curation.
+
+Features:
+- Analyzes intake files (`memory_candidates.md` or self-dump files).
+- Routes content to the most appropriate module using confidence scoring (FR-4).
+- Generates unified diff patch files for review (`reports/memory_diff/...`).
+- Parks low-confidence content in an `unclassified.md` file for manual review (FR-4).
+- Can be extended to open a PR with the proposed changes.
 """
 import argparse
 import sys
@@ -40,7 +53,7 @@ def parse_args():
     return parser.parse_args()
 
 
-def load_source_content(source: str, date: str = None) -> str:
+def load_source_content(source: str, date: Optional[str] = None) -> str:
     """Load content from the specified source."""
     source_file: Optional[Path] = None
     if source == "candidates":
