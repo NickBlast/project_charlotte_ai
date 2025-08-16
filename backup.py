@@ -1,21 +1,49 @@
 #!/usr/bin/env python3
 """
-Charlotte Core Backup System - Automated versioned backups with integrity verification.
+Charlotte Core Backup System
 
-Why this exists:
-To fulfill Goal 1 of the PRD: Achieve Stateful Memory. This script is the heart
-of the snapshot system (Feature 1), creating deterministic, verifiable backups of
-Charlotte's core knowledge files. It treats the Git repository as canonical,
-long-term memory, resilient to platform-specific memory limitations.
+Purpose:
+  This script is the primary tool for creating versioned, deterministic backups of
+  Charlotte's core persona and knowledge files. It fulfills the "Stateful Memory"
+  and "Automated Backups" requirements (FR-4.1.1, FR-4.3.1) outlined in the
+  `docs/process/charlotte_ai_prd.md`. It treats a Git repository as a reliable,
+  long-term memory store, creating timestamped snapshots with integrity checks.
 
-Features:
-- Collects Core Modules as defined in `config.yaml`.
-- Creates timestamped snapshots under `snapshots/YYYY-MM-DD_HHMMSSZ/` (FR-1).
-- Generates a `MANIFEST.json` with SHA-256 hashes for integrity (FR-1).
-- Optionally commits, tags, and pushes to a Git remote (FR-1).
-- `--plan` mode for a safe dry-run (FR-1).
-- Preflight checks to validate persona integrity before backup.
-- Adheres to deterministic principles (UTC, sorted paths) (FR-6).
+Inputs/Outputs:
+  - Inputs:
+    - `config.yaml`: A configuration file specifying source directories, file
+      extensions to include, patterns to exclude, and Git integration settings.
+    - Command-line arguments: `plan` for a dry-run or `snapshot` to execute.
+  - Outputs:
+    - A new directory under `snapshots/YYYY-MM-DD_HHMMSSZ/` containing the backup.
+    - A `MANIFEST.json` file within the snapshot directory, containing metadata
+      and SHA-256 hashes for all backed-up files.
+    - If Git is enabled: a new commit, a new tag (e.g., `backup-YYYYMMDD-HHMMSSZ`),
+      and a push to the `origin` remote.
+
+Side Effects:
+  - Creates new directories and files under the `snapshots/` directory.
+  - If Git integration is enabled, it will stage files, create commits, create tags,
+    and push to a remote repository. This modifies the Git history.
+
+Failure Modes:
+  - The script will fail if `config.yaml` is missing or malformed.
+  - It will fail if the source directories specified in the config are not found.
+  - It will fail if there are file system permission errors when creating
+    snapshot directories or writing files.
+  - Git operations can fail if Git is not installed, if the repository is in a
+    detached HEAD state, or if the remote is not configured correctly.
+
+Exit Codes:
+  - 0: Success.
+  - 1: General Error (e.g., no files selected for backup).
+  - 2: Bad Input (e.g., `config.yaml` not found or `PyYAML` not installed).
+
+Dry-Run Behavior:
+  - The `plan` command (`python backup.py plan`) provides a dry-run mode.
+  - It lists all files that *would* be included in a snapshot based on the
+    current configuration, but does not create any files, directories, or
+    make any changes to the Git repository.
 """
 
 import argparse
@@ -374,12 +402,12 @@ def build_manifest(files, repo_root, snapshot_rel):
     entries.sort(key=lambda x: x["path"])
     
     # Build overall hash from compact JSON (no spaces)
-    manifest_str = json.dumps(entries, separators=(",", ":"), ensure_ascii=False)
+    manifest_str = json.dumps(entries, separators=( ",", ":"), ensure_ascii=False)
     overall = sha256_str(manifest_str)
     
     return {
         "created_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "snapshot": snapshot_rel.replace("\\", "/"),
+        "snapshot": snapshot_rel.replace("\", "/"),
         "count": len(entries),
         "overall_sha256": overall,
         "files": entries
@@ -514,7 +542,7 @@ def is_detached_head():
     """
     import subprocess
     try:
-        result = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], 
+        result = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"],
                               capture_output=True, text=True)
         return result.stdout.strip() == "HEAD"
     except:
@@ -537,7 +565,7 @@ def get_origin_url():
     """
     import subprocess
     try:
-        result = subprocess.run(["git", "remote", "get-url", "origin"], 
+        result = subprocess.run(["git", "remote", "get-url", "origin"],
                               capture_output=True, text=True)
         return result.stdout.strip()
     except:
@@ -567,7 +595,7 @@ def do_plan(cfg):
         Exits with code 1 if no files are selected for backup.
     """
     repo_root = cfg["repo_root"]
-    include_exts = set([e.lower() for e in cfg.get("include_exts", [".md", ".markdown", ".yml", ".yaml", ".json", ".txt"])])
+    include_exts = set([e.lower() for e in cfg.get("include_exts", [".md", ".markdown", ".yml", ".yaml", ".json", ".txt"])]
     exclude_globs = cfg.get("exclude_globs", [])
     source_dirs = [os.path.join(repo_root, p) for p in cfg.get("source_dirs", ["charlotte_core"])]
     follow_symlinks = cfg.get("follow_symlinks", False)
@@ -622,7 +650,7 @@ def do_snapshot(cfg):
         Handles various edge cases like detached HEAD, missing remotes, etc.
     """
     repo_root = cfg["repo_root"]
-    include_exts = set([e.lower() for e in cfg.get("include_exts", [".md", ".markdown", ".yml", ".yaml", ".json", ".txt"])])
+    include_exts = set([e.lower() for e in cfg.get("include_exts", [".md", ".markdown", ".yml", ".yaml", ".json", ".txt"])]
     exclude_globs = cfg.get("exclude_globs", [])
     source_dirs = [os.path.join(repo_root, p) for p in cfg.get("source_dirs", ["charlotte_core"])]
     follow_symlinks = cfg.get("follow_symlinks", False)
@@ -648,7 +676,7 @@ def do_snapshot(cfg):
     
     # Ensure unique snapshot directory
     snapshot_dir = get_unique_snapshot_dir(base_snapshot_dir)
-    snapshot_rel = os.path.relpath(snapshot_dir, repo_root).replace("\\", "/")
+    snapshot_rel = os.path.relpath(snapshot_dir, repo_root).replace("\", "/")
     
     # Copy files to snapshot
     write_snapshot(files, repo_root, snapshot_dir)
@@ -689,7 +717,7 @@ def do_snapshot(cfg):
             # Only commit if there are changes
             import subprocess
             try:
-                status_result = subprocess.run(["git", "status", "--porcelain"], 
+                status_result = subprocess.run(["git", "status", "--porcelain"],
                                              capture_output=True, text=True)
                 if status_result.stdout.strip():
                     msg = cfg.get("git", {}).get("commit_message", "chore: Charlotte snapshot")
@@ -716,7 +744,7 @@ def do_snapshot(cfg):
             if push_enabled:
                 try:
                     # Check if origin exists
-                    subprocess.run(["git", "remote", "get-url", "origin"], 
+                    subprocess.run(["git", "remote", "get-url", "origin"],
                                  check=True, capture_output=True)
                     git("push", "origin", "HEAD", allow_fail=True)
                     if tag_enabled and tag:

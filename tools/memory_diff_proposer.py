@@ -1,20 +1,47 @@
 #!/usr/bin/env python3
 """
-Turn _intake/memory_candidates.md and/or latest _intake/memory_self_dump/YYYY-MM-DD.md 
-into proposed patches for the correct modules.
+Charlotte AI Memory Diff Proposer
 
-Why this exists:
-To fulfill part of Feature 3 of the PRD and to automate the "Weekly Self-Dump Mirror"
-workflow (Track B in the Memory Pipeline). It bridges the gap between raw text
-(from conversations or self-reflection) and structured Memory Cards by suggesting
-where new information belongs, reducing the manual effort of memory curation.
+Purpose:
+  This script automates the process of turning unstructured text from memory
+  intake files into structured, actionable changes for Charlotte's knowledge base.
+  It implements "Track B" of the Memory Pipeline and fulfills the "Memory Candidate
+  Generation" feature (FR-4.1.2) from the PRD. Its primary goal is to reduce the
+  manual effort of curating memory by analyzing text, routing it to the correct
+  knowledge module, and generating proposed changes as patch files for review.
 
-Features:
-- Analyzes intake files (`memory_candidates.md` or self-dump files).
-- Routes content to the most appropriate module using confidence scoring (FR-4).
-- Generates unified diff patch files for review (`reports/memory_diff/...`).
-- Parks low-confidence content in an `unclassified.md` file for manual review (FR-4).
-- Can be extended to open a PR with the proposed changes.
+Inputs/Outputs:
+  - Inputs:
+    - A source file specified via the `--source` argument:
+      - `charlotte_core/_intake/memory_candidates.md`
+      - The latest `charlotte_core/_intake/memory_self_dump/YYYY-MM-DD.md`
+  - Outputs:
+    - Patch files (`.patch`) in `reports/memory_diff/<DATE>/proposed_patches/`.
+    - An `unclassified.md` file for content that could not be confidently routed.
+    - A `summary.md` report detailing the proposed changes.
+    - Optionally, a new GitHub Pull Request if `--open-pr` is used.
+
+Side Effects:
+  - Creates new files and directories under `reports/memory_diff/`.
+  - If `--open-pr` is used, it will create a new Git branch, commit files,
+    push the branch to the `origin` remote, and open a pull request.
+
+Failure Modes:
+  - The script will exit if the specified source file cannot be found or read.
+  - It will exit if no content can be successfully routed to a target module.
+  - The `--open-pr` functionality will fail if the `gh` CLI is not installed
+    or not authenticated.
+
+Exit Codes:
+  - 0: Success.
+  - 2: Bad Input (`EXIT_BAD_INPUT`) if source files are missing.
+  - 3: Nothing to Do (`EXIT_NOTHING_TO_DO`) if the source file is empty or no
+       content can be routed.
+
+Dry-Run Behavior:
+  - The `--dry-run` flag prevents any file system modifications or Git actions.
+  - It prints to standard output what actions *would* be taken, including which
+    patches and reports would be created.
 """
 import argparse
 import sys

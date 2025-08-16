@@ -6,10 +6,10 @@
   },
   "settings": {
     "terminal.integrated.defaultProfile.linux": "bash",
-    "python.defaultInterpreterPath": "/usr/local/bin/python3"
+    "python.defaultInterpreterPath": "/workspaces/ai_persona_constructs/.venv/bin/python"
   },
   "features": {},
-  "postCreateCommand": "python3 -m pip install --upgrade pip && if [ -f tools/requirements.txt ]; then pip install -r tools/requirements.txt; else python3 -m pip install pyyaml; fi",
+  "postCreateCommand": "python3 -m venv /workspaces/ai_persona_constructs/.venv && /workspaces/ai_persona_constructs/.venv/bin/python -m pip install --upgrade pip && /workspaces/ai_persona_constructs/.venv/bin/pip install -r tools/requirements.txt && sudo npm install -g @google/gemini-cli",
   "remoteUser": "vscode",
   "customizations": {
     "vscode": {

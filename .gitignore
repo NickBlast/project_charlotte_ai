@@ -1,11 +1,14 @@
 # Archive Files
 .archive/
-GEMINI.md
-.gemini/
 
+# Tools
+.gemini/
 
 # Python artifacts
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+
+# Docker
+.devcontainer

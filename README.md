@@ -126,10 +126,10 @@ project_charlotte_ai/
 #### Create a Snapshot
 ```bash
 # Create backup with automatic Git operations
-python backup.py snapshot
+python3 backup.py snapshot
 
 # Preview what would be backed up (dry run)
-python backup.py plan
+python3 backup.py plan
 ```
 
 #### Cross-Platform Wrappers

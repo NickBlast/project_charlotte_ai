@@ -1,21 +1,50 @@
 #!/usr/bin/env python3
 """
-Charlotte AI ChatGPT Export Ingestion Tool - Process OpenAI exports into structured memory.
+Charlotte AI ChatGPT Export Ingestion Tool
 
-Why this exists:
-To fulfill Feature 2 of the PRD. This tool automates the first step of the
-"Monthly Official Export" workflow (Track A in the Memory Pipeline), turning a
-raw ChatGPT data export into structured, archivable, and searchable Markdown
-files and identifying potential new memories for integration.
+Purpose:
+  This script automates the ingestion of official OpenAI ChatGPT data exports.
+  It serves as the entry point for "Track A" of the Memory Pipeline and fulfills
+  the "ChatGPT Export Ingestion" feature (FR-4.1.1) from the PRD. Its primary
+  function is to convert raw, unstructured export data into a structured,
+  archivable, and secure format that can be integrated into Charlotte's long-term
+  memory, including the generation of memory candidates for review.
 
-Features:
-- Processes official OpenAI data export ZIPs safely (FR-2).
-- Handles both `messages.json` and `conversations.html` formats (FR-1).
-- Converts conversations into clean Markdown files in `archives/` (FR-2).
-- Preserves and organizes artifacts like images and metadata (FR-2).
-- Generates a redacted `memory_candidates.md` for safe review (FR-3).
-- Creates a detailed `export_ingest_...md` report for auditability.
-- Security-focused with Zip-Slip protection and path sanitization.
+Inputs/Outputs:
+  - Inputs:
+    - A ChatGPT export `.zip` file (via `--zip`) or a pre-extracted directory
+      (via `--dir`).
+  - Outputs:
+    - Raw export files stored in `imports/chatgpt_export/<DATE>/raw/`.
+    - Processed conversations as Markdown files in `archives/chat_exports/<DATE>/`.
+    - A consolidated, redacted `memory_candidates.md` file in `charlotte_core/_intake/`.
+    - A detailed summary report in `reports/export_ingest_<DATE>.md`.
+    - Organized assets (images, metadata) in the `archives/` directory.
+
+Side Effects:
+  - Creates new directories and files under `imports/`, `archives/`,
+    `charlotte_core/_intake/`, and `reports/`.
+  - Extracts the contents of the provided ZIP file.
+
+Failure Modes:
+  - The script will exit if the input ZIP or directory does not exist or is invalid.
+  - It will fail if the export format is unrecognized (not JSON or HTML).
+  - It will fail on filesystem errors (e.g., permission denied, no disk space).
+  - It will warn and skip individual files that are too large or have unsafe paths.
+
+Exit Codes:
+  - 0: Success.
+  - 2: Bad Input (`EXIT_BAD_INPUT`) for invalid arguments, missing files, or
+       unrecognized export formats.
+  - 3: Nothing to Do (`EXIT_NOTHING_TO_DO`) if the export contains no
+       conversations to process.
+  - 4: Write Error (`EXIT_WRITE_ERROR`) if file/directory creation fails.
+
+Dry-Run Behavior:
+  - The `--dry-run` flag prevents all file system modifications.
+  - It prints a detailed log to standard output describing every action that
+    *would* be taken, including file extractions, conversions, and report
+    generation.
 """
 
 import argparse

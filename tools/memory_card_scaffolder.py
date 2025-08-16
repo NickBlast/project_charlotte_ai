@@ -1,19 +1,45 @@
 #!/usr/bin/env python3
 """
-Scaffold a Memory Card, update the relevant index, and print a ready-made "Remember" prompt.
+Charlotte AI Memory Card Scaffolder
 
-Why this exists:
-To fulfill part of Feature 3 of the PRD and the "Ad-hoc Memory at Source" workflow.
-It provides a structured, repeatable way to create new, atomic pieces of knowledge
-("Memory Cards") with the correct format and metadata, reducing manual effort and
-ensuring consistency in Charlotte's knowledge base.
+Purpose:
+  This script automates the creation of new "Memory Cards" to ensure they adhere
+  to the project's structured format. It fulfills the "Ad-hoc Memory at Source"
+  workflow and "Memory Card Management" feature (FR-4.1.3) from the PRD. By
+  providing a CLI to generate consistent, uniquely identified memory files, it
+  reduces manual error and streamlines the process of adding new, atomic
+  knowledge to Charlotte's memory base.
 
-Features:
-- Generates a new Memory Card markdown file from a template (FR-3).
-- Enforces the correct YAML frontmatter structure.
-- Ensures a unique, sanitized filename (slug).
-- Automatically updates the relevant `memory_index.md` to keep it current.
-- Prints a copy-pasteable "Remember this" prompt for immediate caching in the AI.
+Inputs/Outputs:
+  - Inputs:
+    - Command-line arguments: `--category`, `--title`, `--scope`, and optional
+      `--project` or `--mode`.
+  - Outputs:
+    - A new Markdown file (e.g., `charlotte_core/persona/memory_cards/new_card.md`).
+    - An update to the corresponding `memory_index.md` file, adding a reference
+      to the new card.
+    - A "Remember this" prompt printed to standard output for immediate use.
+
+Side Effects:
+  - Creates a new `.md` file in the `charlotte_core` directory structure.
+  - Modifies an existing `memory_index.md` file.
+  - Creates directories if they do not exist.
+
+Failure Modes:
+  - The script will exit if required command-line arguments are missing or invalid
+    (e.g., specifying `--category project` without `--project`).
+  - It will fail if it cannot write to the filesystem due to permissions issues
+    or lack of disk space.
+
+Exit Codes:
+  - 0: Success.
+  - 2: Bad Input (`EXIT_BAD_INPUT`) if command-line arguments are invalid.
+  - 4: Write Error (`EXIT_WRITE_ERROR`) if a file or directory cannot be created.
+
+Dry-Run Behavior:
+  - The `--dry-run` flag prevents any file system modifications.
+  - It prints the path of the file that would be created, its metadata, and a
+    preview of its content to standard output.
 """
 import argparse
 import sys
