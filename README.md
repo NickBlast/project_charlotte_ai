@@ -190,8 +190,8 @@ git:                             # Git integration settings
 
 3. **Review and Process**:
    - Check `charlotte_core/_intake/memory_candidates.md` for redacted summaries
-   - Use `tools/memory_diff_proposer.py` to suggest Memory Card updates
-   - Review and accept proposed changes
+   - Manually curate candidates into Memory Cards via `tools/memory_card_scaffolder.py`
+   - Review and accept changes
    - Commit changes with `Mem-Intent:` trailer
 
 **Expected Outputs**:
@@ -207,26 +207,8 @@ charlotte_core/_intake/memory_candidates.md
 reports/export_ingest_2025-08-12.md
 ```
 
-#### Weekly Self-Dump Mirror
-**Purpose**: Capture recent memories and update Memory Cards
-
-**Steps**:
-1. **Generate Self-Dump Prompt**:
-   ```bash
-   python tools/charlotte_restore_builder.py --profile minimal --dry-run
-   ```
-
-2. **Execute Self-Dump**: Paste the prompt into ChatGPT, save response to:
-   ```
-   charlotte_core/_intake/memory_self_dump/2025-08-12.md
-   ```
-
-3. **Propose Updates**:
-   ```bash
-   python tools/memory_diff_proposer.py --source self_dump
-   ```
-
-4. **Review and Accept**: Manually review proposed changes, commit updates
+#### Weekly Self-Dump (deprecated)
+The Weekly Self-Dump and Diff Proposer flow are retired. Historical files under `charlotte_core/_intake/memory_self_dump/` may remain for audit, but do not add new self-dumps. Use the scaffolder to author Memory Cards directly or curate from `memory_candidates.md`.
 
 #### Ad-hoc Memory Card Creation
 **Purpose**: Quickly create Memory Cards for important truths
@@ -298,7 +280,7 @@ Run the minimal test battery to verify system functionality:
 # Ingest smoke test
 python3 tools/ingest_chatgpt_export.py --zip tmp/chatgpt-export-fixture.zip --dry-run
 
-# Diff proposer test
+# Diff proposer test (deprecated)
 python3 tools/memory_diff_proposer.py --source candidates --dry-run
 
 # Scaffolder test
