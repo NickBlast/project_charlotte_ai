@@ -280,8 +280,7 @@ Run the minimal test battery to verify system functionality:
 # Ingest smoke test
 python3 tools/ingest_chatgpt_export.py --zip tmp/chatgpt-export-fixture.zip --dry-run
 
-# Diff proposer test (deprecated)
-python3 tools/memory_diff_proposer.py --source candidates --dry-run
+# (Diff proposer retired)
 
 # Scaffolder test
 python3 tools/memory_card_scaffolder.py --category protocol --title "Test Rule" --scope demo --dry-run
