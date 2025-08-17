@@ -1,9 +1,9 @@
 # Current State Repo Snapshot
-Generated: 2025-08-17T06:02:54Z
+Generated: 2025-08-17T20:41:15Z
 ## Summary
-- HEAD: a67a11437fa9dbfe3091b2bb080b72d244e4b39c
-- Title: docs+ops: finalize Track B/Proposer retirement; repo hygiene; fix snapshot path checks
-- Files tracked: 269
+- HEAD: a02f7d911066d65175fbe7b32d2c962291a29d29
+- Title: docs: drop last proposer test; add current_state_report.py; smoke test bash guard
+- Files tracked: 270
 ## Key Paths Check
 - charlotte_core: present
 - imports/chatgpt_export: present
@@ -11,7 +11,7 @@ Generated: 2025-08-17T06:02:54Z
 - snapshots: present
 - out: present
 ## Deprecated Scan
-- Matches (excluding allowed ops note): 12
+- Matches (excluding allowed ops note): 16
 ## Changed Files
 - .gitignore
 - .venv/bin/Activate.ps1
@@ -504,159 +504,318 @@ Generated: 2025-08-17T06:02:54Z
 - .venv/lib/python3.12/site-packages/yaml/tokens.py
 - .venv/lib64
 - .venv/pyvenv.cfg
+- README.md
 - archives/chat_exports/.gitkeep
+- docs/reports/current_state_2025-08-17.json
+- docs/reports/current_state_2025-08-17.md
 - imports/chatgpt_export/.gitkeep
 - out/.gitkeep
+- tests/ingest_export_smoke.sh
+- tools/current_state_report.py
 - tools/memory_diff_proposer.py
 ## TODO / FIXME
-- docs/reports/current_state_2025-08-17.json:238 "text": "# FIXME: Consider direct URL?"
-- docs/reports/current_state_2025-08-17.json:243 "text": "# TODO: use DirectUrl.equivalent when"
-- docs/reports/current_state_2025-08-17.json:248 "text": "# TODO: Try to get these passing down from the command?"
-- docs/reports/current_state_2025-08-17.json:253 "text": "# TODO tags? scheme?"
-- docs/reports/current_state_2025-08-17.json:258 "text": "# TODO: In the future, it would be nice if pip supported PEP 691"
-- docs/reports/current_state_2025-08-17.json:263 "text": "# FIXME doesn't account for venv linked to global site-packages"
-- docs/reports/current_state_2025-08-17.json:268 "text": "# FIXME: keep src in cwd for now (it is not a temporary folder)"
-- docs/reports/current_state_2025-08-17.json:273 "text": "from pip._internal.utils.compat import stdlib_pkgs  # TODO: Move definition here."
-- docs/reports/current_state_2025-08-17.json:278 "text": "# TODO: this property is relatively costly to compute, memoize it ?"
-- docs/reports/current_state_2025-08-17.json:283 "text": "# TODO: get project location from second line of egg_link file"
-- docs/reports/current_state_2025-08-17.json:288 "text": "# TODO: currently, the resolver uses the default environment to evaluate"
-- docs/reports/current_state_2025-08-17.json:293 "text": "# TODO: This needs Python 3.10's improved slots support for dataclasses"
-- docs/reports/current_state_2025-08-17.json:298 "text": "# TODO: Get range requests to be correctly cached"
-- docs/reports/current_state_2025-08-17.json:303 "text": "# TODO: separate this part out from RequirementPreparer when the v1"
-- docs/reports/current_state_2025-08-17.json:308 "text": "# FIXME: https://github.com/pypa/pip/issues/11943"
-- docs/reports/current_state_2025-08-17.json:313 "text": "# TODO: The is_installable_dir test here might not be necessary"
-- docs/reports/current_state_2025-08-17.json:318 "text": "# TODO: replace this with slots=True when dropping Python 3.9 support."
-- docs/reports/current_state_2025-08-17.json:323 "text": "# FIXME: it would be nice to keep track of the source"
-- docs/reports/current_state_2025-08-17.json:328 "text": "# TODO: handle space after '\\'."
-- docs/reports/current_state_2025-08-17.json:333 "text": "# FIXME: Is there a better place to create the build_dir? (hg and bzr"
-- docs/reports/current_state_2025-08-17.json:338 "text": "TODO remove this property together with the legacy resolver, since the new"
-- docs/reports/current_state_2025-08-17.json:343 "text": "# FIXME: need a test for this elif block"
-- docs/reports/current_state_2025-08-17.json:348 "text": "# TODO performance: this means we iterate the dependencies at least twice,"
-- docs/reports/current_state_2025-08-17.json:353 "text": "# TODO: Supply reason based on force_reinstall and upgrade_strategy."
-- docs/reports/current_state_2025-08-17.json:358 "text": "# TODO: Check already installed candidate, and use it if the link and"
-- docs/reports/current_state_2025-08-17.json:363 "text": "# TODO: Are there more cases this needs to return True? Editable?"
-- docs/reports/current_state_2025-08-17.json:368 "text": "# FIXME: handle?"
-- docs/reports/current_state_2025-08-17.json:373 "text": "# FIXME: magic signatures?"
-- docs/reports/current_state_2025-08-17.json:378 "text": "# FIXME: should we warn?"
-- docs/reports/current_state_2025-08-17.json:383 "text": "# TODO: There is an assumption that the result will be a"
-- docs/reports/current_state_2025-08-17.json:388 "text": "# TODO: Add some logging here..."
-- docs/reports/current_state_2025-08-17.json:393 "text": "# TODO check k, v for valid values"
-- docs/reports/current_state_2025-08-17.json:398 "text": "# TODO should we eliminate the recursion?"
-- docs/reports/current_state_2025-08-17.json:403 "text": "# TODO check whether we need to call `list_hook`"
-- docs/reports/current_state_2025-08-17.json:408 "text": "# TODO is the interaction between `list_hook` and `use_list` ok?"
-- docs/reports/current_state_2025-08-17.json:413 "text": "# TODO check whether we need to call hooks"
-- docs/reports/current_state_2025-08-17.json:418 "text": "# TODO: The spec doesn't say anything about if the keys should be"
-- docs/reports/current_state_2025-08-17.json:423 "text": "description: _Validator[str | None] = _Validator()  # TODO 2.1: can be in body"
-- docs/reports/current_state_2025-08-17.json:428 "text": "# TODO: Can we test whether something is contained within a requirement?"
-- docs/reports/current_state_2025-08-17.json:433 "text": "# TODO: Can we normalize the name and extra name?"
-- docs/reports/current_state_2025-08-17.json:438 "text": "# TODO: Need to care about 32-bit PPC for ppc64 through 10.2?"
-- docs/reports/current_state_2025-08-17.json:443 "text": "# TODO: Add Generic type annotations to initialized collections."
-- docs/reports/current_state_2025-08-17.json:448 "text": "_ResourceStream = Any  # TODO / Incomplete: A readable file-like object"
-- docs/reports/current_state_2025-08-17.json:453 "text": "# FIXME: 'ZipProvider._extract_resource' is too complex (12)"
-- docs/reports/current_state_2025-08-17.json:458 "text": "# FIXME: 'Distribution.insert_on' is too complex (13)"
-- docs/reports/current_state_2025-08-17.json:463 "text": "# TODO: remove this except clause when python/cpython#103632 is fixed."
-- docs/reports/current_state_2025-08-17.json:468 "text": "# TODO: Add a deadline?"
-- docs/reports/current_state_2025-08-17.json:473 "text": "highlight ``XXX``, ``TODO``, ``FIXME``, ``BUG`` and ``NOTE``."
-- docs/reports/current_state_2025-08-17.json:478 "text": "Now recognizes ``FIXME`` by default."
-- docs/reports/current_state_2025-08-17.json:483 "text": "['XXX', 'TODO', 'FIXME', 'BUG', 'NOTE'])"
-- docs/reports/current_state_2025-08-17.json:488 "text": "TODO: clean up the code here."
-- docs/reports/current_state_2025-08-17.json:493 "text": "# different tokens.  TODO: DelegatingLexer should support this"
-- docs/reports/current_state_2025-08-17.json:498 "text": "# TODO: Remove this in 3.0.0: see #2811"
-- docs/reports/current_state_2025-08-17.json:503 "text": "# TODO: response is the only one"
-- docs/reports/current_state_2025-08-17.json:508 "text": "# TODO: This is a little inefficient, it is only used by full justify"
-- docs/reports/current_state_2025-08-17.json:513 "text": "# TODO: Not sure if we need the SecTrustResultType for anything?"
-- docs/reports/current_state_2025-08-17.json:518 "text": "# TODO: Fix tunnel so it doesn't depend on self.sock state."
-- docs/reports/current_state_2025-08-17.json:523 "text": "# TODO: Add optional support for socket.gethostbyname checking."
-- docs/reports/current_state_2025-08-17.json:528 "text": "# FIXME rethrow compatible exceptions should we ever use this"
-- docs/reports/current_state_2025-08-17.json:533 "text": "# TODO: should I do clean shutdown here? Do I have to?"
-- docs/reports/current_state_2025-08-17.json:538 "text": "# TODO: Well, crap."
-- docs/reports/current_state_2025-08-17.json:543 "text": "# TODO: Update in line with above."
-- docs/reports/current_state_2025-08-17.json:548 "text": "# TODO(t-8ch): Stop inheriting from AssertionError in v2.0."
-- docs/reports/current_state_2025-08-17.json:553 "text": "# FIXME: Ideally we'd like to include the url in the ReadTimeoutError but"
-- docs/reports/current_state_2025-08-17.json:558 "text": "# FIXME: Is there a better way to differentiate between SSLErrors?"
-- docs/reports/current_state_2025-08-17.json:563 "text": "# FIXME: Rewrite this method and make it a class with a better structured logic."
-- docs/reports/current_state_2025-08-17.json:568 "text": "# FIXME: Can we do this somehow without accessing private httplib _method?"
-- docs/reports/current_state_2025-08-17.json:573 "text": "# TODO: In v2 we can remove this sentinel and metaclass with deprecated options."
-- docs/reports/current_state_2025-08-17.json:578 "text": "# TODO: Deprecated, remove in v2.0"
-- docs/reports/current_state_2025-08-17.json:583 "text": "# TODO: If already given in **kw we use what's given to us"
-- docs/reports/current_state_2025-08-17.json:588 "text": "# TODO: For now favor if the Retry implementation sets its own method_whitelist"
-- docs/reports/current_state_2025-08-17.json:593 "text": "# TODO: Remove this deprecated alias in v2.0"
-- docs/reports/current_state_2025-08-17.json:598 "text": "# TODO: Remove this when we break backwards compatibility."
-- docs/reports/current_state_2025-08-17.json:603 "text": "# TODO: support for BOM within a stream."
-- docs/reports/current_state_2025-08-17.json:608 "text": "# TODO: We need to make tab handling rules more sane. A good rule is"
-- docs/reports/current_state_2025-08-17.md:51 ## TODO / FIXME
-- docs/reports/current_state_2025-08-17.md:53 - .venv/lib/python3.12/site-packages/pip/_internal/build_env.py:302 # FIXME: Consider direct URL?
-- docs/reports/current_state_2025-08-17.md:54 - .venv/lib/python3.12/site-packages/pip/_internal/cache.py:280 # TODO: use DirectUrl.equivalent when
-- docs/reports/current_state_2025-08-17.md:55 - .venv/lib/python3.12/site-packages/pip/_internal/cli/base_command.py:209 # TODO: Try to get these passing down from the command?
-- docs/reports/current_state_2025-08-17.md:56 - .venv/lib/python3.12/site-packages/pip/_internal/commands/inspect.py:60 # TODO tags? scheme?
-- docs/reports/current_state_2025-08-17.md:57 - .venv/lib/python3.12/site-packages/pip/_internal/index/collector.py:339 # TODO: In the future, it would be nice if pip supported PEP 691
-- docs/reports/current_state_2025-08-17.md:58 - .venv/lib/python3.12/site-packages/pip/_internal/locations/base.py:16 # FIXME doesn't account for venv linked to global site-packages
-- docs/reports/current_state_2025-08-17.md:59 - .venv/lib/python3.12/site-packages/pip/_internal/locations/base.py:60 # FIXME: keep src in cwd for now (it is not a temporary folder)
-- docs/reports/current_state_2025-08-17.md:60 - .venv/lib/python3.12/site-packages/pip/_internal/metadata/base.py:32 from pip._internal.utils.compat import stdlib_pkgs  # TODO: Move definition here.
-- docs/reports/current_state_2025-08-17.md:61 - .venv/lib/python3.12/site-packages/pip/_internal/metadata/base.py:162 # TODO: this property is relatively costly to compute, memoize it ?
-- docs/reports/current_state_2025-08-17.md:62 - .venv/lib/python3.12/site-packages/pip/_internal/metadata/base.py:172 # TODO: get project location from second line of egg_link file
-- docs/reports/current_state_2025-08-17.md:63 - .venv/lib/python3.12/site-packages/pip/_internal/models/installation_report.py:51 # TODO: currently, the resolver uses the default environment to evaluate
-- docs/reports/current_state_2025-08-17.md:64 - .venv/lib/python3.12/site-packages/pip/_internal/models/selection_prefs.py:6 # TODO: This needs Python 3.10's improved slots support for dataclasses
-- docs/reports/current_state_2025-08-17.md:65 - .venv/lib/python3.12/site-packages/pip/_internal/network/lazy_wheel.py:177 # TODO: Get range requests to be correctly cached
-- docs/reports/current_state_2025-08-17.md:66 - .venv/lib/python3.12/site-packages/pip/_internal/operations/prepare.py:562 # TODO: separate this part out from RequirementPreparer when the v1
-- docs/reports/current_state_2025-08-17.md:67 - .venv/lib/python3.12/site-packages/pip/_internal/operations/prepare.py:636 # FIXME: https://github.com/pypa/pip/issues/11943
-- docs/reports/current_state_2025-08-17.md:68 - .venv/lib/python3.12/site-packages/pip/_internal/req/constructors.py:287 # TODO: The is_installable_dir test here might not be necessary
-- docs/reports/current_state_2025-08-17.md:69 - .venv/lib/python3.12/site-packages/pip/_internal/req/req_file.py:104 # TODO: replace this with slots=True when dropping Python 3.9 support.
-- docs/reports/current_state_2025-08-17.md:70 - .venv/lib/python3.12/site-packages/pip/_internal/req/req_file.py:256 # FIXME: it would be nice to keep track of the source
-- docs/reports/current_state_2025-08-17.md:71 - .venv/lib/python3.12/site-packages/pip/_internal/req/req_file.py:523 # TODO: handle space after '\'.
-- docs/reports/current_state_2025-08-17.md:72 - .venv/lib/python3.12/site-packages/pip/_internal/req/req_install.py:374 # FIXME: Is there a better place to create the build_dir? (hg and bzr
-- docs/reports/current_state_2025-08-17.md:73 - .venv/lib/python3.12/site-packages/pip/_internal/req/req_set.py:74 TODO remove this property together with the legacy resolver, since the new
-- docs/reports/current_state_2025-08-17.md:74 - .venv/lib/python3.12/site-packages/pip/_internal/req/req_uninstall.py:483 # FIXME: need a test for this elif block
-- docs/reports/current_state_2025-08-17.md:75 - .venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/candidates.py:230 # TODO performance: this means we iterate the dependencies at least twice,
-- docs/reports/current_state_2025-08-17.md:76 - .venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/candidates.py:365 # TODO: Supply reason based on force_reinstall and upgrade_strategy.
-- docs/reports/current_state_2025-08-17.md:77 - .venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/factory.py:194 # TODO: Check already installed candidate, and use it if the link and
-- docs/reports/current_state_2025-08-17.md:78 - .venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/factory.py:613 # TODO: Are there more cases this needs to return True? Editable?
-- docs/reports/current_state_2025-08-17.md:79 - .venv/lib/python3.12/site-packages/pip/_internal/utils/unpacking.py:328 # FIXME: handle?
-- docs/reports/current_state_2025-08-17.md:80 - .venv/lib/python3.12/site-packages/pip/_internal/utils/unpacking.py:329 # FIXME: magic signatures?
-- docs/reports/current_state_2025-08-17.md:81 - .venv/lib/python3.12/site-packages/pip/_internal/vcs/subversion.py:60 # FIXME: should we warn?
-- docs/reports/current_state_2025-08-17.md:82 - .venv/lib/python3.12/site-packages/pip/_vendor/cachecontrol/controller.py:227 # TODO: There is an assumption that the result will be a
-- docs/reports/current_state_2025-08-17.md:83 - .venv/lib/python3.12/site-packages/pip/_vendor/cachecontrol/filewrapper.py:67 # TODO: Add some logging here...
-- docs/reports/current_state_2025-08-17.md:84 - .venv/lib/python3.12/site-packages/pip/_vendor/distlib/util.py:401 # TODO check k, v for valid values
-- docs/reports/current_state_2025-08-17.md:85 - .venv/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py:499 # TODO should we eliminate the recursion?
-- docs/reports/current_state_2025-08-17.md:86 - .venv/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py:503 # TODO check whether we need to call `list_hook`
-- docs/reports/current_state_2025-08-17.md:87 - .venv/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py:511 # TODO is the interaction between `list_hook` and `use_list` ok?
-- docs/reports/current_state_2025-08-17.md:88 - .venv/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py:516 # TODO check whether we need to call hooks
-- docs/reports/current_state_2025-08-17.md:89 - .venv/lib/python3.12/site-packages/pip/_vendor/packaging/metadata.py:204 # TODO: The spec doesn't say anything about if the keys should be
-- docs/reports/current_state_2025-08-17.md:90 - .venv/lib/python3.12/site-packages/pip/_vendor/packaging/metadata.py:805 description: _Validator[str | None] = _Validator()  # TODO 2.1: can be in body
-- docs/reports/current_state_2025-08-17.md:91 - .venv/lib/python3.12/site-packages/pip/_vendor/packaging/requirements.py:29 # TODO: Can we test whether something is contained within a requirement?
-- docs/reports/current_state_2025-08-17.md:92 - .venv/lib/python3.12/site-packages/pip/_vendor/packaging/requirements.py:32 # TODO: Can we normalize the name and extra name?
-- docs/reports/current_state_2025-08-17.md:93 - .venv/lib/python3.12/site-packages/pip/_vendor/packaging/tags.py:378 # TODO: Need to care about 32-bit PPC for ppc64 through 10.2?
-- docs/reports/current_state_2025-08-17.md:94 - .venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py:1 # TODO: Add Generic type annotations to initialized collections.
-- docs/reports/current_state_2025-08-17.md:95 - .venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py:122 _ResourceStream = Any  # TODO / Incomplete: A readable file-like object
-- docs/reports/current_state_2025-08-17.md:96 - .venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py:2031 # FIXME: 'ZipProvider._extract_resource' is too complex (12)
-- docs/reports/current_state_2025-08-17.md:97 - .venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py:3201 # FIXME: 'Distribution.insert_on' is too complex (13)
-- docs/reports/current_state_2025-08-17.md:98 - .venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py:3308 # TODO: remove this except clause when python/cpython#103632 is fixed.
-- docs/reports/current_state_2025-08-17.md:99 - .venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py:3598 # TODO: Add a deadline?
-- docs/reports/current_state_2025-08-17.md:100 - .venv/lib/python3.12/site-packages/pip/_vendor/pygments/filters/__init__.py:72 highlight ``XXX``, ``TODO``, ``FIXME``, ``BUG`` and ``NOTE``.
-- docs/reports/current_state_2025-08-17.md:101 - .venv/lib/python3.12/site-packages/pip/_vendor/pygments/filters/__init__.py:75 Now recognizes ``FIXME`` by default.
-- docs/reports/current_state_2025-08-17.md:102 - .venv/lib/python3.12/site-packages/pip/_vendor/pygments/filters/__init__.py:81 ['XXX', 'TODO', 'FIXME', 'BUG', 'NOTE'])
-- docs/reports/current_state_2025-08-17.md:103 - .venv/lib/python3.12/site-packages/pip/_vendor/pygments/lexer.py:863 TODO: clean up the code here.
-- docs/reports/current_state_2025-08-17.md:104 - .venv/lib/python3.12/site-packages/pip/_vendor/pygments/lexers/python.py:715 # different tokens.  TODO: DelegatingLexer should support this
-- docs/reports/current_state_2025-08-17.md:105 - .venv/lib/python3.12/site-packages/pip/_vendor/requests/adapters.py:686 # TODO: Remove this in 3.0.0: see #2811
-- docs/reports/current_state_2025-08-17.md:106 - .venv/lib/python3.12/site-packages/pip/_vendor/requests/hooks.py:19 # TODO: response is the only one
-- docs/reports/current_state_2025-08-17.md:107 - .venv/lib/python3.12/site-packages/pip/_vendor/rich/text.py:562 # TODO: This is a little inefficient, it is only used by full justify
-- docs/reports/current_state_2025-08-17.md:108 - .venv/lib/python3.12/site-packages/pip/_vendor/truststore/_macos.py:558 # TODO: Not sure if we need the SecTrustResultType for anything?
-- docs/reports/current_state_2025-08-17.md:109 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/connection.py:199 # TODO: Fix tunnel so it doesn't depend on self.sock state.
-- docs/reports/current_state_2025-08-17.md:110 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/connectionpool.py:522 # TODO: Add optional support for socket.gethostbyname checking.
-- docs/reports/current_state_2025-08-17.md:111 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/pyopenssl.py:371 # FIXME rethrow compatible exceptions should we ever use this
-- docs/reports/current_state_2025-08-17.md:112 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/securetransport.py:659 # TODO: should I do clean shutdown here? Do I have to?
-- docs/reports/current_state_2025-08-17.md:113 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/securetransport.py:819 # TODO: Well, crap.
-- docs/reports/current_state_2025-08-17.md:114 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/securetransport.py:829 # TODO: Update in line with above.
-- docs/reports/current_state_2025-08-17.md:115 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/exceptions.py:289 # TODO(t-8ch): Stop inheriting from AssertionError in v2.0.
-- docs/reports/current_state_2025-08-17.md:116 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/response.py:441 # FIXME: Ideally we'd like to include the url in the ReadTimeoutError but
-- docs/reports/current_state_2025-08-17.md:117 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/response.py:446 # FIXME: Is there a better way to differentiate between SSLErrors?
-- docs/reports/current_state_2025-08-17.md:118 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/response.py:798 # FIXME: Rewrite this method and make it a class with a better structured logic.
-- docs/reports/current_state_2025-08-17.md:119 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/response.py:103 # FIXME: Can we do this somehow without accessing private httplib _method?
-- docs/reports/current_state_2025-08-17.md:120 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py:31 # TODO: In v2 we can remove this sentinel and metaclass with deprecated options.
-- docs/reports/current_state_2025-08-17.md:121 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py:261 # TODO: Deprecated, remove in v2.0
-- docs/reports/current_state_2025-08-17.md:122 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py:323 # TODO: If already given in **kw we use what's given to us
-- docs/reports/current_state_2025-08-17.md:123 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py:454 # TODO: For now favor if the Retry implementation sets its own method_whitelist
-- docs/reports/current_state_2025-08-17.md:124 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py:608 # TODO: Remove this deprecated alias in v2.0
-- docs/reports/current_state_2025-08-17.md:125 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/url.py:402 # TODO: Remove this when we break backwards compatibility.
-- docs/reports/current_state_2025-08-17.md:126 - .venv/lib/python3.12/site-packages/yaml/scanner.py:187 # TODO: support for BOM within a stream.
-- docs/reports/current_state_2025-08-17.md:127 - .venv/lib/python3.12/site-packages/yaml/scanner.py:761 # TODO: We need to make tab handling rules more sane. A good rule is
+- docs/reports/current_state_2025-08-17.json:730 "text": "\"text\": \"# FIXME: Consider direct URL?\""
+- docs/reports/current_state_2025-08-17.json:735 "text": "\"text\": \"# TODO: use DirectUrl.equivalent when\""
+- docs/reports/current_state_2025-08-17.json:740 "text": "\"text\": \"# TODO: Try to get these passing down from the command?\""
+- docs/reports/current_state_2025-08-17.json:745 "text": "\"text\": \"# TODO tags? scheme?\""
+- docs/reports/current_state_2025-08-17.json:750 "text": "\"text\": \"# TODO: In the future, it would be nice if pip supported PEP 691\""
+- docs/reports/current_state_2025-08-17.json:755 "text": "\"text\": \"# FIXME doesn't account for venv linked to global site-packages\""
+- docs/reports/current_state_2025-08-17.json:760 "text": "\"text\": \"# FIXME: keep src in cwd for now (it is not a temporary folder)\""
+- docs/reports/current_state_2025-08-17.json:765 "text": "\"text\": \"from pip._internal.utils.compat import stdlib_pkgs  # TODO: Move definition here.\""
+- docs/reports/current_state_2025-08-17.json:770 "text": "\"text\": \"# TODO: this property is relatively costly to compute, memoize it ?\""
+- docs/reports/current_state_2025-08-17.json:775 "text": "\"text\": \"# TODO: get project location from second line of egg_link file\""
+- docs/reports/current_state_2025-08-17.json:780 "text": "\"text\": \"# TODO: currently, the resolver uses the default environment to evaluate\""
+- docs/reports/current_state_2025-08-17.json:785 "text": "\"text\": \"# TODO: This needs Python 3.10's improved slots support for dataclasses\""
+- docs/reports/current_state_2025-08-17.json:790 "text": "\"text\": \"# TODO: Get range requests to be correctly cached\""
+- docs/reports/current_state_2025-08-17.json:795 "text": "\"text\": \"# TODO: separate this part out from RequirementPreparer when the v1\""
+- docs/reports/current_state_2025-08-17.json:800 "text": "\"text\": \"# FIXME: https://github.com/pypa/pip/issues/11943\""
+- docs/reports/current_state_2025-08-17.json:805 "text": "\"text\": \"# TODO: The is_installable_dir test here might not be necessary\""
+- docs/reports/current_state_2025-08-17.json:810 "text": "\"text\": \"# TODO: replace this with slots=True when dropping Python 3.9 support.\""
+- docs/reports/current_state_2025-08-17.json:815 "text": "\"text\": \"# FIXME: it would be nice to keep track of the source\""
+- docs/reports/current_state_2025-08-17.json:820 "text": "\"text\": \"# TODO: handle space after '\\\\'.\""
+- docs/reports/current_state_2025-08-17.json:825 "text": "\"text\": \"# FIXME: Is there a better place to create the build_dir? (hg and bzr\""
+- docs/reports/current_state_2025-08-17.json:830 "text": "\"text\": \"TODO remove this property together with the legacy resolver, since the new\""
+- docs/reports/current_state_2025-08-17.json:835 "text": "\"text\": \"# FIXME: need a test for this elif block\""
+- docs/reports/current_state_2025-08-17.json:840 "text": "\"text\": \"# TODO performance: this means we iterate the dependencies at least twice,\""
+- docs/reports/current_state_2025-08-17.json:845 "text": "\"text\": \"# TODO: Supply reason based on force_reinstall and upgrade_strategy.\""
+- docs/reports/current_state_2025-08-17.json:850 "text": "\"text\": \"# TODO: Check already installed candidate, and use it if the link and\""
+- docs/reports/current_state_2025-08-17.json:855 "text": "\"text\": \"# TODO: Are there more cases this needs to return True? Editable?\""
+- docs/reports/current_state_2025-08-17.json:860 "text": "\"text\": \"# FIXME: handle?\""
+- docs/reports/current_state_2025-08-17.json:865 "text": "\"text\": \"# FIXME: magic signatures?\""
+- docs/reports/current_state_2025-08-17.json:870 "text": "\"text\": \"# FIXME: should we warn?\""
+- docs/reports/current_state_2025-08-17.json:875 "text": "\"text\": \"# TODO: There is an assumption that the result will be a\""
+- docs/reports/current_state_2025-08-17.json:880 "text": "\"text\": \"# TODO: Add some logging here...\""
+- docs/reports/current_state_2025-08-17.json:885 "text": "\"text\": \"# TODO check k, v for valid values\""
+- docs/reports/current_state_2025-08-17.json:890 "text": "\"text\": \"# TODO should we eliminate the recursion?\""
+- docs/reports/current_state_2025-08-17.json:895 "text": "\"text\": \"# TODO check whether we need to call `list_hook`\""
+- docs/reports/current_state_2025-08-17.json:900 "text": "\"text\": \"# TODO is the interaction between `list_hook` and `use_list` ok?\""
+- docs/reports/current_state_2025-08-17.json:905 "text": "\"text\": \"# TODO check whether we need to call hooks\""
+- docs/reports/current_state_2025-08-17.json:910 "text": "\"text\": \"# TODO: The spec doesn't say anything about if the keys should be\""
+- docs/reports/current_state_2025-08-17.json:915 "text": "\"text\": \"description: _Validator[str | None] = _Validator()  # TODO 2.1: can be in body\""
+- docs/reports/current_state_2025-08-17.json:920 "text": "\"text\": \"# TODO: Can we test whether something is contained within a requirement?\""
+- docs/reports/current_state_2025-08-17.json:925 "text": "\"text\": \"# TODO: Can we normalize the name and extra name?\""
+- docs/reports/current_state_2025-08-17.json:930 "text": "\"text\": \"# TODO: Need to care about 32-bit PPC for ppc64 through 10.2?\""
+- docs/reports/current_state_2025-08-17.json:935 "text": "\"text\": \"# TODO: Add Generic type annotations to initialized collections.\""
+- docs/reports/current_state_2025-08-17.json:940 "text": "\"text\": \"_ResourceStream = Any  # TODO / Incomplete: A readable file-like object\""
+- docs/reports/current_state_2025-08-17.json:945 "text": "\"text\": \"# FIXME: 'ZipProvider._extract_resource' is too complex (12)\""
+- docs/reports/current_state_2025-08-17.json:950 "text": "\"text\": \"# FIXME: 'Distribution.insert_on' is too complex (13)\""
+- docs/reports/current_state_2025-08-17.json:955 "text": "\"text\": \"# TODO: remove this except clause when python/cpython#103632 is fixed.\""
+- docs/reports/current_state_2025-08-17.json:960 "text": "\"text\": \"# TODO: Add a deadline?\""
+- docs/reports/current_state_2025-08-17.json:965 "text": "\"text\": \"highlight ``XXX``, ``TODO``, ``FIXME``, ``BUG`` and ``NOTE``.\""
+- docs/reports/current_state_2025-08-17.json:970 "text": "\"text\": \"Now recognizes ``FIXME`` by default.\""
+- docs/reports/current_state_2025-08-17.json:975 "text": "\"text\": \"['XXX', 'TODO', 'FIXME', 'BUG', 'NOTE'])\""
+- docs/reports/current_state_2025-08-17.json:980 "text": "\"text\": \"TODO: clean up the code here.\""
+- docs/reports/current_state_2025-08-17.json:985 "text": "\"text\": \"# different tokens.  TODO: DelegatingLexer should support this\""
+- docs/reports/current_state_2025-08-17.json:990 "text": "\"text\": \"# TODO: Remove this in 3.0.0: see #2811\""
+- docs/reports/current_state_2025-08-17.json:995 "text": "\"text\": \"# TODO: response is the only one\""
+- docs/reports/current_state_2025-08-17.json:1000 "text": "\"text\": \"# TODO: This is a little inefficient, it is only used by full justify\""
+- docs/reports/current_state_2025-08-17.json:1005 "text": "\"text\": \"# TODO: Not sure if we need the SecTrustResultType for anything?\""
+- docs/reports/current_state_2025-08-17.json:1010 "text": "\"text\": \"# TODO: Fix tunnel so it doesn't depend on self.sock state.\""
+- docs/reports/current_state_2025-08-17.json:1015 "text": "\"text\": \"# TODO: Add optional support for socket.gethostbyname checking.\""
+- docs/reports/current_state_2025-08-17.json:1020 "text": "\"text\": \"# FIXME rethrow compatible exceptions should we ever use this\""
+- docs/reports/current_state_2025-08-17.json:1025 "text": "\"text\": \"# TODO: should I do clean shutdown here? Do I have to?\""
+- docs/reports/current_state_2025-08-17.json:1030 "text": "\"text\": \"# TODO: Well, crap.\""
+- docs/reports/current_state_2025-08-17.json:1035 "text": "\"text\": \"# TODO: Update in line with above.\""
+- docs/reports/current_state_2025-08-17.json:1040 "text": "\"text\": \"# TODO(t-8ch): Stop inheriting from AssertionError in v2.0.\""
+- docs/reports/current_state_2025-08-17.json:1045 "text": "\"text\": \"# FIXME: Ideally we'd like to include the url in the ReadTimeoutError but\""
+- docs/reports/current_state_2025-08-17.json:1050 "text": "\"text\": \"# FIXME: Is there a better way to differentiate between SSLErrors?\""
+- docs/reports/current_state_2025-08-17.json:1055 "text": "\"text\": \"# FIXME: Rewrite this method and make it a class with a better structured logic.\""
+- docs/reports/current_state_2025-08-17.json:1060 "text": "\"text\": \"# FIXME: Can we do this somehow without accessing private httplib _method?\""
+- docs/reports/current_state_2025-08-17.json:1065 "text": "\"text\": \"# TODO: In v2 we can remove this sentinel and metaclass with deprecated options.\""
+- docs/reports/current_state_2025-08-17.json:1070 "text": "\"text\": \"# TODO: Deprecated, remove in v2.0\""
+- docs/reports/current_state_2025-08-17.json:1075 "text": "\"text\": \"# TODO: If already given in **kw we use what's given to us\""
+- docs/reports/current_state_2025-08-17.json:1080 "text": "\"text\": \"# TODO: For now favor if the Retry implementation sets its own method_whitelist\""
+- docs/reports/current_state_2025-08-17.json:1085 "text": "\"text\": \"# TODO: Remove this deprecated alias in v2.0\""
+- docs/reports/current_state_2025-08-17.json:1090 "text": "\"text\": \"# TODO: Remove this when we break backwards compatibility.\""
+- docs/reports/current_state_2025-08-17.json:1095 "text": "\"text\": \"# TODO: support for BOM within a stream.\""
+- docs/reports/current_state_2025-08-17.json:1100 "text": "\"text\": \"# TODO: We need to make tab handling rules more sane. A good rule is\""
+- docs/reports/current_state_2025-08-17.json:1105 "text": "## TODO / FIXME"
+- docs/reports/current_state_2025-08-17.json:1110 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/build_env.py:302 # FIXME: Consider direct URL?"
+- docs/reports/current_state_2025-08-17.json:1115 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/cache.py:280 # TODO: use DirectUrl.equivalent when"
+- docs/reports/current_state_2025-08-17.json:1120 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/cli/base_command.py:209 # TODO: Try to get these passing down from the command?"
+- docs/reports/current_state_2025-08-17.json:1125 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/commands/inspect.py:60 # TODO tags? scheme?"
+- docs/reports/current_state_2025-08-17.json:1130 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/index/collector.py:339 # TODO: In the future, it would be nice if pip supported PEP 691"
+- docs/reports/current_state_2025-08-17.json:1135 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/locations/base.py:16 # FIXME doesn't account for venv linked to global site-packages"
+- docs/reports/current_state_2025-08-17.json:1140 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/locations/base.py:60 # FIXME: keep src in cwd for now (it is not a temporary folder)"
+- docs/reports/current_state_2025-08-17.json:1145 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/metadata/base.py:32 from pip._internal.utils.compat import stdlib_pkgs  # TODO: Move definition here."
+- docs/reports/current_state_2025-08-17.json:1150 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/metadata/base.py:162 # TODO: this property is relatively costly to compute, memoize it ?"
+- docs/reports/current_state_2025-08-17.json:1155 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/metadata/base.py:172 # TODO: get project location from second line of egg_link file"
+- docs/reports/current_state_2025-08-17.json:1160 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/models/installation_report.py:51 # TODO: currently, the resolver uses the default environment to evaluate"
+- docs/reports/current_state_2025-08-17.json:1165 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/models/selection_prefs.py:6 # TODO: This needs Python 3.10's improved slots support for dataclasses"
+- docs/reports/current_state_2025-08-17.json:1170 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/network/lazy_wheel.py:177 # TODO: Get range requests to be correctly cached"
+- docs/reports/current_state_2025-08-17.json:1175 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/operations/prepare.py:562 # TODO: separate this part out from RequirementPreparer when the v1"
+- docs/reports/current_state_2025-08-17.json:1180 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/operations/prepare.py:636 # FIXME: https://github.com/pypa/pip/issues/11943"
+- docs/reports/current_state_2025-08-17.json:1185 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/req/constructors.py:287 # TODO: The is_installable_dir test here might not be necessary"
+- docs/reports/current_state_2025-08-17.json:1190 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/req/req_file.py:104 # TODO: replace this with slots=True when dropping Python 3.9 support."
+- docs/reports/current_state_2025-08-17.json:1195 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/req/req_file.py:256 # FIXME: it would be nice to keep track of the source"
+- docs/reports/current_state_2025-08-17.json:1200 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/req/req_file.py:523 # TODO: handle space after '\\'."
+- docs/reports/current_state_2025-08-17.json:1205 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/req/req_install.py:374 # FIXME: Is there a better place to create the build_dir? (hg and bzr"
+- docs/reports/current_state_2025-08-17.json:1210 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/req/req_set.py:74 TODO remove this property together with the legacy resolver, since the new"
+- docs/reports/current_state_2025-08-17.json:1215 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/req/req_uninstall.py:483 # FIXME: need a test for this elif block"
+- docs/reports/current_state_2025-08-17.json:1220 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/candidates.py:230 # TODO performance: this means we iterate the dependencies at least twice,"
+- docs/reports/current_state_2025-08-17.json:1225 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/candidates.py:365 # TODO: Supply reason based on force_reinstall and upgrade_strategy."
+- docs/reports/current_state_2025-08-17.json:1230 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/factory.py:194 # TODO: Check already installed candidate, and use it if the link and"
+- docs/reports/current_state_2025-08-17.json:1235 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/factory.py:613 # TODO: Are there more cases this needs to return True? Editable?"
+- docs/reports/current_state_2025-08-17.json:1240 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/utils/unpacking.py:328 # FIXME: handle?"
+- docs/reports/current_state_2025-08-17.json:1245 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/utils/unpacking.py:329 # FIXME: magic signatures?"
+- docs/reports/current_state_2025-08-17.json:1250 "text": "- .venv/lib/python3.12/site-packages/pip/_internal/vcs/subversion.py:60 # FIXME: should we warn?"
+- docs/reports/current_state_2025-08-17.json:1255 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/cachecontrol/controller.py:227 # TODO: There is an assumption that the result will be a"
+- docs/reports/current_state_2025-08-17.json:1260 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/cachecontrol/filewrapper.py:67 # TODO: Add some logging here..."
+- docs/reports/current_state_2025-08-17.json:1265 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/distlib/util.py:401 # TODO check k, v for valid values"
+- docs/reports/current_state_2025-08-17.json:1270 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py:499 # TODO should we eliminate the recursion?"
+- docs/reports/current_state_2025-08-17.json:1275 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py:503 # TODO check whether we need to call `list_hook`"
+- docs/reports/current_state_2025-08-17.json:1280 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py:511 # TODO is the interaction between `list_hook` and `use_list` ok?"
+- docs/reports/current_state_2025-08-17.json:1285 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py:516 # TODO check whether we need to call hooks"
+- docs/reports/current_state_2025-08-17.json:1290 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/packaging/metadata.py:204 # TODO: The spec doesn't say anything about if the keys should be"
+- docs/reports/current_state_2025-08-17.json:1295 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/packaging/metadata.py:805 description: _Validator[str | None] = _Validator()  # TODO 2.1: can be in body"
+- docs/reports/current_state_2025-08-17.json:1300 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/packaging/requirements.py:29 # TODO: Can we test whether something is contained within a requirement?"
+- docs/reports/current_state_2025-08-17.json:1305 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/packaging/requirements.py:32 # TODO: Can we normalize the name and extra name?"
+- docs/reports/current_state_2025-08-17.json:1310 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/packaging/tags.py:378 # TODO: Need to care about 32-bit PPC for ppc64 through 10.2?"
+- docs/reports/current_state_2025-08-17.json:1315 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py:1 # TODO: Add Generic type annotations to initialized collections."
+- docs/reports/current_state_2025-08-17.json:1320 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py:122 _ResourceStream = Any  # TODO / Incomplete: A readable file-like object"
+- docs/reports/current_state_2025-08-17.json:1325 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py:2031 # FIXME: 'ZipProvider._extract_resource' is too complex (12)"
+- docs/reports/current_state_2025-08-17.json:1330 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py:3201 # FIXME: 'Distribution.insert_on' is too complex (13)"
+- docs/reports/current_state_2025-08-17.json:1335 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py:3308 # TODO: remove this except clause when python/cpython#103632 is fixed."
+- docs/reports/current_state_2025-08-17.json:1340 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py:3598 # TODO: Add a deadline?"
+- docs/reports/current_state_2025-08-17.json:1345 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/pygments/filters/__init__.py:72 highlight ``XXX``, ``TODO``, ``FIXME``, ``BUG`` and ``NOTE``."
+- docs/reports/current_state_2025-08-17.json:1350 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/pygments/filters/__init__.py:75 Now recognizes ``FIXME`` by default."
+- docs/reports/current_state_2025-08-17.json:1355 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/pygments/filters/__init__.py:81 ['XXX', 'TODO', 'FIXME', 'BUG', 'NOTE'])"
+- docs/reports/current_state_2025-08-17.json:1360 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/pygments/lexer.py:863 TODO: clean up the code here."
+- docs/reports/current_state_2025-08-17.json:1365 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/pygments/lexers/python.py:715 # different tokens.  TODO: DelegatingLexer should support this"
+- docs/reports/current_state_2025-08-17.json:1370 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/requests/adapters.py:686 # TODO: Remove this in 3.0.0: see #2811"
+- docs/reports/current_state_2025-08-17.json:1375 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/requests/hooks.py:19 # TODO: response is the only one"
+- docs/reports/current_state_2025-08-17.json:1380 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/rich/text.py:562 # TODO: This is a little inefficient, it is only used by full justify"
+- docs/reports/current_state_2025-08-17.json:1385 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/truststore/_macos.py:558 # TODO: Not sure if we need the SecTrustResultType for anything?"
+- docs/reports/current_state_2025-08-17.json:1390 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/connection.py:199 # TODO: Fix tunnel so it doesn't depend on self.sock state."
+- docs/reports/current_state_2025-08-17.json:1395 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/connectionpool.py:522 # TODO: Add optional support for socket.gethostbyname checking."
+- docs/reports/current_state_2025-08-17.json:1400 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/pyopenssl.py:371 # FIXME rethrow compatible exceptions should we ever use this"
+- docs/reports/current_state_2025-08-17.json:1405 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/securetransport.py:659 # TODO: should I do clean shutdown here? Do I have to?"
+- docs/reports/current_state_2025-08-17.json:1410 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/securetransport.py:819 # TODO: Well, crap."
+- docs/reports/current_state_2025-08-17.json:1415 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/securetransport.py:829 # TODO: Update in line with above."
+- docs/reports/current_state_2025-08-17.json:1420 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/exceptions.py:289 # TODO(t-8ch): Stop inheriting from AssertionError in v2.0."
+- docs/reports/current_state_2025-08-17.json:1425 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/response.py:441 # FIXME: Ideally we'd like to include the url in the ReadTimeoutError but"
+- docs/reports/current_state_2025-08-17.json:1430 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/response.py:446 # FIXME: Is there a better way to differentiate between SSLErrors?"
+- docs/reports/current_state_2025-08-17.json:1435 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/response.py:798 # FIXME: Rewrite this method and make it a class with a better structured logic."
+- docs/reports/current_state_2025-08-17.json:1440 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/response.py:103 # FIXME: Can we do this somehow without accessing private httplib _method?"
+- docs/reports/current_state_2025-08-17.json:1445 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py:31 # TODO: In v2 we can remove this sentinel and metaclass with deprecated options."
+- docs/reports/current_state_2025-08-17.json:1450 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py:261 # TODO: Deprecated, remove in v2.0"
+- docs/reports/current_state_2025-08-17.json:1455 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py:323 # TODO: If already given in **kw we use what's given to us"
+- docs/reports/current_state_2025-08-17.json:1460 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py:454 # TODO: For now favor if the Retry implementation sets its own method_whitelist"
+- docs/reports/current_state_2025-08-17.json:1465 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py:608 # TODO: Remove this deprecated alias in v2.0"
+- docs/reports/current_state_2025-08-17.json:1470 "text": "- .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/url.py:402 # TODO: Remove this when we break backwards compatibility."
+- docs/reports/current_state_2025-08-17.json:1475 "text": "- .venv/lib/python3.12/site-packages/yaml/scanner.py:187 # TODO: support for BOM within a stream."
+- docs/reports/current_state_2025-08-17.json:1480 "text": "- .venv/lib/python3.12/site-packages/yaml/scanner.py:761 # TODO: We need to make tab handling rules more sane. A good rule is"
+- docs/reports/current_state_2025-08-17.md:511 ## TODO / FIXME
+- docs/reports/current_state_2025-08-17.md:512 - docs/reports/current_state_2025-08-17.json:238 "text": "# FIXME: Consider direct URL?"
+- docs/reports/current_state_2025-08-17.md:513 - docs/reports/current_state_2025-08-17.json:243 "text": "# TODO: use DirectUrl.equivalent when"
+- docs/reports/current_state_2025-08-17.md:514 - docs/reports/current_state_2025-08-17.json:248 "text": "# TODO: Try to get these passing down from the command?"
+- docs/reports/current_state_2025-08-17.md:515 - docs/reports/current_state_2025-08-17.json:253 "text": "# TODO tags? scheme?"
+- docs/reports/current_state_2025-08-17.md:516 - docs/reports/current_state_2025-08-17.json:258 "text": "# TODO: In the future, it would be nice if pip supported PEP 691"
+- docs/reports/current_state_2025-08-17.md:517 - docs/reports/current_state_2025-08-17.json:263 "text": "# FIXME doesn't account for venv linked to global site-packages"
+- docs/reports/current_state_2025-08-17.md:518 - docs/reports/current_state_2025-08-17.json:268 "text": "# FIXME: keep src in cwd for now (it is not a temporary folder)"
+- docs/reports/current_state_2025-08-17.md:519 - docs/reports/current_state_2025-08-17.json:273 "text": "from pip._internal.utils.compat import stdlib_pkgs  # TODO: Move definition here."
+- docs/reports/current_state_2025-08-17.md:520 - docs/reports/current_state_2025-08-17.json:278 "text": "# TODO: this property is relatively costly to compute, memoize it ?"
+- docs/reports/current_state_2025-08-17.md:521 - docs/reports/current_state_2025-08-17.json:283 "text": "# TODO: get project location from second line of egg_link file"
+- docs/reports/current_state_2025-08-17.md:522 - docs/reports/current_state_2025-08-17.json:288 "text": "# TODO: currently, the resolver uses the default environment to evaluate"
+- docs/reports/current_state_2025-08-17.md:523 - docs/reports/current_state_2025-08-17.json:293 "text": "# TODO: This needs Python 3.10's improved slots support for dataclasses"
+- docs/reports/current_state_2025-08-17.md:524 - docs/reports/current_state_2025-08-17.json:298 "text": "# TODO: Get range requests to be correctly cached"
+- docs/reports/current_state_2025-08-17.md:525 - docs/reports/current_state_2025-08-17.json:303 "text": "# TODO: separate this part out from RequirementPreparer when the v1"
+- docs/reports/current_state_2025-08-17.md:526 - docs/reports/current_state_2025-08-17.json:308 "text": "# FIXME: https://github.com/pypa/pip/issues/11943"
+- docs/reports/current_state_2025-08-17.md:527 - docs/reports/current_state_2025-08-17.json:313 "text": "# TODO: The is_installable_dir test here might not be necessary"
+- docs/reports/current_state_2025-08-17.md:528 - docs/reports/current_state_2025-08-17.json:318 "text": "# TODO: replace this with slots=True when dropping Python 3.9 support."
+- docs/reports/current_state_2025-08-17.md:529 - docs/reports/current_state_2025-08-17.json:323 "text": "# FIXME: it would be nice to keep track of the source"
+- docs/reports/current_state_2025-08-17.md:530 - docs/reports/current_state_2025-08-17.json:328 "text": "# TODO: handle space after '\\'."
+- docs/reports/current_state_2025-08-17.md:531 - docs/reports/current_state_2025-08-17.json:333 "text": "# FIXME: Is there a better place to create the build_dir? (hg and bzr"
+- docs/reports/current_state_2025-08-17.md:532 - docs/reports/current_state_2025-08-17.json:338 "text": "TODO remove this property together with the legacy resolver, since the new"
+- docs/reports/current_state_2025-08-17.md:533 - docs/reports/current_state_2025-08-17.json:343 "text": "# FIXME: need a test for this elif block"
+- docs/reports/current_state_2025-08-17.md:534 - docs/reports/current_state_2025-08-17.json:348 "text": "# TODO performance: this means we iterate the dependencies at least twice,"
+- docs/reports/current_state_2025-08-17.md:535 - docs/reports/current_state_2025-08-17.json:353 "text": "# TODO: Supply reason based on force_reinstall and upgrade_strategy."
+- docs/reports/current_state_2025-08-17.md:536 - docs/reports/current_state_2025-08-17.json:358 "text": "# TODO: Check already installed candidate, and use it if the link and"
+- docs/reports/current_state_2025-08-17.md:537 - docs/reports/current_state_2025-08-17.json:363 "text": "# TODO: Are there more cases this needs to return True? Editable?"
+- docs/reports/current_state_2025-08-17.md:538 - docs/reports/current_state_2025-08-17.json:368 "text": "# FIXME: handle?"
+- docs/reports/current_state_2025-08-17.md:539 - docs/reports/current_state_2025-08-17.json:373 "text": "# FIXME: magic signatures?"
+- docs/reports/current_state_2025-08-17.md:540 - docs/reports/current_state_2025-08-17.json:378 "text": "# FIXME: should we warn?"
+- docs/reports/current_state_2025-08-17.md:541 - docs/reports/current_state_2025-08-17.json:383 "text": "# TODO: There is an assumption that the result will be a"
+- docs/reports/current_state_2025-08-17.md:542 - docs/reports/current_state_2025-08-17.json:388 "text": "# TODO: Add some logging here..."
+- docs/reports/current_state_2025-08-17.md:543 - docs/reports/current_state_2025-08-17.json:393 "text": "# TODO check k, v for valid values"
+- docs/reports/current_state_2025-08-17.md:544 - docs/reports/current_state_2025-08-17.json:398 "text": "# TODO should we eliminate the recursion?"
+- docs/reports/current_state_2025-08-17.md:545 - docs/reports/current_state_2025-08-17.json:403 "text": "# TODO check whether we need to call `list_hook`"
+- docs/reports/current_state_2025-08-17.md:546 - docs/reports/current_state_2025-08-17.json:408 "text": "# TODO is the interaction between `list_hook` and `use_list` ok?"
+- docs/reports/current_state_2025-08-17.md:547 - docs/reports/current_state_2025-08-17.json:413 "text": "# TODO check whether we need to call hooks"
+- docs/reports/current_state_2025-08-17.md:548 - docs/reports/current_state_2025-08-17.json:418 "text": "# TODO: The spec doesn't say anything about if the keys should be"
+- docs/reports/current_state_2025-08-17.md:549 - docs/reports/current_state_2025-08-17.json:423 "text": "description: _Validator[str | None] = _Validator()  # TODO 2.1: can be in body"
+- docs/reports/current_state_2025-08-17.md:550 - docs/reports/current_state_2025-08-17.json:428 "text": "# TODO: Can we test whether something is contained within a requirement?"
+- docs/reports/current_state_2025-08-17.md:551 - docs/reports/current_state_2025-08-17.json:433 "text": "# TODO: Can we normalize the name and extra name?"
+- docs/reports/current_state_2025-08-17.md:552 - docs/reports/current_state_2025-08-17.json:438 "text": "# TODO: Need to care about 32-bit PPC for ppc64 through 10.2?"
+- docs/reports/current_state_2025-08-17.md:553 - docs/reports/current_state_2025-08-17.json:443 "text": "# TODO: Add Generic type annotations to initialized collections."
+- docs/reports/current_state_2025-08-17.md:554 - docs/reports/current_state_2025-08-17.json:448 "text": "_ResourceStream = Any  # TODO / Incomplete: A readable file-like object"
+- docs/reports/current_state_2025-08-17.md:555 - docs/reports/current_state_2025-08-17.json:453 "text": "# FIXME: 'ZipProvider._extract_resource' is too complex (12)"
+- docs/reports/current_state_2025-08-17.md:556 - docs/reports/current_state_2025-08-17.json:458 "text": "# FIXME: 'Distribution.insert_on' is too complex (13)"
+- docs/reports/current_state_2025-08-17.md:557 - docs/reports/current_state_2025-08-17.json:463 "text": "# TODO: remove this except clause when python/cpython#103632 is fixed."
+- docs/reports/current_state_2025-08-17.md:558 - docs/reports/current_state_2025-08-17.json:468 "text": "# TODO: Add a deadline?"
+- docs/reports/current_state_2025-08-17.md:559 - docs/reports/current_state_2025-08-17.json:473 "text": "highlight ``XXX``, ``TODO``, ``FIXME``, ``BUG`` and ``NOTE``."
+- docs/reports/current_state_2025-08-17.md:560 - docs/reports/current_state_2025-08-17.json:478 "text": "Now recognizes ``FIXME`` by default."
+- docs/reports/current_state_2025-08-17.md:561 - docs/reports/current_state_2025-08-17.json:483 "text": "['XXX', 'TODO', 'FIXME', 'BUG', 'NOTE'])"
+- docs/reports/current_state_2025-08-17.md:562 - docs/reports/current_state_2025-08-17.json:488 "text": "TODO: clean up the code here."
+- docs/reports/current_state_2025-08-17.md:563 - docs/reports/current_state_2025-08-17.json:493 "text": "# different tokens.  TODO: DelegatingLexer should support this"
+- docs/reports/current_state_2025-08-17.md:564 - docs/reports/current_state_2025-08-17.json:498 "text": "# TODO: Remove this in 3.0.0: see #2811"
+- docs/reports/current_state_2025-08-17.md:565 - docs/reports/current_state_2025-08-17.json:503 "text": "# TODO: response is the only one"
+- docs/reports/current_state_2025-08-17.md:566 - docs/reports/current_state_2025-08-17.json:508 "text": "# TODO: This is a little inefficient, it is only used by full justify"
+- docs/reports/current_state_2025-08-17.md:567 - docs/reports/current_state_2025-08-17.json:513 "text": "# TODO: Not sure if we need the SecTrustResultType for anything?"
+- docs/reports/current_state_2025-08-17.md:568 - docs/reports/current_state_2025-08-17.json:518 "text": "# TODO: Fix tunnel so it doesn't depend on self.sock state."
+- docs/reports/current_state_2025-08-17.md:569 - docs/reports/current_state_2025-08-17.json:523 "text": "# TODO: Add optional support for socket.gethostbyname checking."
+- docs/reports/current_state_2025-08-17.md:570 - docs/reports/current_state_2025-08-17.json:528 "text": "# FIXME rethrow compatible exceptions should we ever use this"
+- docs/reports/current_state_2025-08-17.md:571 - docs/reports/current_state_2025-08-17.json:533 "text": "# TODO: should I do clean shutdown here? Do I have to?"
+- docs/reports/current_state_2025-08-17.md:572 - docs/reports/current_state_2025-08-17.json:538 "text": "# TODO: Well, crap."
+- docs/reports/current_state_2025-08-17.md:573 - docs/reports/current_state_2025-08-17.json:543 "text": "# TODO: Update in line with above."
+- docs/reports/current_state_2025-08-17.md:574 - docs/reports/current_state_2025-08-17.json:548 "text": "# TODO(t-8ch): Stop inheriting from AssertionError in v2.0."
+- docs/reports/current_state_2025-08-17.md:575 - docs/reports/current_state_2025-08-17.json:553 "text": "# FIXME: Ideally we'd like to include the url in the ReadTimeoutError but"
+- docs/reports/current_state_2025-08-17.md:576 - docs/reports/current_state_2025-08-17.json:558 "text": "# FIXME: Is there a better way to differentiate between SSLErrors?"
+- docs/reports/current_state_2025-08-17.md:577 - docs/reports/current_state_2025-08-17.json:563 "text": "# FIXME: Rewrite this method and make it a class with a better structured logic."
+- docs/reports/current_state_2025-08-17.md:578 - docs/reports/current_state_2025-08-17.json:568 "text": "# FIXME: Can we do this somehow without accessing private httplib _method?"
+- docs/reports/current_state_2025-08-17.md:579 - docs/reports/current_state_2025-08-17.json:573 "text": "# TODO: In v2 we can remove this sentinel and metaclass with deprecated options."
+- docs/reports/current_state_2025-08-17.md:580 - docs/reports/current_state_2025-08-17.json:578 "text": "# TODO: Deprecated, remove in v2.0"
+- docs/reports/current_state_2025-08-17.md:581 - docs/reports/current_state_2025-08-17.json:583 "text": "# TODO: If already given in **kw we use what's given to us"
+- docs/reports/current_state_2025-08-17.md:582 - docs/reports/current_state_2025-08-17.json:588 "text": "# TODO: For now favor if the Retry implementation sets its own method_whitelist"
+- docs/reports/current_state_2025-08-17.md:583 - docs/reports/current_state_2025-08-17.json:593 "text": "# TODO: Remove this deprecated alias in v2.0"
+- docs/reports/current_state_2025-08-17.md:584 - docs/reports/current_state_2025-08-17.json:598 "text": "# TODO: Remove this when we break backwards compatibility."
+- docs/reports/current_state_2025-08-17.md:585 - docs/reports/current_state_2025-08-17.json:603 "text": "# TODO: support for BOM within a stream."
+- docs/reports/current_state_2025-08-17.md:586 - docs/reports/current_state_2025-08-17.json:608 "text": "# TODO: We need to make tab handling rules more sane. A good rule is"
+- docs/reports/current_state_2025-08-17.md:587 - docs/reports/current_state_2025-08-17.md:51 ## TODO / FIXME
+- docs/reports/current_state_2025-08-17.md:588 - docs/reports/current_state_2025-08-17.md:53 - .venv/lib/python3.12/site-packages/pip/_internal/build_env.py:302 # FIXME: Consider direct URL?
+- docs/reports/current_state_2025-08-17.md:589 - docs/reports/current_state_2025-08-17.md:54 - .venv/lib/python3.12/site-packages/pip/_internal/cache.py:280 # TODO: use DirectUrl.equivalent when
+- docs/reports/current_state_2025-08-17.md:590 - docs/reports/current_state_2025-08-17.md:55 - .venv/lib/python3.12/site-packages/pip/_internal/cli/base_command.py:209 # TODO: Try to get these passing down from the command?
+- docs/reports/current_state_2025-08-17.md:591 - docs/reports/current_state_2025-08-17.md:56 - .venv/lib/python3.12/site-packages/pip/_internal/commands/inspect.py:60 # TODO tags? scheme?
+- docs/reports/current_state_2025-08-17.md:592 - docs/reports/current_state_2025-08-17.md:57 - .venv/lib/python3.12/site-packages/pip/_internal/index/collector.py:339 # TODO: In the future, it would be nice if pip supported PEP 691
+- docs/reports/current_state_2025-08-17.md:593 - docs/reports/current_state_2025-08-17.md:58 - .venv/lib/python3.12/site-packages/pip/_internal/locations/base.py:16 # FIXME doesn't account for venv linked to global site-packages
+- docs/reports/current_state_2025-08-17.md:594 - docs/reports/current_state_2025-08-17.md:59 - .venv/lib/python3.12/site-packages/pip/_internal/locations/base.py:60 # FIXME: keep src in cwd for now (it is not a temporary folder)
+- docs/reports/current_state_2025-08-17.md:595 - docs/reports/current_state_2025-08-17.md:60 - .venv/lib/python3.12/site-packages/pip/_internal/metadata/base.py:32 from pip._internal.utils.compat import stdlib_pkgs  # TODO: Move definition here.
+- docs/reports/current_state_2025-08-17.md:596 - docs/reports/current_state_2025-08-17.md:61 - .venv/lib/python3.12/site-packages/pip/_internal/metadata/base.py:162 # TODO: this property is relatively costly to compute, memoize it ?
+- docs/reports/current_state_2025-08-17.md:597 - docs/reports/current_state_2025-08-17.md:62 - .venv/lib/python3.12/site-packages/pip/_internal/metadata/base.py:172 # TODO: get project location from second line of egg_link file
+- docs/reports/current_state_2025-08-17.md:598 - docs/reports/current_state_2025-08-17.md:63 - .venv/lib/python3.12/site-packages/pip/_internal/models/installation_report.py:51 # TODO: currently, the resolver uses the default environment to evalua
+- docs/reports/current_state_2025-08-17.md:599 - docs/reports/current_state_2025-08-17.md:64 - .venv/lib/python3.12/site-packages/pip/_internal/models/selection_prefs.py:6 # TODO: This needs Python 3.10's improved slots support for dataclasses
+- docs/reports/current_state_2025-08-17.md:600 - docs/reports/current_state_2025-08-17.md:65 - .venv/lib/python3.12/site-packages/pip/_internal/network/lazy_wheel.py:177 # TODO: Get range requests to be correctly cached
+- docs/reports/current_state_2025-08-17.md:601 - docs/reports/current_state_2025-08-17.md:66 - .venv/lib/python3.12/site-packages/pip/_internal/operations/prepare.py:562 # TODO: separate this part out from RequirementPreparer when the v1
+- docs/reports/current_state_2025-08-17.md:602 - docs/reports/current_state_2025-08-17.md:67 - .venv/lib/python3.12/site-packages/pip/_internal/operations/prepare.py:636 # FIXME: https://github.com/pypa/pip/issues/11943
+- docs/reports/current_state_2025-08-17.md:603 - docs/reports/current_state_2025-08-17.md:68 - .venv/lib/python3.12/site-packages/pip/_internal/req/constructors.py:287 # TODO: The is_installable_dir test here might not be necessary
+- docs/reports/current_state_2025-08-17.md:604 - docs/reports/current_state_2025-08-17.md:69 - .venv/lib/python3.12/site-packages/pip/_internal/req/req_file.py:104 # TODO: replace this with slots=True when dropping Python 3.9 support.
+- docs/reports/current_state_2025-08-17.md:605 - docs/reports/current_state_2025-08-17.md:70 - .venv/lib/python3.12/site-packages/pip/_internal/req/req_file.py:256 # FIXME: it would be nice to keep track of the source
+- docs/reports/current_state_2025-08-17.md:606 - docs/reports/current_state_2025-08-17.md:71 - .venv/lib/python3.12/site-packages/pip/_internal/req/req_file.py:523 # TODO: handle space after '\'.
+- docs/reports/current_state_2025-08-17.md:607 - docs/reports/current_state_2025-08-17.md:72 - .venv/lib/python3.12/site-packages/pip/_internal/req/req_install.py:374 # FIXME: Is there a better place to create the build_dir? (hg and bzr
+- docs/reports/current_state_2025-08-17.md:608 - docs/reports/current_state_2025-08-17.md:73 - .venv/lib/python3.12/site-packages/pip/_internal/req/req_set.py:74 TODO remove this property together with the legacy resolver, since the new
+- docs/reports/current_state_2025-08-17.md:609 - docs/reports/current_state_2025-08-17.md:74 - .venv/lib/python3.12/site-packages/pip/_internal/req/req_uninstall.py:483 # FIXME: need a test for this elif block
+- docs/reports/current_state_2025-08-17.md:610 - docs/reports/current_state_2025-08-17.md:75 - .venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/candidates.py:230 # TODO performance: this means we iterate the dependencies at l
+- docs/reports/current_state_2025-08-17.md:611 - docs/reports/current_state_2025-08-17.md:76 - .venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/candidates.py:365 # TODO: Supply reason based on force_reinstall and upgrade_stra
+- docs/reports/current_state_2025-08-17.md:612 - docs/reports/current_state_2025-08-17.md:77 - .venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/factory.py:194 # TODO: Check already installed candidate, and use it if the link 
+- docs/reports/current_state_2025-08-17.md:613 - docs/reports/current_state_2025-08-17.md:78 - .venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/factory.py:613 # TODO: Are there more cases this needs to return True? Editable?
+- docs/reports/current_state_2025-08-17.md:614 - docs/reports/current_state_2025-08-17.md:79 - .venv/lib/python3.12/site-packages/pip/_internal/utils/unpacking.py:328 # FIXME: handle?
+- docs/reports/current_state_2025-08-17.md:615 - docs/reports/current_state_2025-08-17.md:80 - .venv/lib/python3.12/site-packages/pip/_internal/utils/unpacking.py:329 # FIXME: magic signatures?
+- docs/reports/current_state_2025-08-17.md:616 - docs/reports/current_state_2025-08-17.md:81 - .venv/lib/python3.12/site-packages/pip/_internal/vcs/subversion.py:60 # FIXME: should we warn?
+- docs/reports/current_state_2025-08-17.md:617 - docs/reports/current_state_2025-08-17.md:82 - .venv/lib/python3.12/site-packages/pip/_vendor/cachecontrol/controller.py:227 # TODO: There is an assumption that the result will be a
+- docs/reports/current_state_2025-08-17.md:618 - docs/reports/current_state_2025-08-17.md:83 - .venv/lib/python3.12/site-packages/pip/_vendor/cachecontrol/filewrapper.py:67 # TODO: Add some logging here...
+- docs/reports/current_state_2025-08-17.md:619 - docs/reports/current_state_2025-08-17.md:84 - .venv/lib/python3.12/site-packages/pip/_vendor/distlib/util.py:401 # TODO check k, v for valid values
+- docs/reports/current_state_2025-08-17.md:620 - docs/reports/current_state_2025-08-17.md:85 - .venv/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py:499 # TODO should we eliminate the recursion?
+- docs/reports/current_state_2025-08-17.md:621 - docs/reports/current_state_2025-08-17.md:86 - .venv/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py:503 # TODO check whether we need to call `list_hook`
+- docs/reports/current_state_2025-08-17.md:622 - docs/reports/current_state_2025-08-17.md:87 - .venv/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py:511 # TODO is the interaction between `list_hook` and `use_list` ok?
+- docs/reports/current_state_2025-08-17.md:623 - docs/reports/current_state_2025-08-17.md:88 - .venv/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py:516 # TODO check whether we need to call hooks
+- docs/reports/current_state_2025-08-17.md:624 - docs/reports/current_state_2025-08-17.md:89 - .venv/lib/python3.12/site-packages/pip/_vendor/packaging/metadata.py:204 # TODO: The spec doesn't say anything about if the keys should be
+- docs/reports/current_state_2025-08-17.md:625 - docs/reports/current_state_2025-08-17.md:90 - .venv/lib/python3.12/site-packages/pip/_vendor/packaging/metadata.py:805 description: _Validator[str | None] = _Validator()  # TODO 2.1: can be in body
+- docs/reports/current_state_2025-08-17.md:626 - docs/reports/current_state_2025-08-17.md:91 - .venv/lib/python3.12/site-packages/pip/_vendor/packaging/requirements.py:29 # TODO: Can we test whether something is contained within a requirement?
+- docs/reports/current_state_2025-08-17.md:627 - docs/reports/current_state_2025-08-17.md:92 - .venv/lib/python3.12/site-packages/pip/_vendor/packaging/requirements.py:32 # TODO: Can we normalize the name and extra name?
+- docs/reports/current_state_2025-08-17.md:628 - docs/reports/current_state_2025-08-17.md:93 - .venv/lib/python3.12/site-packages/pip/_vendor/packaging/tags.py:378 # TODO: Need to care about 32-bit PPC for ppc64 through 10.2?
+- docs/reports/current_state_2025-08-17.md:629 - docs/reports/current_state_2025-08-17.md:94 - .venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py:1 # TODO: Add Generic type annotations to initialized collections.
+- docs/reports/current_state_2025-08-17.md:630 - docs/reports/current_state_2025-08-17.md:95 - .venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py:122 _ResourceStream = Any  # TODO / Incomplete: A readable file-like object
+- docs/reports/current_state_2025-08-17.md:631 - docs/reports/current_state_2025-08-17.md:96 - .venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py:2031 # FIXME: 'ZipProvider._extract_resource' is too complex (12)
+- docs/reports/current_state_2025-08-17.md:632 - docs/reports/current_state_2025-08-17.md:97 - .venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py:3201 # FIXME: 'Distribution.insert_on' is too complex (13)
+- docs/reports/current_state_2025-08-17.md:633 - docs/reports/current_state_2025-08-17.md:98 - .venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py:3308 # TODO: remove this except clause when python/cpython#103632 is fixed.
+- docs/reports/current_state_2025-08-17.md:634 - docs/reports/current_state_2025-08-17.md:99 - .venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py:3598 # TODO: Add a deadline?
+- docs/reports/current_state_2025-08-17.md:635 - docs/reports/current_state_2025-08-17.md:100 - .venv/lib/python3.12/site-packages/pip/_vendor/pygments/filters/__init__.py:72 highlight ``XXX``, ``TODO``, ``FIXME``, ``BUG`` and ``NOTE``.
+- docs/reports/current_state_2025-08-17.md:636 - docs/reports/current_state_2025-08-17.md:101 - .venv/lib/python3.12/site-packages/pip/_vendor/pygments/filters/__init__.py:75 Now recognizes ``FIXME`` by default.
+- docs/reports/current_state_2025-08-17.md:637 - docs/reports/current_state_2025-08-17.md:102 - .venv/lib/python3.12/site-packages/pip/_vendor/pygments/filters/__init__.py:81 ['XXX', 'TODO', 'FIXME', 'BUG', 'NOTE'])
+- docs/reports/current_state_2025-08-17.md:638 - docs/reports/current_state_2025-08-17.md:103 - .venv/lib/python3.12/site-packages/pip/_vendor/pygments/lexer.py:863 TODO: clean up the code here.
+- docs/reports/current_state_2025-08-17.md:639 - docs/reports/current_state_2025-08-17.md:104 - .venv/lib/python3.12/site-packages/pip/_vendor/pygments/lexers/python.py:715 # different tokens.  TODO: DelegatingLexer should support this
+- docs/reports/current_state_2025-08-17.md:640 - docs/reports/current_state_2025-08-17.md:105 - .venv/lib/python3.12/site-packages/pip/_vendor/requests/adapters.py:686 # TODO: Remove this in 3.0.0: see #2811
+- docs/reports/current_state_2025-08-17.md:641 - docs/reports/current_state_2025-08-17.md:106 - .venv/lib/python3.12/site-packages/pip/_vendor/requests/hooks.py:19 # TODO: response is the only one
+- docs/reports/current_state_2025-08-17.md:642 - docs/reports/current_state_2025-08-17.md:107 - .venv/lib/python3.12/site-packages/pip/_vendor/rich/text.py:562 # TODO: This is a little inefficient, it is only used by full justify
+- docs/reports/current_state_2025-08-17.md:643 - docs/reports/current_state_2025-08-17.md:108 - .venv/lib/python3.12/site-packages/pip/_vendor/truststore/_macos.py:558 # TODO: Not sure if we need the SecTrustResultType for anything?
+- docs/reports/current_state_2025-08-17.md:644 - docs/reports/current_state_2025-08-17.md:109 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/connection.py:199 # TODO: Fix tunnel so it doesn't depend on self.sock state.
+- docs/reports/current_state_2025-08-17.md:645 - docs/reports/current_state_2025-08-17.md:110 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/connectionpool.py:522 # TODO: Add optional support for socket.gethostbyname checking.
+- docs/reports/current_state_2025-08-17.md:646 - docs/reports/current_state_2025-08-17.md:111 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/pyopenssl.py:371 # FIXME rethrow compatible exceptions should we ever use this
+- docs/reports/current_state_2025-08-17.md:647 - docs/reports/current_state_2025-08-17.md:112 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/securetransport.py:659 # TODO: should I do clean shutdown here? Do I have to?
+- docs/reports/current_state_2025-08-17.md:648 - docs/reports/current_state_2025-08-17.md:113 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/securetransport.py:819 # TODO: Well, crap.
+- docs/reports/current_state_2025-08-17.md:649 - docs/reports/current_state_2025-08-17.md:114 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/securetransport.py:829 # TODO: Update in line with above.
+- docs/reports/current_state_2025-08-17.md:650 - docs/reports/current_state_2025-08-17.md:115 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/exceptions.py:289 # TODO(t-8ch): Stop inheriting from AssertionError in v2.0.
+- docs/reports/current_state_2025-08-17.md:651 - docs/reports/current_state_2025-08-17.md:116 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/response.py:441 # FIXME: Ideally we'd like to include the url in the ReadTimeoutError but
+- docs/reports/current_state_2025-08-17.md:652 - docs/reports/current_state_2025-08-17.md:117 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/response.py:446 # FIXME: Is there a better way to differentiate between SSLErrors?
+- docs/reports/current_state_2025-08-17.md:653 - docs/reports/current_state_2025-08-17.md:118 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/response.py:798 # FIXME: Rewrite this method and make it a class with a better structured logic.
+- docs/reports/current_state_2025-08-17.md:654 - docs/reports/current_state_2025-08-17.md:119 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/response.py:103 # FIXME: Can we do this somehow without accessing private httplib _method?
+- docs/reports/current_state_2025-08-17.md:655 - docs/reports/current_state_2025-08-17.md:120 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py:31 # TODO: In v2 we can remove this sentinel and metaclass with deprecated options
+- docs/reports/current_state_2025-08-17.md:656 - docs/reports/current_state_2025-08-17.md:121 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py:261 # TODO: Deprecated, remove in v2.0
+- docs/reports/current_state_2025-08-17.md:657 - docs/reports/current_state_2025-08-17.md:122 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py:323 # TODO: If already given in **kw we use what's given to us
+- docs/reports/current_state_2025-08-17.md:658 - docs/reports/current_state_2025-08-17.md:123 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py:454 # TODO: For now favor if the Retry implementation sets its own method_whitelis
+- docs/reports/current_state_2025-08-17.md:659 - docs/reports/current_state_2025-08-17.md:124 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py:608 # TODO: Remove this deprecated alias in v2.0
+- docs/reports/current_state_2025-08-17.md:660 - docs/reports/current_state_2025-08-17.md:125 - .venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/url.py:402 # TODO: Remove this when we break backwards compatibility.
+- docs/reports/current_state_2025-08-17.md:661 - docs/reports/current_state_2025-08-17.md:126 - .venv/lib/python3.12/site-packages/yaml/scanner.py:187 # TODO: support for BOM within a stream.
+- docs/reports/current_state_2025-08-17.md:662 - docs/reports/current_state_2025-08-17.md:127 - .venv/lib/python3.12/site-packages/yaml/scanner.py:761 # TODO: We need to make tab handling rules more sane. A good rule is
+- tools/current_state_report.py:105 if re.search(r"\b(TODO|FIXME)\b", line):
+- tools/current_state_report.py:150 md.append("## TODO / FIXME")
