@@ -24,3 +24,10 @@ __pycache__/
 # Other
 imports/
 tests/
+
+# Hygiene additions
+.venv/
+Downloads/
+imports/
+out/
+**/*.zip
