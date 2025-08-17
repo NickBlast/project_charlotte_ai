@@ -1,0 +1,621 @@
+{
+  "generated_at_utc": "2025-08-17T04:20:23Z",
+  "head": {
+    "commit": "626e44eae4a48d59083581a672956ba64425de52",
+    "title": "Fill Memory Card: Track C Manual Test (2025-08-14) Mem-Intent: Author-at-source: purpose=TrackC-Test; scope=Persona; status=Active"
+  },
+  "counts": {
+    "files_total": 762,
+    "by_ext": {
+      ".devcontainer/Dockerfile": 1,
+      ".json": 8,
+      ".md": 240,
+      ".yml": 3,
+      ".gitignore": 1,
+      ".ps1": 2,
+      ".venv/bin/activate": 1,
+      ".csh": 1,
+      ".fish": 1,
+      ".venv/bin/pip": 1,
+      ".venv/bin/pip3": 1,
+      ".12": 2,
+      ".venv/bin/python": 1,
+      ".venv/bin/python3": 1,
+      ".dist-info/INSTALLER": 2,
+      ".dist-info/LICENSE": 1,
+      ".dist-info/METADATA": 2,
+      ".dist-info/RECORD": 2,
+      ".dist-info/REQUESTED": 2,
+      ".dist-info/WHEEL": 2,
+      ".txt": 12,
+      ".py": 428,
+      ".dist-info/licenses/src/pip/_vendor/certifi/LICENSE": 1,
+      ".dist-info/licenses/src/pip/_vendor/distro/LICENSE": 1,
+      ".dist-info/licenses/src/pip/_vendor/msgpack/COPYING": 1,
+      ".dist-info/licenses/src/pip/_vendor/packaging/LICENSE": 1,
+      ".APACHE": 1,
+      ".BSD": 1,
+      ".dist-info/licenses/src/pip/_vendor/pkg_resources/LICENSE": 1,
+      ".dist-info/licenses/src/pip/_vendor/platformdirs/LICENSE": 1,
+      ".dist-info/licenses/src/pip/_vendor/pygments/LICENSE": 1,
+      ".dist-info/licenses/src/pip/_vendor/pyproject_hooks/LICENSE": 1,
+      ".dist-info/licenses/src/pip/_vendor/requests/LICENSE": 1,
+      ".dist-info/licenses/src/pip/_vendor/resolvelib/LICENSE": 1,
+      ".dist-info/licenses/src/pip/_vendor/rich/LICENSE": 1,
+      ".dist-info/licenses/src/pip/_vendor/tomli/LICENSE": 1,
+      ".dist-info/licenses/src/pip/_vendor/tomli/LICENSE-HEADER": 1,
+      ".dist-info/licenses/src/pip/_vendor/tomli_w/LICENSE": 1,
+      ".dist-info/licenses/src/pip/_vendor/truststore/LICENSE": 1,
+      ".typed": 14,
+      ".pem": 1,
+      ".exe": 6,
+      ".so": 1,
+      ".venv/lib64": 1,
+      ".cfg": 1,
+      ".zip": 1,
+      ".png": 1,
+      ".yaml": 2,
+      ".sh": 2
+    }
+  },
+  "folders": [
+    {
+      "path": ".devcontainer",
+      "files": 2,
+      "subdirs": [
+        "Dockerfile",
+        "devcontainer.json"
+      ]
+    },
+    {
+      "path": ".github",
+      "files": 4,
+      "subdirs": [
+        "ISSUE_TEMPLATE",
+        "workflows"
+      ]
+    },
+    {
+      "path": ".gitignore",
+      "files": 1,
+      "subdirs": []
+    },
+    {
+      "path": ".venv",
+      "files": 493,
+      "subdirs": [
+        "bin",
+        "lib",
+        "lib64",
+        "pyvenv.cfg"
+      ]
+    },
+    {
+      "path": ".vscode",
+      "files": 1,
+      "subdirs": [
+        "tasks.json"
+      ]
+    },
+    {
+      "path": "CHANGELOG.md",
+      "files": 1,
+      "subdirs": []
+    },
+    {
+      "path": "Downloads",
+      "files": 1,
+      "subdirs": [
+        "chatgpt-export.zip"
+      ]
+    },
+    {
+      "path": "README.md",
+      "files": 1,
+      "subdirs": []
+    },
+    {
+      "path": "archives",
+      "files": 5,
+      "subdirs": [
+        "chat_exports"
+      ]
+    },
+    {
+      "path": "backup.py",
+      "files": 1,
+      "subdirs": []
+    },
+    {
+      "path": "charlotte_core",
+      "files": 75,
+      "subdirs": [
+        "README.md",
+        "_intake",
+        "charlotte_backup_process.md",
+        "charlotte_ops.md",
+        "compliance",
+        "core_context",
+        "developer_mind",
+        "draft_Charlotte3_v1.md",
+        "modes",
+        "persona",
+        "projects",
+        "prompt_templates",
+        "relationship_identity",
+        "research_results",
+        "signatures",
+        "soul_codex"
+      ]
+    },
+    {
+      "path": "config.example.yaml",
+      "files": 1,
+      "subdirs": []
+    },
+    {
+      "path": "config.yaml",
+      "files": 1,
+      "subdirs": []
+    },
+    {
+      "path": "docs",
+      "files": 5,
+      "subdirs": [
+        "charlotte_ai_prd.md",
+        "charlotte_memory_pipeline.md",
+        "process",
+        "prompts"
+      ]
+    },
+    {
+      "path": "reports",
+      "files": 4,
+      "subdirs": [
+        "code_review",
+        "export_ingest_2025-08-13.md"
+      ]
+    },
+    {
+      "path": "restore_checklist.md",
+      "files": 1,
+      "subdirs": []
+    },
+    {
+      "path": "scripts",
+      "files": 2,
+      "subdirs": [
+        "backup.ps1",
+        "backup.sh"
+      ]
+    },
+    {
+      "path": "snapshots",
+      "files": 154,
+      "subdirs": [
+        "2025-08-11_003602Z",
+        "2025-08-11_003725Z"
+      ]
+    },
+    {
+      "path": "tests",
+      "files": 2,
+      "subdirs": [
+        "ingest_export_smoke.sh",
+        "test_ingest_report.py"
+      ]
+    },
+    {
+      "path": "tools",
+      "files": 7,
+      "subdirs": [
+        "__init__.py",
+        "charlotte_restore_builder.py",
+        "ingest_chatgpt_export.py",
+        "memory_card_scaffolder.py",
+        "memory_diff_proposer.py",
+        "requirements.txt",
+        "utils.py"
+      ]
+    }
+  ],
+  "expected_paths_present": {
+    "charlotte_core": true,
+    "imports/chatgpt_export": false,
+    "archives/chat_exports": false,
+    "snapshots": true,
+    "out": false
+  },
+  "deprecated_scan": {
+    "matches": 0,
+    "files": []
+  },
+  "changed_files": [],
+  "todos": [
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/build_env.py",
+      "line": 302,
+      "text": "# FIXME: Consider direct URL?"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/cache.py",
+      "line": 280,
+      "text": "# TODO: use DirectUrl.equivalent when"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/cli/base_command.py",
+      "line": 209,
+      "text": "# TODO: Try to get these passing down from the command?"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/commands/inspect.py",
+      "line": 60,
+      "text": "# TODO tags? scheme?"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/index/collector.py",
+      "line": 339,
+      "text": "# TODO: In the future, it would be nice if pip supported PEP 691"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/locations/base.py",
+      "line": 16,
+      "text": "# FIXME doesn't account for venv linked to global site-packages"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/locations/base.py",
+      "line": 60,
+      "text": "# FIXME: keep src in cwd for now (it is not a temporary folder)"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/metadata/base.py",
+      "line": 32,
+      "text": "from pip._internal.utils.compat import stdlib_pkgs  # TODO: Move definition here."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/metadata/base.py",
+      "line": 162,
+      "text": "# TODO: this property is relatively costly to compute, memoize it ?"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/metadata/base.py",
+      "line": 172,
+      "text": "# TODO: get project location from second line of egg_link file"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/models/installation_report.py",
+      "line": 51,
+      "text": "# TODO: currently, the resolver uses the default environment to evaluate"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/models/selection_prefs.py",
+      "line": 6,
+      "text": "# TODO: This needs Python 3.10's improved slots support for dataclasses"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/network/lazy_wheel.py",
+      "line": 177,
+      "text": "# TODO: Get range requests to be correctly cached"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/operations/prepare.py",
+      "line": 562,
+      "text": "# TODO: separate this part out from RequirementPreparer when the v1"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/operations/prepare.py",
+      "line": 636,
+      "text": "# FIXME: https://github.com/pypa/pip/issues/11943"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/req/constructors.py",
+      "line": 287,
+      "text": "# TODO: The is_installable_dir test here might not be necessary"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/req/req_file.py",
+      "line": 104,
+      "text": "# TODO: replace this with slots=True when dropping Python 3.9 support."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/req/req_file.py",
+      "line": 256,
+      "text": "# FIXME: it would be nice to keep track of the source"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/req/req_file.py",
+      "line": 523,
+      "text": "# TODO: handle space after '\\'."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/req/req_install.py",
+      "line": 374,
+      "text": "# FIXME: Is there a better place to create the build_dir? (hg and bzr"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/req/req_set.py",
+      "line": 74,
+      "text": "TODO remove this property together with the legacy resolver, since the new"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/req/req_uninstall.py",
+      "line": 483,
+      "text": "# FIXME: need a test for this elif block"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/candidates.py",
+      "line": 230,
+      "text": "# TODO performance: this means we iterate the dependencies at least twice,"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/candidates.py",
+      "line": 365,
+      "text": "# TODO: Supply reason based on force_reinstall and upgrade_strategy."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/factory.py",
+      "line": 194,
+      "text": "# TODO: Check already installed candidate, and use it if the link and"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/factory.py",
+      "line": 613,
+      "text": "# TODO: Are there more cases this needs to return True? Editable?"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/utils/unpacking.py",
+      "line": 328,
+      "text": "# FIXME: handle?"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/utils/unpacking.py",
+      "line": 329,
+      "text": "# FIXME: magic signatures?"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_internal/vcs/subversion.py",
+      "line": 60,
+      "text": "# FIXME: should we warn?"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/cachecontrol/controller.py",
+      "line": 227,
+      "text": "# TODO: There is an assumption that the result will be a"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/cachecontrol/filewrapper.py",
+      "line": 67,
+      "text": "# TODO: Add some logging here..."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/distlib/util.py",
+      "line": 401,
+      "text": "# TODO check k, v for valid values"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py",
+      "line": 499,
+      "text": "# TODO should we eliminate the recursion?"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py",
+      "line": 503,
+      "text": "# TODO check whether we need to call `list_hook`"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py",
+      "line": 511,
+      "text": "# TODO is the interaction between `list_hook` and `use_list` ok?"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py",
+      "line": 516,
+      "text": "# TODO check whether we need to call hooks"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/packaging/metadata.py",
+      "line": 204,
+      "text": "# TODO: The spec doesn't say anything about if the keys should be"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/packaging/metadata.py",
+      "line": 805,
+      "text": "description: _Validator[str | None] = _Validator()  # TODO 2.1: can be in body"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/packaging/requirements.py",
+      "line": 29,
+      "text": "# TODO: Can we test whether something is contained within a requirement?"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/packaging/requirements.py",
+      "line": 32,
+      "text": "# TODO: Can we normalize the name and extra name?"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/packaging/tags.py",
+      "line": 378,
+      "text": "# TODO: Need to care about 32-bit PPC for ppc64 through 10.2?"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py",
+      "line": 1,
+      "text": "# TODO: Add Generic type annotations to initialized collections."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py",
+      "line": 122,
+      "text": "_ResourceStream = Any  # TODO / Incomplete: A readable file-like object"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py",
+      "line": 2031,
+      "text": "# FIXME: 'ZipProvider._extract_resource' is too complex (12)"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py",
+      "line": 3201,
+      "text": "# FIXME: 'Distribution.insert_on' is too complex (13)"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py",
+      "line": 3308,
+      "text": "# TODO: remove this except clause when python/cpython#103632 is fixed."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py",
+      "line": 3598,
+      "text": "# TODO: Add a deadline?"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/pygments/filters/__init__.py",
+      "line": 72,
+      "text": "highlight ``XXX``, ``TODO``, ``FIXME``, ``BUG`` and ``NOTE``."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/pygments/filters/__init__.py",
+      "line": 75,
+      "text": "Now recognizes ``FIXME`` by default."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/pygments/filters/__init__.py",
+      "line": 81,
+      "text": "['XXX', 'TODO', 'FIXME', 'BUG', 'NOTE'])"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/pygments/lexer.py",
+      "line": 863,
+      "text": "TODO: clean up the code here."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/pygments/lexers/python.py",
+      "line": 715,
+      "text": "# different tokens.  TODO: DelegatingLexer should support this"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/requests/adapters.py",
+      "line": 686,
+      "text": "# TODO: Remove this in 3.0.0: see #2811"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/requests/hooks.py",
+      "line": 19,
+      "text": "# TODO: response is the only one"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/rich/text.py",
+      "line": 562,
+      "text": "# TODO: This is a little inefficient, it is only used by full justify"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/truststore/_macos.py",
+      "line": 558,
+      "text": "# TODO: Not sure if we need the SecTrustResultType for anything?"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/urllib3/connection.py",
+      "line": 199,
+      "text": "# TODO: Fix tunnel so it doesn't depend on self.sock state."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/urllib3/connectionpool.py",
+      "line": 522,
+      "text": "# TODO: Add optional support for socket.gethostbyname checking."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/pyopenssl.py",
+      "line": 371,
+      "text": "# FIXME rethrow compatible exceptions should we ever use this"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "line": 659,
+      "text": "# TODO: should I do clean shutdown here? Do I have to?"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "line": 819,
+      "text": "# TODO: Well, crap."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "line": 829,
+      "text": "# TODO: Update in line with above."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/urllib3/exceptions.py",
+      "line": 289,
+      "text": "# TODO(t-8ch): Stop inheriting from AssertionError in v2.0."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/urllib3/response.py",
+      "line": 441,
+      "text": "# FIXME: Ideally we'd like to include the url in the ReadTimeoutError but"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/urllib3/response.py",
+      "line": 446,
+      "text": "# FIXME: Is there a better way to differentiate between SSLErrors?"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/urllib3/response.py",
+      "line": 798,
+      "text": "# FIXME: Rewrite this method and make it a class with a better structured logic."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/response.py",
+      "line": 103,
+      "text": "# FIXME: Can we do this somehow without accessing private httplib _method?"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py",
+      "line": 31,
+      "text": "# TODO: In v2 we can remove this sentinel and metaclass with deprecated options."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py",
+      "line": 261,
+      "text": "# TODO: Deprecated, remove in v2.0"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py",
+      "line": 323,
+      "text": "# TODO: If already given in **kw we use what's given to us"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py",
+      "line": 454,
+      "text": "# TODO: For now favor if the Retry implementation sets its own method_whitelist"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py",
+      "line": 608,
+      "text": "# TODO: Remove this deprecated alias in v2.0"
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/url.py",
+      "line": 402,
+      "text": "# TODO: Remove this when we break backwards compatibility."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/yaml/scanner.py",
+      "line": 187,
+      "text": "# TODO: support for BOM within a stream."
+    },
+    {
+      "file": ".venv/lib/python3.12/site-packages/yaml/scanner.py",
+      "line": 761,
+      "text": "# TODO: We need to make tab handling rules more sane. A good rule is"
+    },
+    {
+      "file": "snapshots/2025-08-11_003602Z/charlotte_ai/developer_mind/stack_profile.md",
+      "line": 63,
+      "text": "## \ud83d\udccc TODOs / Ongoing Refinement"
+    },
+    {
+      "file": "snapshots/2025-08-11_003725Z/charlotte_ai/developer_mind/stack_profile.md",
+      "line": 63,
+      "text": "## \ud83d\udccc TODOs / Ongoing Refinement"
+    }
+  ]
+}

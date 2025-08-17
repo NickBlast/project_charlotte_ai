@@ -98,3 +98,8 @@ If GPT-4o is not shown in the web portal:
 ---
 
 *End of Charlotte Ops Kit*
+
+### Deprecation: Weekly Self-Dump (Track B)
+The Weekly Self-Dump flow and Diff Proposer are retired. The folder `_intake/memory_self_dump/` remains only for historical files. Do not add new self-dumps. New content flows through:
+- Track A: Official export → ingest → manual curation into Memory Cards
+- Memory-at-Source: author cards directly via the scaffolder

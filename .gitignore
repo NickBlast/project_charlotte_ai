@@ -3,6 +3,7 @@
 
 # Tools
 .gemini/
+.clinerules/
 
 # Python artifacts
 __pycache__/
@@ -11,4 +12,15 @@ __pycache__/
 *.pyd
 
 # Docker
-.devcontainer
+.devcontainer/
+
+# Python Environment
+.venv/
+.pytest_cache/
+
+# VS Code
+.vscode/
+
+# Other
+imports/
+tests/
