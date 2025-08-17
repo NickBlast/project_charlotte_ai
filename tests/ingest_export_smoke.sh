@@ -10,17 +10,31 @@ rm -rf "$TMP" && mkdir -p "$TMP/user_images/sub" "$TMP/loose"
 # Minimal fixtures
 echo '{"dummy":"ok"}' > "$TMP/user.json"
 echo '[{"id":"m1","rating":"thumbsUp"}]' > "$TMP/message_feedback.json"
-echo '{"mapping":{}}' > "$TMP/conversations.json"
-convert -size 10x10 xc:white "$TMP/user_images/u1.png" 2>/dev/null || :  # if ImageMagick absent, skip
-printf '\x89PNG\r\n\x1a\n' > "$TMP/loose/file_xyz.png" || :
+# Add a minimal conversations.json that ingestion recognizes
+cat > "$TMP/conversations.json" <<'JSON'
+[
+  {
+    "id": "conv1",
+    "title": "Test conversation",
+    "mapping": {}
+  }
+]
+JSON
 
-# Zip it
+convert -size 10x10 xc:white "$TMP/user_images/u1.png" 2>/dev/null || :  # if ImageMagick absent, skip
+# write a tiny PNG via base64 (portable inside script)
+base64 -d > "$TMP/loose/file_xyz.png" <<'B64' || true
+iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFElEQVQoU2NkYGD4z0AEYBxVSF8A
+AAcEAAD+8e3KAAAAAElFTkSuQmCC
+B64
+
+# Zip it: put files at zip root so ingestion detects conversations.json
 ZIP="tmp/chatgpt-export-fixture.zip"
 rm -f "$ZIP"
-( cd tmp && zip -r "$(basename "$ZIP")" "export_fixture" >/dev/null )
+( cd tmp/export_fixture && zip -r "../$(basename "$ZIP")" . >/dev/null )
 
-# Dry-run should detect json + images + meta
-python3 tools/ingest_chatgpt_export.py --zip "$ZIP" --dry-run
+# Dry-run: point at the already-created extracted directory so detection sees conversations.json
+python3 tools/ingest_chatgpt_export.py --dir "$TMP" --dry-run
 
 # Real run
 python3 tools/ingest_chatgpt_export.py --zip "$ZIP"
