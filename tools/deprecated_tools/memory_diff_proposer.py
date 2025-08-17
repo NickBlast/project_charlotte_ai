@@ -368,7 +368,7 @@ def open_pr_with_gh(summary_file: Path, patches_dir: Path):
     """Open a PR with gh CLI."""
     try:
         # Create a new branch
-        branch_name = f"memory-update-{utc_ts().replace('_', '-') }"
+        branch_name = f"memory-update-{utc_ts().replace('_', '-')}"
         subprocess.run(["git", "checkout", "-b", branch_name], check=True)
         
         # Commit the changes
