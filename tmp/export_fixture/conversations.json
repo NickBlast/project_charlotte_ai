@@ -1,1 +1,7 @@
-{"mapping":{}}
+[
+  {
+    "id": "conv1",
+    "title": "Test conversation",
+    "mapping": {}
+  }
+]

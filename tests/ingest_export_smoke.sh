@@ -31,7 +31,8 @@ B64
 # Zip it: put files at zip root so ingestion detects conversations.json
 ZIP="tmp/chatgpt-export-fixture.zip"
 rm -f "$ZIP"
-( cd tmp/export_fixture && zip -r "../$(basename "$ZIP")" . >/dev/null )
+( cd tmp/export_fixture && zip -r "../$(basename \"$ZIP\")" . >/dev/null )
+
 
 # Dry-run: point at the already-created extracted directory so detection sees conversations.json
 python3 tools/ingest_chatgpt_export.py --dir "$TMP" --dry-run
