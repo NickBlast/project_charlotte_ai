@@ -1,13 +1,16 @@
 # Memory Candidates
 
-Generated from ChatGPT export. Review and refine before processing.
+**Generated from ChatGPT export.** Review and refine before processing.
 
-## From: 2025-08-13_045341Z_Test Conversation.md
+**Source:** ChatGPT conversation export
+**Purpose:** Integration with Charlotte AI memory system
 
-# Test Conversation
+## From: 2025-08-17_210450Z_Test conversation.md
 
-Exported: 2025-08-13
-Created: 2025-08-13_045341Z
+# Test conversation
+
+**Exported:** 2025-08-17
+**Created:** 2025-08-17_210450Z
 
 
 
