@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Runs Gemini with the /scanrepo prompt from this file (PLAN-only by default).
+# Add --act to request ACT after reviewing PLAN (you still must type GO in the session).
+
+PROMPT_FILE=".gemini/prompts/scanrepo.md"
+if [ ! -f "$PROMPT_FILE" ]; then
+  echo "Missing $PROMPT_FILE. Create it by copying the prompt from 'Gemini `/scanrepo` — Plan→Act Prompt'." >&2
+  exit 2
+fi
+
+if [ "$1" == "--act" ]; then
+  gemini -p "$(cat $PROMPT_FILE)"
+else
+  gemini -p "PLAN ONLY: Generate the PLAN for the following task and stop before acting.\n\n$(cat $PROMPT_FILE)"
+fi
