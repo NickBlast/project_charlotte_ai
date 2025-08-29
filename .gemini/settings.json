@@ -1,0 +1,57 @@
+{
+  // === Project-scoped Gemini CLI settings ===
+  // Place at: <repo>/.gemini/settings.json
+  // Overrides any global (~/.gemini/settings.json) when run inside this repo
+
+  "system": {
+    // Core instruction to always load alongside GEMINI.md
+    "prompt": "You are operating inside the Charlotte repo. Adhere to .gemini/GEMINI.md, charlotte_ai_prd.md, charlotte_memory_pipeline.md, and README.md at all times. Follow PLAN → GO → ACT discipline. Respect protected surfaces, determinism, privacy, and documentation requirements."
+  },
+
+  "behavior": {
+    // Require explicit PLAN before acting
+    "require_plan": true,
+    "plan_approval_keyword": "GO",
+    "default_mode": "interactive", // Avoid auto-writes in non-interactive mode
+    "refuse_on_main": true, // Never act if branch is main
+    "protected_paths": [
+      "imports/chatgpt_export/**/raw/**",
+      "archives/chat_exports/**",
+      "snapshots/**",
+      ".github/workflows/**",
+      "charlotte_ai/**"
+    ]
+  },
+
+  "plan": {
+    // Enforce our PLAN block template
+    "template": "# PLAN\n## Objective\n<one sentence>\n\n## Scope of edit\n- Touch: <files>\n- Do NOT touch: imports/**, archives/**, snapshots/**, .github/workflows/**, charlotte_ai/**\n\n## Approach\n- Steps 1..N with exact commands (DevContainer Bash and/or Windows PowerShell)\n\n## Acceptance criteria\n- Concrete file paths\n- Determinism checks (hashes, sorted lists, timestamps)\n- Dry-run outputs\n- Exit codes: 0=success, 2=bad input, 3=nothing to do, 4=write error\n\n## Risks & rollbacks\n- <risks>\n- Rollback plan: <git restore/reset>\n\n## Out-of-scope\n- <explicitly excluded items>"
+  },
+
+  "output": {
+    // Require CHANGELOG and README updates on behavior change
+    "require_changelog": true,
+    "require_readme_update": true,
+    "act_log_in_pr": true,
+    "include_acceptance_evidence": true
+  },
+
+  "lint": {
+    // Auto-checks before write
+    "check_lf_endings": true,
+    "check_utf8_encoding": true,
+    "check_utc_timestamps": true,
+    "scan_for_secrets": true
+  },
+
+  "tools": {
+    // Allow only approved Gemini CLI tools unless overridden
+    "allowed": [
+      "write_file",
+      "read_file",
+      "search",
+      "execute_shell"
+    ],
+    "require_permission_each_tool": true
+  }
+}

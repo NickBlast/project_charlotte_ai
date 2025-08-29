@@ -1,33 +1,20 @@
-# Archive Files
-.archive/
-
-# Tools
-.gemini/
-.clinerules/
-
-# Python artifacts
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-
-# Docker
-.devcontainer/
-
-# Python Environment
+.Python
 .venv/
-.pytest_cache/
 
-# VS Code
+# Build artifacts
+/dist/
+/artifacts/
+
+# Secrets
+**/secrets/**
+*.key
+*.pem
+.env*
+
+# IDE
 .vscode/
-
-# Other
-imports/
-tests/
-
-# Hygiene additions
-.venv/
-Downloads/
-imports/
-out/
-**/*.zip
