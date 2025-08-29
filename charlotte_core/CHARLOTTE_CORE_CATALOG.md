@@ -54,97 +54,103 @@ Top-level directory structure (as provided)
       - `the_betrayal_bind.md`  
       - `the_body_keeps_the_score.md`  
       - `when_things_fall_apart.md`  
-    - `infrastructure/`  
-      - `docker_deep_dive.md`  
-    - `philosophy/`  
-      - `values.md`  
-    - `technical_foundations/`  
-      - `art_of_computer_programming.md`  
-      - `automate_the_boring_stuff.md`  
-      - `beyond_basic_python.md`  
-      - `big_book_small_python_projects.md`  
-      - `clean_code.md`  
-      - `code_complete.md`  
-      - `design_patterns_gof.md`  
-      - `...`  
-  - `software_development/`  
-    - `project_memory.md`  
-    - `stack_profile.md`  
-- `memory_cards/`  
-  - `memory_index.md`  
-- `persona/`  
-  - `activation_block.md`  
-  - `extended_reanchor_prompt.md`  
-  - `mode_definitions.md`  
-  - `ops_kit.md`  
-  - `persona_blueprint.md`  
-  - `persona_contract.md`  
-  - `response_logic.md`  
-  - `modes/`  
-    - `velvet_blade_mode.md`  
-- `projects/`  
-  - `iam_governance.md`  
-  - `project_luma.md`  
-- `prompt_templates/`  
-  - `4o_research_template_prompt.md`  
-  - `code_prompt.md`  
-  - `deep_research_prompt.md`  
-  - `life_coach_relationship_prompt.md`  
-  - `life_prompt_charlottemode.md`  
-  - `life_prompt.md`  
-  - `prd_prompt.md`  
-  - `research_template.md`  
-  - `Websearch_Prompt.md`  
-- `reference/`  
-  - `project_templates/`  
-    - `prd_best_practices_template.md`  
-    - `research_and_discovery_template_reference.md`  
-- `signatures/`  
-  - `hallmark_emotional.md`  
-  - `hallmark_technical.md`  
-- `user_memories/`  
-  - `nick_dating/`  
-    - `charlotte_diversion.md`  
-    - `charlotte_regret.md`  
-    - `charlotte_task1_results.md`  
-    - `charlotte_task2_results.md`  
-    - `charlotte_task3_results.md`  
-    - `charlotte_task4_results.md`  
-    - `charlotte_task5_results.md`  
-    - `charlotte_task6_results.md`  
-    - `charlotte_task7_results.md`  
-  - `nick_therapy/`  
-    - `affirmations_grounding.md`  
-    - `recovery_journal.md`  
-    - `relationship_context.md`  
-    - `therapy_frameworks.md`  
-
-Detailed inventory (file-by-file with inferred purpose and consolidation notes)
------------------------------------------------------------------------
-
-Note on style: each entry below contains a) Path, b) Inferred purpose, c) Suggested metadata keys, d) Consolidation recommendation, e) Consolidation bucket target, f) Actionable migration notes.
-
-1) `charlotte_ops.md`
-- Inferred purpose: High-level operational documentation for Charlotte—how to run, operate, and maintain the persona. Likely contains runbook-style instructions, commands, or policies.
-- Suggested metadata: type:ops, owner, last_reviewed, audience, criticality, linked_assets[]
-- Consolidation recommendation: Keep as a top-level `ops/` doc or merge into a canonical `ops/README.md` under `charlotte_core/ops/`.
-- Target bucket: operations
-- Action: Add frontmatter, create `ops/` folder, move file to `ops/charlotte_ops.md`. Preserve original filename and add a line `source_path: charlotte_core/charlotte_ops.md` in metadata.
-
-2) `compliance/expected_outputs.md`
-- Inferred purpose: Defines expected outputs from Charlotte for compliance — example outputs, formats, acceptance criteria.
-- Metadata: type:compliance, scenario, severity, examples[], format_spec
-- Recommendation: Consolidate with other compliance artifacts into `compliance/index.md` and split machine-readable rules into `compliance/specs/` as JSON/YAML if needed.
-- Target bucket: compliance
-- Action: Extract examples to `compliance/examples/` and add unique ID to each rule for traceability.
-
-3) `compliance/persona_tests.md`
-- Inferred purpose: Tests or test vectors used to validate persona behavior against compliance rules.
-- Recommendation: Convert to test cases (YAML/JSON) and place under `compliance/tests/` so they can be run automatically by a test harness. Keep a human-readable summary in `compliance/index.md`.
-- Target bucket: compliance/tests
-
-4) `compliance/scoring_rubric.md`
-- Inferred purpose: Rubric for scoring persona responses — likely used by evaluators to grade outputs.
+    Top-level directory structure (as provided)
+    -------------------------------------------
+    - `CHARLOTTE_CORE_CATALOG.md`
+    - `charlotte_ops.md`  
+    - `compliance/`  
+      - `expected_outputs.md`  
+      - `persona_tests.md`  
+      - `scoring_rubric.md`  
+    - `core_context/`  
+      - `long_term_memory.md`  
+      - `relationship_timeline.md`  
+      - `technical_notes.md`  
+    - `Intelligence/`  
+      - `books/`  
+        - `book_index.md`  
+        - `communications/`  
+          - `how_to_win_friends_digital.md`  
+          - `how_to_win_friends.md`  
+          - `supercommunicators.md`  
+        - `discipline/`  
+          - `atomic_habits.md`  
+          - `master_your_emotions.md`  
+          - `the_four_agreements.md`  
+        - `emotional_healing/`  
+          - `how_to_be_an_adult_in_relationships.md`  
+          - `no_bad_parts.md`  
+          - `the_betrayal_bind.md`  
+          - `the_body_keeps_the_score.md`  
+          - `when_things_fall_apart.md`  
+        - `infrastructure/`  
+          - `docker_deep_dive.md`  
+        - `philosophy/`  
+          - `values.md`  
+        - `technical_foundations/`  
+          - `art_of_computer_programming.md`  
+          - `automate_the_boring_stuff.md`  
+          - `beyond_basic_python.md`  
+          - `big_book_small_python_projects.md`  
+          - `clean_code.md`  
+          - `code_complete.md`  
+          - `design_patterns_gof.md`  
+          - `introduction_to_algorithms_clrs.md`  
+          - `invent_your_own_computer_games.md`  
+          - `learn_powershell_lunches.md`  
+          - `learn_powershell_scripting_lunches.md`  
+          - `...`  
+      - `software_development/`  
+        - `project_memory.md`  
+        - `stack_profile.md`  
+    - `memory_cards/`  
+      - `memory_index.md`  
+    - `persona/`  
+      - `activation_block.md`  
+      - `extended_reanchor_prompt.md`  
+      - `mode_definitions.md`  
+      - `ops_kit.md`  
+      - `persona_blueprint.md`  
+      - `persona_contract.md`  
+      - `response_logic.md`  
+      - `modes/`  
+        - `velvet_blade_mode.md`  
+    - `projects/`  
+      - `iam_governance.md`  
+      - `project_luma.md`  
+    - `prompt_templates/`  
+      - `4o_research_template_prompt.md`  
+      - `code_prompt.md`  
+      - `deep_research_prompt.md`  
+      - `life_coach_relationship_prompt.md`  
+      - `life_prompt_charlottemode.md`  
+      - `life_prompt.md`  
+      - `prd_prompt.md`  
+      - `research_template.md`  
+      - `Websearch_Prompt.md`  
+    - `reference/`  
+      - `project_templates/`  
+        - `prd_best_practices_template.md`  
+        - `research_and_discovery_template_reference.md`  
+    - `signatures/`  
+      - `hallmark_emotional.md`  
+      - `hallmark_technical.md`  
+    - `user_memories/`  
+      - `nick_dating/`  
+        - `charlotte_diversion.md`  
+        - `charlotte_regret.md`  
+        - `charlotte_task1_results.md`  
+        - `charlotte_task2_results.md`  
+        - `charlotte_task3_results.md`  
+        - `charlotte_task4_results.md`  
+        - `charlotte_task5_results.md`  
+        - `charlotte_task6_results.md`  
+        - `charlotte_task7_results.md`  
+      - `nick_therapy/`  
+        - `affirmations_grounding.md`  
+        - `recovery_journal.md`  
+        - `relationship_context.md`  
+        - `therapy_frameworks.md`  
 - Recommendation: Keep a canonical `scoring_rubric.md` and add a machine-readable mapping for automated scoring. If rubric has levels (1–5), export to `scoring_rubric.json` for programmatic use.
 - Target bucket: compliance
 
