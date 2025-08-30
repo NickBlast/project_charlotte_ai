@@ -1,0 +1,43 @@
+Title: Docs: charlotte_core Full-Text Monolith + Extractions (read-only)
+
+Summary
+- Added a deterministic, read-only full-text monolith of everything under `charlotte_core/**` and three derivative extractions (books index, prompts→conditionals, persona spine & modes). This PR contains only generated documentation and CHANGELOG updates; no edits to files under `charlotte_core/**` are included.
+
+Artifacts
+- docs/monoliths/charlotte_core_fulltext_2025-08-29.md (166,706 bytes)
+- docs/monoliths/charlotte_core_manifest_2025-08-29.json
+- docs/extractions/books_index_2025-08-29.md
+- docs/extractions/prompts_conditionals_2025-08-29.md
+- docs/extractions/persona_spine_and_modes_2025-08-29.md
+
+Manifest stats
+- file_count: 43
+- monolith_bytes: 166706
+- monolith_sha256: 26443903658a8ac115d41d111c018c1d94c89862ac8312cdbf87f1aa09006c78
+
+Acceptance checklist
+- [ ] All five output files exist and are non-empty under `docs/`.
+- [ ] Manifest JSON includes an entry for every regular file under `charlotte_core/**` with bytes and sha256.
+- [ ] Monolith contains BEGIN/END markers for every file and declared bytes match manifest entries.
+- [ ] CHANGELOG.md updated (Unreleased entry added).
+- [ ] PR contains no modifications under `charlotte_core/**` (read-only capture).
+
+ACT LOG (local)
+- Generated: 2025-08-29T00:00:00Z (UTC)
+- Files counted: 43
+- Monolith bytes: 166706
+- Monolith SHA256: 26443903658a8ac115d41d111c018c1d94c89862ac8312cdbf87f1aa09006c78
+- Script used: tools/charlotte_monolith.py (created locally; not included in this PR)
+
+Risks & mitigations
+- Risk: accidental edits to `charlotte_core/**`. Mitigation: the script is read-only and PR reviewed to ensure no source edits.
+- Risk: large files may affect performance. Mitigation: script streams reads for hashing and notes large files in monolith.
+- Risk: encoding/line-ending drift. Mitigation: generated docs use LF and UTF-8; original bytes preserved in manifest.
+
+Next steps
+1. Merge PR after review (docs-only).  
+2. Optionally add a CI smoke-check that validates manifest file_count == number of files under `charlotte_core/**`.  
+3. If desired, promote `tools/charlotte_monolith.py` into repo and include a dry-run flag for CI usage (separate PR).
+
+Notes
+- This PR intentionally contains only documentation artifacts and CHANGELOG updates. The helper script used to generate these artifacts (tools/charlotte_monolith.py) was not staged for commit and is not part of this PR to preserve the "docs-only" requirement.

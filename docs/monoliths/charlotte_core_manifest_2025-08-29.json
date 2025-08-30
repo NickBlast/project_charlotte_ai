@@ -1,0 +1,308 @@
+{
+  "monolith_sha256": "26443903658a8ac115d41d111c018c1d94c89862ac8312cdbf87f1aa09006c78",
+  "monolith_bytes": 166706,
+  "file_count": 43,
+  "files": [
+    {
+      "path": "charlotte_core/Intelligence/books/communications/how_to_win_friends.md",
+      "bytes": 1926,
+      "sha256": "e80987230bf164573b9cde3c5841baf6726da6951c7382ec31258bdbc9af9ae1",
+      "modified_iso": "2025-08-29T06:22:01.300895Z",
+      "order_index": 0
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/communications/how_to_win_friends_digital.md",
+      "bytes": 2200,
+      "sha256": "982ffcdd21a5a39102fea16c02d0b77a572ce700e316be0ba2f0fc507999dd51",
+      "modified_iso": "2025-08-29T06:22:01.301435Z",
+      "order_index": 1
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/communications/supercommunicators.md",
+      "bytes": 2556,
+      "sha256": "b7f5ce4f74a0baf0a483e2e1022e703fd89bc5a2d2e6f0506dd7e8e744cea7fb",
+      "modified_iso": "2025-08-29T06:22:01.323758Z",
+      "order_index": 2
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/discipline/atomic_habits.md",
+      "bytes": 2551,
+      "sha256": "6c112680cb589dc391981577bb07671577b1c36cc3fe7cd672afc07279825510",
+      "modified_iso": "2025-08-29T06:22:01.357658Z",
+      "order_index": 3
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/discipline/master_your_emotions.md",
+      "bytes": 2431,
+      "sha256": "0107399431f2086f3568ddf31c91f656f42fcb9334be2463b3b4556a2ec96f2e",
+      "modified_iso": "2025-08-29T06:22:01.377523Z",
+      "order_index": 4
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/discipline/the_four_agreements.md",
+      "bytes": 2789,
+      "sha256": "fad1192ad3133ed3f95f2247694bc1dc774fcba7d65f8f89213caaa5d29cd81a",
+      "modified_iso": "2025-08-29T06:22:01.390465Z",
+      "order_index": 5
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/emotional_healing/how_to_be_an_adult_in_relationships.md",
+      "bytes": 2542,
+      "sha256": "de4171d37e7c1db63f2cbca49d9ec40aaa9dff5867848caaa4a52d3c76185a8d",
+      "modified_iso": "2025-08-29T06:22:01.306945Z",
+      "order_index": 6
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/emotional_healing/no_bad_parts.md",
+      "bytes": 2064,
+      "sha256": "d5f0c677f2a20a633ade2e2af301586d161696ac9e8a9f70b80b4221a6f91a14",
+      "modified_iso": "2025-08-29T06:22:01.316142Z",
+      "order_index": 7
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/emotional_healing/the_betrayal_bind.md",
+      "bytes": 2303,
+      "sha256": "fcdcce42ab2b6b8312b1f4a4ad7b9e295820bf9b1e8a2244113de98a56c1b8fa",
+      "modified_iso": "2025-08-29T06:22:01.333567Z",
+      "order_index": 8
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/emotional_healing/the_body_keeps_the_score.md",
+      "bytes": 2445,
+      "sha256": "f27f4a2223be51329f44fb8e6ab35dbac4d74a642ba5240f5b1ff630ce008f9e",
+      "modified_iso": "2025-08-29T06:22:01.342795Z",
+      "order_index": 9
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/emotional_healing/when_things_fall_apart.md",
+      "bytes": 2309,
+      "sha256": "4ba82c4122205597ba4c80e6fbdd185d7e046f85827e3512f919192ebbea2db3",
+      "modified_iso": "2025-08-29T06:22:01.366698Z",
+      "order_index": 10
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/infrastructure/docker_deep_dive.md",
+      "bytes": 8231,
+      "sha256": "a608a4972e7e3fa9f729fc53f8483c43df085b67c9760cc485a1c033764afc68",
+      "modified_iso": "2025-08-29T06:22:01.350311Z",
+      "order_index": 11
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/philosophy/values.md",
+      "bytes": 2366,
+      "sha256": "6adeb0a7f3984ca49e7cf7163fc1b768b512e33318265731b880f8b8ffd0b742",
+      "modified_iso": "2025-08-29T06:22:01.381886Z",
+      "order_index": 12
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/technical_foundations/art_of_computer_programming.md",
+      "bytes": 2843,
+      "sha256": "556330a9fc0120a5e0bab6738ea6396c04c624f9d3b74fa9e9f929edf1e9212e",
+      "modified_iso": "2025-08-29T06:22:01.407701Z",
+      "order_index": 13
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/technical_foundations/automate_the_boring_stuff.md",
+      "bytes": 2140,
+      "sha256": "d3f4f7bf84beacac8088f738b5919c929b8f429a6cbee0037e33490dd7d416d9",
+      "modified_iso": "2025-08-29T06:22:01.416295Z",
+      "order_index": 14
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/technical_foundations/beyond_basic_python.md",
+      "bytes": 2351,
+      "sha256": "d7e727f3b9fac2d23f33199f64c01c710bc0ab17e6e9c9a95086045c394e3cdc",
+      "modified_iso": "2025-08-29T06:22:01.410226Z",
+      "order_index": 15
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/technical_foundations/big_book_small_python_projects.md",
+      "bytes": 2098,
+      "sha256": "fed7d3f95037847532e8b115d36fffe2a1e66f4e0068d25add6861ae53415afc",
+      "modified_iso": "2025-08-29T06:22:01.425223Z",
+      "order_index": 16
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/technical_foundations/clean_code.md",
+      "bytes": 1890,
+      "sha256": "b334eef291da7c117d73ddce12068757fc4041830cd9c7e7363e4fa483a01c7c",
+      "modified_iso": "2025-08-29T06:22:01.431742Z",
+      "order_index": 17
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/technical_foundations/code_complete.md",
+      "bytes": 2143,
+      "sha256": "6012ed34538a78ea58c7f28466da754c8fac0db749676db2bd42cf976221aeb7",
+      "modified_iso": "2025-08-29T06:22:01.439312Z",
+      "order_index": 18
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/technical_foundations/design_patterns_gof.md",
+      "bytes": 3144,
+      "sha256": "0e7a981269c09fbe0685a37d00c30d7857872689ef93a63e244464ad850d6f21",
+      "modified_iso": "2025-08-29T06:22:01.449026Z",
+      "order_index": 19
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/technical_foundations/introduction_to_algorithms_clrs.md",
+      "bytes": 2540,
+      "sha256": "b584096c10486f7249dcc5d954aeec1d68fdf26b91b577d8aef512fae413893d",
+      "modified_iso": "2025-08-29T06:22:01.455492Z",
+      "order_index": 20
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/technical_foundations/invent_your_own_computer_games.md",
+      "bytes": 2229,
+      "sha256": "fbdb9f20c0ea8a805a7a6740b2068c459e0c18c6f97c391050124741d009b8a2",
+      "modified_iso": "2025-08-29T06:22:01.464724Z",
+      "order_index": 21
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/technical_foundations/learn_powershell_lunches.md",
+      "bytes": 2423,
+      "sha256": "23eff37608420d2b08647a0b197674891c1a88a1a72f3bf05eb1f75506feb546",
+      "modified_iso": "2025-08-29T06:22:01.471720Z",
+      "order_index": 22
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/technical_foundations/learn_powershell_scripting_lunches.md",
+      "bytes": 2463,
+      "sha256": "18ee5d4c752fbb0078e550f1895b81669201523b50faccd4bc518f2a0abe593e",
+      "modified_iso": "2025-08-29T06:22:01.480936Z",
+      "order_index": 23
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/technical_foundations/recursive_book_of_recursion.md",
+      "bytes": 2218,
+      "sha256": "4800ae4e9d1d38502a8378831d96df8dcc379a66ba156a3de39e880dfd4de550",
+      "modified_iso": "2025-08-29T06:22:01.497754Z",
+      "order_index": 24
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/technical_foundations/refactoring.md",
+      "bytes": 2157,
+      "sha256": "c913b6a80dd338816954b148c2170a85972c7d34f320b5ef567c56f32a808f50",
+      "modified_iso": "2025-08-29T06:22:01.511599Z",
+      "order_index": 25
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/technical_foundations/sicp.md",
+      "bytes": 2638,
+      "sha256": "0a447f273cb621af1a7a055aabeaed4b3e6119c761b60ccf39b2e77236d9209a",
+      "modified_iso": "2025-08-29T06:22:01.490187Z",
+      "order_index": 26
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/technical_foundations/the_pragmatic_programmer.md",
+      "bytes": 2203,
+      "sha256": "f5bfc27cb0b73fb586eadba493895f5ba947ae29791e7da4a9f38206492b6a0b",
+      "modified_iso": "2025-08-29T06:22:01.560251Z",
+      "order_index": 27
+    },
+    {
+      "path": "charlotte_core/Intelligence/books/book_index.md",
+      "bytes": 4535,
+      "sha256": "156ca73be9242402e7ab6dec35edff824d9781a7283045c23cfde513a3390557",
+      "modified_iso": "2025-08-29T06:22:01.036041Z",
+      "order_index": 28
+    },
+    {
+      "path": "charlotte_core/Intelligence/software_development/project_memory.md",
+      "bytes": 2981,
+      "sha256": "be4d9f8e250bf4e7a6a9b778de063821ff92ce4221f23e0dbca48783a807d347",
+      "modified_iso": "2025-08-29T06:22:01.082696Z",
+      "order_index": 29
+    },
+    {
+      "path": "charlotte_core/Intelligence/software_development/stack_profile.md",
+      "bytes": 2473,
+      "sha256": "c62cff6e9f4ec006c5bcfbdc694a967c3d90e6d6aa891933b278f875cb3f8030",
+      "modified_iso": "2025-08-29T06:22:01.094798Z",
+      "order_index": 30
+    },
+    {
+      "path": "charlotte_core/core_context/persona_review.md",
+      "bytes": 17196,
+      "sha256": "dc8755ad5ff635d2169fdba2ac7a576100b7b2ae7e33f8f0f8f4e2aa9db15a02",
+      "modified_iso": "2025-08-29T22:54:45.090088Z",
+      "order_index": 31
+    },
+    {
+      "path": "charlotte_core/prompt_templates/4o_research_template_prompt.md",
+      "bytes": 2741,
+      "sha256": "b7dc941715b355d0e5516fffa9b587a20cbeebc2c7ab33929e41df5e59ca0e0e",
+      "modified_iso": "2025-08-29T06:22:00.791330Z",
+      "order_index": 32
+    },
+    {
+      "path": "charlotte_core/prompt_templates/Websearch_Prompt.md",
+      "bytes": 2826,
+      "sha256": "09f695ec8a5f3a0bd570368b13e3d526e603fc4ecd09e6890ffa22ac68c065fe",
+      "modified_iso": "2025-08-29T06:22:00.936691Z",
+      "order_index": 33
+    },
+    {
+      "path": "charlotte_core/prompt_templates/code_prompt.md",
+      "bytes": 8863,
+      "sha256": "e492522929a3c9d64d4a1f8072c6053941d1b46814c7948abbfa1fd035154d0d",
+      "modified_iso": "2025-08-29T06:22:00.827505Z",
+      "order_index": 34
+    },
+    {
+      "path": "charlotte_core/prompt_templates/deep_research_prompt.md",
+      "bytes": 6613,
+      "sha256": "2ed6dd95cedef63881b760ad220d634d5cb60eb6dee773abd191996fbb14d4e3",
+      "modified_iso": "2025-08-29T06:22:00.805282Z",
+      "order_index": 35
+    },
+    {
+      "path": "charlotte_core/prompt_templates/life_coach_relationship_prompt.md",
+      "bytes": 4599,
+      "sha256": "6ef53e9646e3b4391e7dd392739329f2c0becba65129f034873ec31772842cf8",
+      "modified_iso": "2025-08-29T06:22:00.857829Z",
+      "order_index": 36
+    },
+    {
+      "path": "charlotte_core/prompt_templates/life_prompt.md",
+      "bytes": 5626,
+      "sha256": "0b2ab9afec2afe9d793b063dd11d6cb98dd76a0c9e992b8ad21c1e370d35606d",
+      "modified_iso": "2025-08-29T06:22:00.866100Z",
+      "order_index": 37
+    },
+    {
+      "path": "charlotte_core/prompt_templates/life_prompt_charlottemode.md",
+      "bytes": 5929,
+      "sha256": "8fe2d4a448040ddb16a0e5a983e48a8d0722784f6b8906a2c4f71b941fb605ca",
+      "modified_iso": "2025-08-29T06:22:00.886611Z",
+      "order_index": 38
+    },
+    {
+      "path": "charlotte_core/prompt_templates/prd_prompt.md",
+      "bytes": 2839,
+      "sha256": "16c280747263453060b4f6ebaa28c563e0c5f84445ecf1ffd1de179438f681f5",
+      "modified_iso": "2025-08-29T06:22:00.901863Z",
+      "order_index": 39
+    },
+    {
+      "path": "charlotte_core/prompt_templates/research_template.md",
+      "bytes": 3072,
+      "sha256": "6226f0408a7c8c7585eb8c41293de98b483def9ae2404f667ce67c747cabff88",
+      "modified_iso": "2025-08-29T06:22:00.918759Z",
+      "order_index": 40
+    },
+    {
+      "path": "charlotte_core/reference/project_templates/prd_best_practices_template.md",
+      "bytes": 7350,
+      "sha256": "6a4e0b3848b1efa716295d06cdc5d87c4bc3a5e40a62ed0b3bab872fda9a78e9",
+      "modified_iso": "2025-08-29T06:22:01.192457Z",
+      "order_index": 41
+    },
+    {
+      "path": "charlotte_core/reference/project_templates/research_and_discovery_template_reference.md",
+      "bytes": 5493,
+      "sha256": "708f5ea176d0f6d8f957bf2b462761f403edae1d61cbfcdebe3956b7f0acb273",
+      "modified_iso": "2025-08-29T06:22:01.233436Z",
+      "order_index": 42
+    }
+  ]
+}
